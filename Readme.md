@@ -1,4 +1,6 @@
-# Here is an example of how stdx::opt works.
+# STDX (Standard eXtended)
+
+Here is an example of how stdx::opt works.
 
 ```cpp
 #include "stdx"
