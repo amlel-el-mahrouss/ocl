@@ -1,5 +1,5 @@
 /* written by Amlal El Mahrouss */
-#include <stdx>
+#include <stdx.hpp>
 
 
 // eof

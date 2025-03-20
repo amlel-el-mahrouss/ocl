@@ -4,17 +4,14 @@
   licensed under GPL-2 license
  */
 
-#include <stdx>
+#include <stdx.hpp>
+#include <string>
 
-extern "C" {
-#  include <string.h>
-}
-
-static const char do_hash(const char* in)
+static const char do_hash(const std::string& in)
 {
   int hash = 0;
   
-  for (long index = 0; index < strlen(in); ++index)
+  for (long index = 0; index < in.size(); ++index)
   {
     hash += in[index];
   }
@@ -22,7 +19,7 @@ static const char do_hash(const char* in)
   return hash;
 }
 
-static auto do_some(const char* recv_data, const char* check_data)
+static auto do_some(const std::string recv_data, const std::string check_data)
 {
   const int hash_to_check = do_hash(check_data); /* here we assume this should match opt_hash */
   const int opt_hash = do_hash(recv_data); /* we assume that the hash is correct */
