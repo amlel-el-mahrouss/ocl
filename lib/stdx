@@ -1,6 +1,7 @@
 /* 
- * Written by Amlal El Mahrouss, 
- * Copyright 2023, all rights reserved. 
+ * File: stdx
+ * Author: Amlal El Mahrouss, 
+ * Copyright 2023-2025, Amlal El Mahrouss all rights reserved. 
  */
 
 #ifndef _STDX
@@ -12,8 +13,8 @@ namespace stdx
 {
   enum class ret
   {
-    Ok,
-    Err
+    okay,
+    err
   };
 
   struct opt final
@@ -24,7 +25,7 @@ namespace stdx
 
     opt& expect(const char* input)
     {
-       if (m_ret == ret::Err)
+       if (m_ret == ret::err)
        {
           throw std::runtime_error(input);
        }
@@ -40,7 +41,7 @@ namespace stdx
   template <typename Teller, typename... Args>
   stdx::ret eval(Teller tell, Args... arg)
   {
-    return tell(arg...) ? stdx::ret::Ok : stdx::ret::Err;
+    return tell(arg...) ? stdx::ret::okay : stdx::ret::err;
   }
 
   namespace traits
@@ -80,21 +81,21 @@ namespace stdx
   ret eval_less_than(Lst... arg)
   {
     static traits::int_less_than_teller eq;
-    return eq(arg...) ? ret::Ok : ret::Err;
+    return eq(arg...) ? ret::okay : ret::err;
   }
 
   template <typename... Lst>
   ret eval_eq(Lst... arg)
   {
     static traits::int_eq_teller less_than;
-    return less_than(arg...) ? ret::Ok : ret::Err;
+    return less_than(arg...) ? ret::okay : ret::err;
   }
 
   template <typename... Lst>
   ret eval_greater(Lst... arg)
   {
     static traits::int_greater_than_teller greater_than;
-    return greater_than(arg...) ? ret::Ok : ret::Err;
+    return greater_than(arg...) ? ret::okay : ret::err;
   }
 
 } /* namespace stdx */
