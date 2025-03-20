@@ -3,7 +3,7 @@
 Here is an example of how stdx::opt works.
 
 ```cpp
-#include "stdx"
+#include <stdx>
 
 int main(int argc, char** argv)
 {
