@@ -1,5 +1,10 @@
-/* written by Amlal El Mahrouss */
+/* 
+ * File: stdx.cc
+ * Author: Amlal El Mahrouss, 
+ * Copyright 2023-2025, Amlal El Mahrouss all rights reserved. 
+ */
+
 #include <stdx.hpp>
 
 
-// eof
+// EOF
