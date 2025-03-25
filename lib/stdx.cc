@@ -6,5 +6,4 @@
 
 #include <stdx.hpp>
 
-
 // EOF
