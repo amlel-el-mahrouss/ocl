@@ -40,7 +40,7 @@ namespace stdx
 	};
 
 	template <typename Teller, typename... Lst>
-	stdx::ret eval(Teller tell, Lst&&... arg)
+	inline stdx::ret eval(Teller tell, Lst&&... arg)
 	{
 		return tell(std::forward<Lst>(arg)...) ? stdx::ret::okay : stdx::ret::err;
 	}
@@ -85,21 +85,21 @@ namespace stdx
 	} // namespace traits
 
 	template <typename... Lst>
-	ret eval_less_than(Lst&&... arg)
+	inline ret eval_less_than(Lst&&... arg)
 	{
 		static traits::int_less_than_teller eq;
 		return eq(std::forward<Lst>(arg)...) ? ret::okay : ret::err;
 	}
 
 	template <typename... Lst>
-	ret eval_eq(Lst&&... arg)
+	inline ret eval_eq(Lst&&... arg)
 	{
 		static traits::int_eq_teller less_than;
 		return less_than(std::forward<Lst>(arg)...) ? ret::okay : ret::err;
 	}
 
 	template <typename... Lst>
-	ret eval_greater(Lst&&... arg)
+	inline ret eval_greater(Lst&&... arg)
 	{
 		static traits::int_greater_than_teller greater_than;
 		return greater_than(std::forward<Lst>(arg)...) ? ret::okay : ret::err;

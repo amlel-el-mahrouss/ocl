@@ -4,7 +4,7 @@
   licensed under GPL-2 license
  */
 
-#include <stdx.hpp>
+#include <stdx/opt.hpp>
 #include <string>
 
 static const char do_hash(const std::string& in)
