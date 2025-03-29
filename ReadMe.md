@@ -1,5 +1,9 @@
 # STDX (Standard eXtended)
 
+[![License: GPL-2.0](https://img.shields.io/badge/license-GPL--2.0-blue.svg)](LICENSE)
+
+## Getting Started:
+
 Here is an example of how stdx::opt works.
 
 ```cpp

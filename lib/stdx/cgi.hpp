@@ -1,0 +1,62 @@
+/* 
+ * File: cgi.hpp
+ * Author: Amlal El Mahrouss, 
+ * Copyright 2023-2025, Amlal El Mahrouss all rights reserved. 
+ */
+
+#ifndef _STDX_CGI_HPP
+#define _STDX_CGI_HPP
+
+#include <cstdio>
+#include <string>
+#include <sstream>
+
+namespace stdx
+{
+	namespace web
+	{
+		class cgi_writer final
+		{
+			cgi_writer& eval_(const std::string& mime, const std::stringstream& ss) noexcept
+			{
+				std::printf("Content-Type: %s\r\n", mime.c_str());
+				std::printf("Server: %s\r\n", "STDX CGI");
+				std::printf("Content-Length: %ld\r\n\r\n", ss.str().size());
+				std::printf("%s", ss.str().c_str());
+
+				return *this;
+			}
+
+		public:
+			explicit cgi_writer()
+			{
+			}
+
+            cgi_writer& operator=(const cgi_writer&) = default;
+            cgi_writer(const cgi_writer&) = default;
+
+        public:
+			cgi_writer& eval_html(const std::stringstream& ss_html)
+			{
+				return this->eval_("text/html", ss_html);
+			}
+
+			cgi_writer& eval_xml(const std::stringstream& ss_html)
+			{
+				return this->eval_("application/xml", ss_html);
+			}
+
+			cgi_writer& eval_json(const std::stringstream& ss_html)
+			{
+				return this->eval_("application/json", ss_html);
+			}
+
+			cgi_writer& eval_js(const std::stringstream& ss_html)
+			{
+				return this->eval_("text/javascript", ss_html);
+			}
+		};
+	} // namespace details
+} // namespace stdx
+
+#endif // ifndef _STDX_CGI_HPP

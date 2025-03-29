@@ -1,11 +1,11 @@
 /* 
- * File: stdx.hpp
+ * File: opt.hpp
  * Author: Amlal El Mahrouss, 
  * Copyright 2023-2025, Amlal El Mahrouss all rights reserved. 
  */
 
-#ifndef _STDX_HPP
-#define _STDX_HPP
+#ifndef _STDX_OPT_HPP
+#define _STDX_OPT_HPP
 
 #include <stdexcept>
 #include <utility>
@@ -107,4 +107,4 @@ namespace stdx
 
 } /* namespace stdx */
 
-#endif /* ifndef _STDX_HPP */
+#endif /* ifndef _STDX_OPT_HPP */
