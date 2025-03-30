@@ -15,6 +15,7 @@ namespace stdx
 {
 	namespace web
 	{
+		/// @brief CGI Writer class, writes to stdout; as CGI expects.
 		class cgi_writer final
 		{
 			cgi_writer& eval_(const std::string& mime, const std::stringstream& ss) noexcept
@@ -55,7 +56,7 @@ namespace stdx
 				return this->eval_("text/javascript", ss_html);
 			}
 		};
-	} // namespace details
+	} // namespace web
 } // namespace stdx
 
 #endif // ifndef _STDX_CGI_HPP
