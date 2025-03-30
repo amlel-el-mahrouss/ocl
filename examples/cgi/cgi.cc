@@ -10,7 +10,7 @@
 #include <string>
 #include <filesystem>
 
-const std::string g_file_list = R"(
+const std::string g_not_found = R"(
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,7 +82,7 @@ int main(int argc, char** argv)
 	if (fp.good())
 		ss_file << fp.rdbuf();
 	else
-		ss_file << g_file_list;
+		ss_file << g_not_found;
 
 	fp.close();
 
