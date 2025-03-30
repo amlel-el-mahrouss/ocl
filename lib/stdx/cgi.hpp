@@ -20,7 +20,7 @@ namespace stdx
 			cgi_writer& eval_(const std::string& mime, const std::stringstream& ss) noexcept
 			{
 				std::printf("Content-Type: %s\r\n", mime.c_str());
-				std::printf("Server: %s\r\n", "STDX CGI");
+				std::printf("Server: %s\r\n", "stdx-cpp-library");
 				std::printf("Content-Length: %ld\r\n\r\n", ss.str().size());
 				std::printf("%s", ss.str().c_str());
 
