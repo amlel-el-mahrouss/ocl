@@ -7,7 +7,7 @@
 Here is an example of how astdx::opt works.
 
 ```cpp
-#include <astdx.hpp>
+#include <astdx/opt.hpp>
 
 int main(int argc, char** argv)
 {
