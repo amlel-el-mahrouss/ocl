@@ -30,12 +30,12 @@ namespace stdx
 
 		public:
 			explicit cgi_writer() = default;
-			~cgi_writer() = default;
+			~cgi_writer()		  = default;
 
-            cgi_writer& operator=(const cgi_writer&) = default;
-            cgi_writer(const cgi_writer&) = default;
+			cgi_writer& operator=(const cgi_writer&) = default;
+			cgi_writer(const cgi_writer&)			 = default;
 
-        public:
+		public:
 			cgi_writer& eval_html(const std::stringstream& ss_html)
 			{
 				return this->eval_("text/html", ss_html);
