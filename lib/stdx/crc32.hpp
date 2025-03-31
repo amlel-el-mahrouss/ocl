@@ -13,7 +13,7 @@
 /// @brief Crc32 implementation in C++
 /// @author Amlal EL Mahrouss (amlal@nekernel.org)
 
-namespace stdx
+namespace astdx
 {
 	namespace details
 	{
@@ -68,6 +68,6 @@ namespace stdx
 			return ~crc;
 		}
 	} // namespace details
-} // namespace stdx
+} // namespace astdx
 
 #endif // !_STDX_CRC32_HPP

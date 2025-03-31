@@ -15,7 +15,7 @@
 /// @brief A Filesystem designed for tiny storage medias.
 /// @author Amlal EL Mahrouss (amlal@nekernel.org)
 
-namespace stdx::freestanding
+namespace astdx::freestanding
 {
 	namespace details
 	{
@@ -44,6 +44,6 @@ namespace stdx::freestanding
 	/// @brief Destroys the library context.
 	/// @return Whether it suceeded or not.
 	int32_t embdfs_destroy_context();
-} // namespace stdx::freestanding
+} // namespace astdx::freestanding
 
 #endif // ifndef _STDX_EMBDFS_HPP

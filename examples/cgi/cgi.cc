@@ -6,7 +6,7 @@
 
 #include <fstream>
 #include <sstream>
-#include <stdx/cgi.hpp>
+#include <astdx/cgi.hpp>
 #include <string>
 #include <filesystem>
 
@@ -63,7 +63,7 @@ const std::string g_not_found = R"(
 
     <tr><td colspan="3"><hr></td></tr>
   </table>
-  <address>stdx's Common Gateway Server.</address>
+  <address>astdx's Common Gateway Server.</address>
 </body>
 </html>
 )";
@@ -74,7 +74,7 @@ int main(int argc, char** argv)
 {
 	// ... let's assume we serve data.
 
-	stdx::web::cgi_writer writer;
+	astdx::web::cgi_writer writer;
 	std::stringstream	  ss_file;
 
 	std::ifstream fp("index.html");

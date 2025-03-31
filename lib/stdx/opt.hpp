@@ -10,7 +10,7 @@
 #include <stdexcept>
 #include <utility>
 
-namespace stdx
+namespace astdx
 {
 	enum class ret
 	{
@@ -40,9 +40,9 @@ namespace stdx
 	};
 
 	template <typename Teller, typename... Lst>
-	inline stdx::ret eval(Teller tell, Lst&&... arg)
+	inline astdx::ret eval(Teller tell, Lst&&... arg)
 	{
-		return tell(std::forward<Lst>(arg)...) ? stdx::ret::okay : stdx::ret::err;
+		return tell(std::forward<Lst>(arg)...) ? astdx::ret::okay : astdx::ret::err;
 	}
 
 	namespace traits
@@ -105,6 +105,6 @@ namespace stdx
 		return greater_than(std::forward<Lst>(arg)...) ? ret::okay : ret::err;
 	}
 
-} /* namespace stdx */
+} /* namespace astdx */
 
 #endif /* ifndef _STDX_OPT_HPP */
