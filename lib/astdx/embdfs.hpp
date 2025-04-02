@@ -22,7 +22,8 @@ namespace astdx::freestanding
 		struct embdfs_superblock;
 		struct embdfs_inode;
 
-		inline constexpr const size_t _superblock_name_len = 16;
+		inline constexpr const size_t _superblock_name_len	  = 16;
+		inline constexpr const size_t _superblock_reserve_len = 462;
 
 #ifdef EMBDFS_28BIT_LBA
 		typedef std::uint32_t lba_t;
@@ -42,10 +43,12 @@ namespace astdx::freestanding
 			sdword_t	s_num_inodes;
 			sdword_t	s_part_size;
 			sdword_t	s_part_used;
+			sdword_t	s_version;
 			sword_t		s_sector_sz;
 			lba_t		s_inode_start;
 			lba_t		s_inode_end;
 			utf8_char_t s_name[_superblock_name_len];
+			utf8_char_t s_reserved[_superblock_reserve_len];
 		};
 	} // namespace details
 
