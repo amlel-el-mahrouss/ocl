@@ -33,3 +33,5 @@
 
 # CMake build output
 */build/
+
+*.pdf
