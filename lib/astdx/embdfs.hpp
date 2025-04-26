@@ -8,7 +8,6 @@
 #ifndef _STDX_EMBDFS_HPP
 #define _STDX_EMBDFS_HPP
 
-#include <new>
 #include <cstdint>
 #include <cstddef>
 
