@@ -1,7 +1,7 @@
 /* 
  * File: embfs.hpp
  * Purpose: Embedded File System.
- * Author: Amlal El Mahrouss, 
+ * Author: Amlal El Mahrouss (amlal@nekernel.org)
  * Copyright 2025, Amlal El Mahrouss all rights reserved. 
  */
 
