@@ -13,7 +13,9 @@
 
 namespace astdx::fix
 {
-
+  struct fix_reader;
+  struct fix_writer;
+  struct fix_visitor;
 }
 
 #endif // ifndef _STDX_FIX_HPP
