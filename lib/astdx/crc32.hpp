@@ -1,8 +1,8 @@
-/* 
+/*
  * File: embfs.hpp
  * Purpose: Embedded File System.
- * Author: Amlal El Mahrouss, 
- * Copyright 2025, Amlal El Mahrouss all rights reserved. 
+ * Author: Amlal El Mahrouss,
+ * Copyright 2025, Amlal El Mahrouss all rights reserved.
  */
 
 #ifndef _STDX_CRC32_HPP

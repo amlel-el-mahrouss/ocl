@@ -1,7 +1,7 @@
-/* 
+/*
  * File: opt.hpp
- * Author: Amlal El Mahrouss, 
- * Copyright 2023-2025, Amlal El Mahrouss all rights reserved. 
+ * Author: Amlal El Mahrouss,
+ * Copyright 2023-2025, Amlal El Mahrouss all rights reserved.
  */
 
 #ifndef _STDX_OPT_HPP
