@@ -36,7 +36,7 @@ namespace astdx::fix
 	inline std::string to_string(fix_range& range) noexcept
 	{
 		assert(range.length_ > 0);
-		return std::string<char>(range.ascii_bytes_, range.length_);
+		return std::string(range.ascii_bytes_, range.length_);
 	}
 
 	struct fix_metadata final
