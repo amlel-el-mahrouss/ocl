@@ -10,6 +10,7 @@
 
 #include <cstdint>
 #include <cstddef>
+#include <cassert>
 #include <string>
 #include <arpa/inet.h>
 #include <sys/socket.h>
@@ -31,8 +32,10 @@ namespace astdx::fix
 		uint16_t length_;
 	};
 
-	inline std::string to_string(fix_range& range)
+	/// @brief Convert range to usable string.
+	inline std::string to_string(fix_range& range) noexcept
 	{
+		assert(range.length_ > 0);
 		return std::string<char>(range.ascii_bytes_, range.length_);
 	}
 
