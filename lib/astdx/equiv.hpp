@@ -48,6 +48,7 @@ namespace astdx
 			return T::hash() != U::hash();
 		}
 	};
+
 	template <typename T>
 	struct is_not_same<T, T>
 	{
