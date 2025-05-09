@@ -1,5 +1,5 @@
 /*
- * File: equiv.hpp
+ * File: math.hpp
  * Purpose: mathematics c++ header.
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
  * Copyright 2025, Amlal El Mahrouss all rights reserved.
