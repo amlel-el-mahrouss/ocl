@@ -4,7 +4,7 @@
   licensed under GPL-2 license
  */
 
-#include <astdx/opt.hpp>
+#include <lib/opt.hpp>
 #include <string>
 
 static const char do_hash(const std::string& in)
@@ -24,7 +24,7 @@ static auto do_some(const std::string recv_data, const std::string check_data)
 	const int hash_to_check = do_hash(check_data); /* here we assume this should match opt_hash */
 	const int opt_hash		= do_hash(recv_data);  /* we assume that the hash is correct */
 
-	auto opt = astdx::opt(astdx::eval_eq(hash_to_check, opt_hash)); /* do the compute */
+	auto opt = snu::opt(snu::eval_eq(hash_to_check, opt_hash)); /* do the compute */
 	return opt;
 }
 

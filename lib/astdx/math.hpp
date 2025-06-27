@@ -1,6 +1,6 @@
 /*
  * File: math.hpp
- * Purpose: mathematics c++ header.
+ * Purpose: Mathematics c++ header.
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
  * Copyright 2025, Amlal El Mahrouss all rights reserved.
  */
@@ -9,7 +9,7 @@
 
 #include <cmath>
 
-namespace astdx::math
+namespace snu::math
 {
 	template <size_t T>
 	struct is_non_boolean_integer final
@@ -32,4 +32,4 @@ namespace astdx::math
 	constexpr inline auto not_a_number = NAN;
 	constexpr inline auto positive_infinity = INFINITY;
 	constexpr inline auto negative_infinity = -positive_infinity;
-} // namespace astdx::math
+} // namespace snu::math

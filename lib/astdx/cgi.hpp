@@ -11,7 +11,7 @@
 #include <string>
 #include <sstream>
 
-namespace astdx
+namespace snu
 {
 	namespace web
 	{
@@ -21,7 +21,7 @@ namespace astdx
 			cgi_writer& eval_(const std::string& mime, const std::stringstream& ss) noexcept
 			{
 				std::printf("Content-Type: %s\r\n", mime.c_str());
-				std::printf("Server: %s\r\n", "astdx-cpp-library");
+				std::printf("Server: %s\r\n", "snu-cpp-library");
 				std::printf("Content-Length: %ld\r\n\r\n", ss.str().size());
 				std::printf("%s", ss.str().c_str());
 
@@ -57,6 +57,6 @@ namespace astdx
 			}
 		};
 	} // namespace web
-} // namespace astdx
+} // namespace snu
 
 #endif // ifndef _STDX_CGI_HPP

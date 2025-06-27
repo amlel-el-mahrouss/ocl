@@ -9,11 +9,12 @@
 #define _STDX_CRC32_HPP
 
 #include <cstdint>
+#include <cstddef>
 
 /// @brief Crc32 implementation in C++
 /// @author Amlal EL Mahrouss (amlal@nekernel.org)
 
-namespace astdx
+namespace snu
 {
 	namespace details
 	{
@@ -68,6 +69,6 @@ namespace astdx
 			return ~crc;
 		}
 	} // namespace details
-} // namespace astdx
+} // namespace snu
 
 #endif // !_STDX_CRC32_HPP

@@ -7,7 +7,7 @@
 
 #pragma once
 
-namespace astdx
+namespace snu
 {
 	template <typename T>
 	struct basic_hash_trait
@@ -99,4 +99,4 @@ namespace astdx
 			return left_ / right_;
 		}
 	};
-} // namespace astdx
+} // namespace snu

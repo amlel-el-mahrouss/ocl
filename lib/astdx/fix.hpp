@@ -15,7 +15,7 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 
-namespace astdx::fix
+namespace snu::fix
 {
 	struct fix_reader;
 	struct fix_writer;
@@ -58,6 +58,6 @@ namespace astdx::fix
 		uint64_t	time_in_force_;
 		uint32_t	checksum_;
 	};
-} // namespace astdx::fix
+} // namespace snu::fix
 
 #endif // ifndef _STDX_FIX_HPP

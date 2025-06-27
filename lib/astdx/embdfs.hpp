@@ -14,7 +14,7 @@
 /// @brief A Filesystem designed for tiny storage medias.
 /// @author Amlal EL Mahrouss (amlal@nekernel.org)
 
-namespace astdx::embdfs
+namespace snu::embdfs
 {
 	namespace details
 	{
@@ -72,6 +72,6 @@ namespace astdx::embdfs
 		/// @brief Indexed node linear array.
 		typedef embdfs_inode embdfs_inode_arr_t[_inode_arr_len];
 	} // namespace details
-} // namespace astdx::embdfs
+} // namespace snu::embdfs
 
 #endif // ifndef _STDX_EMBDFS_HPP
