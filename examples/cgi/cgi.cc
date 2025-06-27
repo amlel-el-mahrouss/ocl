@@ -1,7 +1,7 @@
 /* 
- cgi example
+  cgi example
   written by Amlal El Mahrouss.
-  licensed under GPL-2 license
+  licensed under the MIT license
  */
 
 #include <lib/cgi.hpp>
