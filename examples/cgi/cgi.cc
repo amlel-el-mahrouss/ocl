@@ -4,11 +4,10 @@
   licensed under GPL-2 license
  */
 
+#include <lib/cgi.hpp>
 #include <fstream>
 #include <sstream>
-#include <lib/cgi.hpp>
 #include <string>
-#include <filesystem>
 
 const std::string g_not_found = R"(
 <!DOCTYPE html>
