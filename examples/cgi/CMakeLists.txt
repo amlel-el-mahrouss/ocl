@@ -9,4 +9,4 @@ project(
 add_executable(CGI cgi.cc)
 
 set_property(TARGET CGI PROPERTY CXX_STANDARD 20)
-target_include_directories(CGI PUBLIC ../../lib)
+target_include_directories(CGI PUBLIC ../../)

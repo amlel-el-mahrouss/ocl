@@ -9,4 +9,4 @@ project(
 add_executable(Equiv equiv.cc)
 
 set_property(TARGET Equiv PROPERTY CXX_STANDARD 20)
-target_include_directories(Equiv PUBLIC ../../lib)
+target_include_directories(Equiv PUBLIC ../../)

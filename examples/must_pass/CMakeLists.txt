@@ -9,4 +9,4 @@ project(
 add_executable(MustPass must_pass.cc)
 
 set_property(TARGET MustPass PROPERTY CXX_STANDARD 20)
-target_include_directories(MustPass PUBLIC ../../lib)
+target_include_directories(MustPass PUBLIC ../../)

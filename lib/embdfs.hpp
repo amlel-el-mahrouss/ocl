@@ -1,7 +1,7 @@
 /*
  * File: embfs.hpp
  * Purpose: Embedded File System.
- * Author: Amlal El Mahrouss (amlal@nekernel.org)
+ * Author: Amlal El Mahrouss (founder@snu.systems)
  * Copyright 2025, Amlal El Mahrouss all rights reserved.
  */
 
@@ -12,7 +12,7 @@
 #include <cstddef>
 
 /// @brief A Filesystem designed for tiny storage medias.
-/// @author Amlal EL Mahrouss (amlal@nekernel.org)
+/// @author Amlal EL Mahrouss (founder@snu.systems)
 
 namespace snu::embdfs
 {

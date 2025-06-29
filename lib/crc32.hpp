@@ -12,7 +12,7 @@
 #include <cstddef>
 
 /// @brief Crc32 implementation in C++
-/// @author Amlal EL Mahrouss (amlal@nekernel.org)
+/// @author Amlal EL Mahrouss (founder@snu.systems)
 
 namespace snu
 {

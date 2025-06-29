@@ -1,7 +1,7 @@
 /*
  * File: math.hpp
  * Purpose: Mathematics c++ header.
- * Author: Amlal El Mahrouss (amlal@nekernel.org)
+ * Author: Amlal El Mahrouss (founder@snu.systems)
  * Copyright 2025, Amlal El Mahrouss all rights reserved.
  */
 
@@ -29,7 +29,7 @@ namespace snu::math
 		static constexpr const bool value = false;
 	};
 
-	constexpr inline auto not_a_number = NAN;
+	constexpr inline auto not_a_number		= NAN;
 	constexpr inline auto positive_infinity = INFINITY;
 	constexpr inline auto negative_infinity = -positive_infinity;
 } // namespace snu::math

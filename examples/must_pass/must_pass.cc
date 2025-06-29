@@ -5,6 +5,7 @@
  */
 
 #include <lib/opt.hpp>
+#include <lib/io/print.hpp>
 #include <string>
 
 static const char do_hash(const std::string& in)
@@ -33,8 +34,11 @@ int main(int argc, char** argv)
 {
 	// ... let's assume we fetch data from network...
 
+	snu::println("Testing data...");
+
 	auto opt = do_some("Ohio", "Ohio");
 	opt.expect("Checksum failed, Ohio isn't Ohio!");
+
 
 	return 0;
 }

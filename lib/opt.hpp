@@ -1,7 +1,7 @@
 /*
  * File: opt.hpp
  * Author: Amlal El Mahrouss,
- * Copyright 2023-2025, Amlal El Mahrouss all rights reserved.
+ * Copyright 2023-2025, Amlal El Mahrouss/SNU Systems Corp all rights reserved.
  */
 
 #ifndef _STDX_OPT_HPP
@@ -14,8 +14,9 @@ namespace snu
 {
 	enum class ret
 	{
-		okay,
-		err
+		invalid,
+		okay = 100,
+		err,
 	};
 
 	struct opt final
