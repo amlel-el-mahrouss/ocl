@@ -13,9 +13,9 @@
 namespace snu
 {
 	template <typename... T>
-	inline void print(const T&... fmt)
+	inline void print(T... fmt)
 	{
-		std::cout << std::forward(fmt...);
+		std::cout << std::move(fmt...);
 	}
 
 	template <typename... T>
