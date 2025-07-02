@@ -21,7 +21,7 @@ namespace snu::fix
 	struct fix_writer;
 	struct fix_visitor;
 	struct fix_range;
-	struct fix_metadata;
+	struct fix_range_data;
 
 	/// @brief Buffer+Length structure
 	typedef fix_range* fix_range_ptr_t;
@@ -39,7 +39,7 @@ namespace snu::fix
 		return std::string(range.ascii_bytes_, range.length_);
 	}
 
-	struct fix_metadata final
+	struct fix_range_data final
 	{
 		std::string begin_string_;
 		size_t		body_len_;
