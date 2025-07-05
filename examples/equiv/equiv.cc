@@ -5,7 +5,6 @@
  */
 
 #include <lib/equiv.hpp>
-#include <lib/fix.hpp>
 #include <iostream>
 
 /* finally test it */

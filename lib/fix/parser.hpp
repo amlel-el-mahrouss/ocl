@@ -55,6 +55,12 @@ namespace snu::fix
 		static constexpr auto soh  = '|';
 		static constexpr auto base = 10U;
 
+		explicit fix_visitor() = default;
+		~fix_visitor()		  = default;
+
+		fix_visitor& operator=(const fix_visitor&) = default;
+		fix_visitor(const fix_visitor&)			 = default;
+
 		fix_range_data visit(const std::string& in)
 		{
 			fix_range_data ret{};

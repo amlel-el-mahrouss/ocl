@@ -4,7 +4,7 @@
   licensed under the MIT license
  */
 
-#include <lib/fix.hpp>
+#include <lib/fix/parser.hpp>
 #include <iostream>
 
 /* finally test it */

@@ -14,7 +14,7 @@ const std::string g_not_found = R"(
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Uh Oh!</title>
+  <title>error | snu-lib</title>
   <style>
     body {
       font-family: monospace;
