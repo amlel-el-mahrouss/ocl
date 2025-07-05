@@ -4,8 +4,8 @@
  * Copyright 2023-2025, Amlal El Mahrouss/SNU Systems Corp all rights reserved.
  */
 
-#ifndef _STDX_OPT_HPP
-#define _STDX_OPT_HPP
+#ifndef _SNU_OPT_HPP
+#define _SNU_OPT_HPP
 
 #include <stdexcept>
 #include <utility>
@@ -108,4 +108,4 @@ namespace snu
 
 } /* namespace snu */
 
-#endif /* ifndef _STDX_OPT_HPP */
+#endif /* ifndef _SNU_OPT_HPP */

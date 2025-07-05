@@ -4,8 +4,8 @@
  * Copyright 2023-2025, Amlal El Mahrouss all rights reserved.
  */
 
-#ifndef _STDX_CGI_HPP
-#define _STDX_CGI_HPP
+#ifndef _SNU_CGI_HPP
+#define _SNU_CGI_HPP
 
 #include <cstdio>
 #include <string>
@@ -59,4 +59,4 @@ namespace snu
 	} // namespace web
 } // namespace snu
 
-#endif // ifndef _STDX_CGI_HPP
+#endif // ifndef _SNU_CGI_HPP

@@ -5,8 +5,8 @@
  * Copyright 2025, Amlal El Mahrouss all rights reserved.
  */
 
-#ifndef _STDX_EMBDFS_HPP
-#define _STDX_EMBDFS_HPP
+#ifndef _SNU_EMBDFS_HPP
+#define _SNU_EMBDFS_HPP
 
 #include <cstdint>
 #include <cstddef>
@@ -74,4 +74,4 @@ namespace snu::embdfs
 	} // namespace details
 } // namespace snu::embdfs
 
-#endif // ifndef _STDX_EMBDFS_HPP
+#endif // ifndef _SNU_EMBDFS_HPP

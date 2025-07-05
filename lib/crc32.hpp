@@ -5,8 +5,8 @@
  * Copyright 2025, Amlal El Mahrouss all rights reserved.
  */
 
-#ifndef _STDX_CRC32_HPP
-#define _STDX_CRC32_HPP
+#ifndef _SNU_CRC32_HPP
+#define _SNU_CRC32_HPP
 
 #include <cstdint>
 #include <cstddef>
@@ -71,4 +71,4 @@ namespace snu
 	} // namespace details
 } // namespace snu
 
-#endif // !_STDX_CRC32_HPP
+#endif // !_SNU_CRC32_HPP

@@ -2,23 +2,23 @@
  * File: fix.hpp
  * Purpose: Financial Information Protocol implementation in C++.
  * Author: Amlal El Mahrouss (founder@snu.systems)
- * Copyright 2025, Amlal El Mahrouss all rights reserved.
+ * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp all rights reserved.
  */
 
-#ifndef _STDX_FIX_HPP
-#define _STDX_FIX_HPP
+#ifndef _SNU_FIX_HPP
+#define _SNU_FIX_HPP
 
 #include <cstdint>
 #include <cstddef>
 #include <cassert>
+#include <utility>
+#include <vector>
 #include <string>
 #include <arpa/inet.h>
 #include <sys/socket.h>
 
 namespace snu::fix
 {
-	struct fix_reader;
-	struct fix_writer;
 	struct fix_visitor;
 	struct fix_range;
 	struct fix_range_data;
@@ -43,26 +43,58 @@ namespace snu::fix
 
 	class fix_range_data final
 	{
-	private:
-		friend fix_visitor;
+	public:
+		std::string										 msg_magic_;
+		std::size_t										 msg_body_len_;
+		std::vector<std::pair<std::string, std::string>> msg_body_;
+	};
 
-		std::string begin_string_;
-		size_t		body_len_;
-		uint16_t	msg_type_;
-		uint32_t	msg_seq_num_;
-		uint32_t	sender_comp_id_;
-		uint32_t	target_comp_id_;
-		std::string send_time_;
-		std::string ci_ord_id_;
-		uint16_t	side_;
-		uint16_t	security_type_;
-		std::string symbol_;
-		uint32_t	order_qty_;
-		uint16_t	order_type_;
-		uint64_t	price_;
-		uint64_t	time_in_force_;
-		uint32_t	checksum_;
+	class fix_visitor final
+	{
+	public:
+		static constexpr auto soh  = '|';
+		static constexpr auto base = 10U;
+
+		fix_range_data visit(const std::string& in)
+		{
+			fix_range_data ret{};
+
+			std::string in_tmp;
+
+			try
+			{
+				for (auto& ch : in)
+				{
+					if (ch != soh)
+					{
+						in_tmp += ch;
+						continue;
+					}
+
+					auto key = in_tmp.substr(0, in_tmp.find("="));
+					auto val = in_tmp.substr(in_tmp.find("=") + 1);
+
+					if (ret.msg_magic_.empty())
+					{
+						ret.msg_magic_ = val;
+					}
+					else
+					{
+						ret.msg_body_.emplace_back(std::make_pair(key, val));
+						ret.msg_body_len_ += in_tmp.size();
+					}
+
+					in_tmp.clear();
+				}
+			}
+			catch (...)
+			{
+				return {};
+			}
+
+			return ret;
+		}
 	};
 } // namespace snu::fix
 
-#endif // ifndef _STDX_FIX_HPP
+#endif // ifndef _SNU_FIX_HPP

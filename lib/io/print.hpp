@@ -5,8 +5,8 @@
  * Copyright 2025, SNU Systems Corp all rights reserved.
  */
 
-#ifndef _STDX_PRINT_HPP
-#define _STDX_PRINT_HPP
+#ifndef _SNU_PRINT_HPP
+#define _SNU_PRINT_HPP
 
 #include <iostream>
 
@@ -26,4 +26,4 @@ namespace snu
 	}
 } // namespace snu
 
-#endif // ifndef _STDX_PRINT_HPP
+#endif // ifndef _SNU_PRINT_HPP
