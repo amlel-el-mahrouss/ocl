@@ -35,12 +35,17 @@ namespace snu::fix
 	/// @brief Convert range to usable string.
 	inline std::string to_string(fix_range& range) noexcept
 	{
-		assert(range.length_ > 0);
+		if (range.length_ < 0)
+			return "";
+
 		return std::string(range.ascii_bytes_, range.length_);
 	}
 
-	struct fix_range_data final
+	class fix_range_data final
 	{
+	private:
+		friend fix_visitor;
+
 		std::string begin_string_;
 		size_t		body_len_;
 		uint16_t	msg_type_;
