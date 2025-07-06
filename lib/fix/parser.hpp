@@ -1,12 +1,12 @@
 /*
- * File: fix.hpp
- * Purpose: Financial Information Protocol implementation in C++.
+ * File: fix/parser.hpp
+ * Purpose: Financial Information Protocol parser implementation in C++.
  * Author: Amlal El Mahrouss (founder@snu.systems)
  * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp all rights reserved.
  */
 
-#ifndef _SNU_FIX_HPP
-#define _SNU_FIX_HPP
+#ifndef _SNU_FIX_PARSER_HPP
+#define _SNU_FIX_PARSER_HPP
 
 #include <cstdint>
 #include <cstddef>
@@ -14,8 +14,6 @@
 #include <utility>
 #include <vector>
 #include <string>
-#include <arpa/inet.h>
-#include <sys/socket.h>
 
 namespace snu::fix
 {
@@ -103,4 +101,4 @@ namespace snu::fix
 	};
 } // namespace snu::fix
 
-#endif // ifndef _SNU_FIX_HPP
+#endif // ifndef _SNU_FIX_PARSER_HPP
