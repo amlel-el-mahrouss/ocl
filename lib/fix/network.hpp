@@ -1,6 +1,6 @@
 /*
 * File: fix/netowrk.hpp
- * Purpose: Financial Information Protocol parser implementation in C++.
+ * Purpose: Financial Information Protocol network implementation in C++.
  * Author: Amlal El Mahrouss (founder@snu.systems)
  * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp all rights reserved.
  */

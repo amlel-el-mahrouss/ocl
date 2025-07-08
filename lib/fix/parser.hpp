@@ -65,7 +65,7 @@ namespace snu::fix
 		{
 			range_data ret{};
 
-			std::string in_tmp;
+			static thread_local std::string in_tmp;
 
 			try
 			{
@@ -95,9 +95,11 @@ namespace snu::fix
 			}
 			catch (...)
 			{
+				in_tmp.clear();
 				return {};
 			}
 
+			in_tmp.clear();
 			return ret;
 		}
 	};
