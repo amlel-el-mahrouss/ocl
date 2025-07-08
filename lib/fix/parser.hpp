@@ -39,6 +39,7 @@ namespace snu::fix
 		return std::string(range.ascii_bytes_, range.length_);
 	}
 
+	/// @brief a range object containing the FIX packet values.
 	class range_data final
 	{
 	public:
@@ -47,6 +48,7 @@ namespace snu::fix
 		std::vector<std::pair<std::string, std::string>> msg_body_;
 	};
 
+	/// @brief visitor object which returns a fix::range_data instance.
 	class visitor final
 	{
 	public:
