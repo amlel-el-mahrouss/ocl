@@ -11,4 +11,9 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 
+namespace snu::fix
+{
+
+}
+
 #endif // ifndef _SNU_FIX_NETWORK_HPP

@@ -17,21 +17,21 @@
 
 namespace snu::fix
 {
-	struct fix_visitor;
-	struct fix_range;
-	struct fix_range_data;
+	struct visitor;
+	struct range;
+	struct range_data;
 
 	/// @brief Buffer+Length structure
-	typedef fix_range* fix_range_ptr_t;
+	typedef range* range_ptr_t;
 
-	struct fix_range final
+	struct range final
 	{
 		char*	 ascii_bytes_;
 		uint16_t length_;
 	};
 
 	/// @brief Convert range to usable string.
-	inline std::string to_string(fix_range& range) noexcept
+	inline std::string to_string(range& range) noexcept
 	{
 		if (range.length_ < 0)
 			return "";
@@ -39,7 +39,7 @@ namespace snu::fix
 		return std::string(range.ascii_bytes_, range.length_);
 	}
 
-	class fix_range_data final
+	class range_data final
 	{
 	public:
 		std::string										 msg_magic_;
@@ -47,21 +47,21 @@ namespace snu::fix
 		std::vector<std::pair<std::string, std::string>> msg_body_;
 	};
 
-	class fix_visitor final
+	class visitor final
 	{
 	public:
 		static constexpr auto soh  = '|';
 		static constexpr auto base = 10U;
 
-		explicit fix_visitor() = default;
-		~fix_visitor()		  = default;
+		explicit visitor() = default;
+		~visitor()		  = default;
 
-		fix_visitor& operator=(const fix_visitor&) = default;
-		fix_visitor(const fix_visitor&)			 = default;
+		visitor& operator=(const visitor&) = default;
+		visitor(const visitor&)			 = default;
 
-		fix_range_data visit(const std::string& in)
+		range_data visit(const std::string& in)
 		{
-			fix_range_data ret{};
+			range_data ret{};
 
 			std::string in_tmp;
 

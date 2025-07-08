@@ -5,21 +5,21 @@
  * Copyright 2025, Amlal El Mahrouss all rights reserved.
  */
 
-#ifndef _SNU_EMBDFS_HPP
-#define _SNU_EMBDFS_HPP
+#ifndef _SNU_EMBFS_HPP
+#define _SNU_EMBFS_HPP
 
 #include <cstdint>
 #include <cstddef>
 
-/// @brief A Filesystem designed for tiny storage medias.
+/// @brief A filesystem designed for tiny storage medias.
 /// @author Amlal EL Mahrouss (founder@snu.systems)
 
-namespace snu::embdfs
+namespace snu::embfs
 {
 	namespace details
 	{
-		struct embdfs_superblock;
-		struct embdfs_inode;
+		struct embfs_superblock;
+		struct embfs_inode;
 
 		inline constexpr const size_t _superblock_name_len	  = 16;
 		inline constexpr const size_t _superblock_reserve_len = 462;
@@ -27,9 +27,9 @@ namespace snu::embdfs
 		inline constexpr const size_t _inode_arr_len		  = 12;
 		inline constexpr const size_t _inode_lookup_len		  = 8;
 
-#ifdef EMBDFS_28BIT_LBA
+#ifdef EMBFS_28BIT_LBA
 		typedef std::uint32_t lba_t;
-#elif defined(EMBDFS_48BIT_LBA)
+#elif defined(EMBFS_48BIT_LBA)
 		typedef std::uint64_t lba_t;
 #endif
 
@@ -39,7 +39,7 @@ namespace snu::embdfs
 		typedef std::uint8_t utf8_char_t;
 
 		/// @brief Superblock data structure
-		struct embdfs_superblock
+		struct embfs_superblock
 		{
 			sword_t		s_block_mag;
 			sdword_t	s_num_inodes;
@@ -60,7 +60,7 @@ namespace snu::embdfs
 		/// @brief i_checksum crc32 checksum.
 		/// @brief i_flags_perms flags and permissions
 		/// @brief i_acl_* ACL to keep track of inode allocation status.
-		struct embdfs_inode
+		struct embfs_inode
 		{
 			utf8_char_t i_name[_inode_name_len];
 			sword_t		i_size_virt, i_size_phys;
@@ -70,8 +70,8 @@ namespace snu::embdfs
 		};
 
 		/// @brief Indexed node linear array.
-		typedef embdfs_inode embdfs_inode_arr_t[_inode_arr_len];
+		typedef embfs_inode embfs_inode_arr_t[_inode_arr_len];
 	} // namespace details
-} // namespace snu::embdfs
+} // namespace snu::embfs
 
-#endif // ifndef _SNU_EMBDFS_HPP
+#endif // ifndef _SNU_EMBFS_HPP

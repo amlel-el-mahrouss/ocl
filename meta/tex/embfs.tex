@@ -37,14 +37,14 @@ The \textbf{Embedded File System (EMBFS)} is a compact and minimal filesystem de
 \section{Namespace}
 The EMBFS implementation resides under:
 \begin{lstlisting}
-namespace snu::embdfs
+namespace snu::embfs
 \end{lstlisting}
 
 \section{Supported Logical Block Addressing (LBA) Modes}
 Two LBA addressing modes are supported via macro definitions:
 \begin{itemize}
-    \item \texttt{EMBDFS\_28BIT\_LBA} — Uses \texttt{uint32\_t}.
-    \item \texttt{EMBDFS\_48BIT\_LBA} — Uses \texttt{uint64\_t}.
+    \item \texttt{EMBFS\_28BIT\_LBA} — Uses \texttt{uint32\_t}.
+    \item \texttt{EMBFS\_48BIT\_LBA} — Uses \texttt{uint64\_t}.
 \end{itemize}
 
 \section{Fundamental Types}
@@ -73,9 +73,9 @@ Two LBA addressing modes are supported via macro definitions:
 \end{longtable}
 
 \section{Superblock Structure}
-\textbf{Structure:} \texttt{embdfs\_superblock}
+\textbf{Structure:} \texttt{embfs\_superblock}
 \begin{lstlisting}
-struct embdfs_superblock {
+struct embfs_superblock {
     sword_t     s_block_mag;
     sdword_t    s_num_inodes;
     sdword_t    s_part_size;
@@ -103,9 +103,9 @@ struct embdfs_superblock {
 \end{itemize}
 
 \section{Inode Structure}
-\textbf{Structure:} \texttt{embdfs\_inode}
+\textbf{Structure:} \texttt{embfs\_inode}
 \begin{lstlisting}
-struct embdfs_inode {
+struct embfs_inode {
     utf8_char_t i_name[128];
     sword_t     i_size_virt, i_size_phys;
     lba_t       i_offset[8];
@@ -127,7 +127,7 @@ struct embdfs_inode {
 
 \section{Inode Array Type}
 \begin{lstlisting}
-typedef embdfs_inode embdfs_inode_arr_t[12];
+typedef embfs_inode embfs_inode_arr_t[12];
 \end{lstlisting}
 Represents a fixed-size array of 12 inodes within a given partition.
 
