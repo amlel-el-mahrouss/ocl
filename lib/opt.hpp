@@ -14,9 +14,10 @@ namespace snu
 {
 	enum class ret
 	{
-		invalid,
+		invalid = 0,
 		okay = 100,
 		err,
+		count = err - okay + 1,
 	};
 
 	struct opt final
@@ -100,7 +101,7 @@ namespace snu
 	}
 
 	template <typename... Lst>
-	inline ret eval_greater(Lst&&... arg)
+	inline ret eval_greater_than(Lst&&... arg)
 	{
 		static traits::int_greater_than_teller greater_than;
 		return greater_than(std::forward<Lst>(arg)...) ? ret::okay : ret::err;

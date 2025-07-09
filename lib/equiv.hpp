@@ -7,7 +7,7 @@
 
 #pragma once
 
-namespace snu
+namespace snu::equiv
 {
 	template <typename T>
 	struct basic_hash_trait

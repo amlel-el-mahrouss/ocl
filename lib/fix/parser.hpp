@@ -8,64 +8,111 @@
 #ifndef _SNU_FIX_PARSER_HPP
 #define _SNU_FIX_PARSER_HPP
 
-#include <cstdint>
 #include <cstddef>
 #include <cassert>
 #include <utility>
-#include <vector>
 #include <string>
+#include <vector>
 
 namespace snu::fix
 {
+	template <typename char_type>
 	struct visitor;
+	template <typename char_type>
 	struct range;
+	template <typename char_type>
 	struct range_data;
 
 	/// @brief Buffer+Length structure
-	typedef range* range_ptr_t;
+	template <typename char_type>
+	using range_ptr_t = range<char_type>;
 
+	namespace detail
+	{
+		template<char c>
+		inline constexpr auto begin_fix() -> const char*
+		{
+			return "8=FIX.";
+		}
+
+		template<char16_t c>
+		inline constexpr auto begin_fix() -> const char16_t*
+		{
+			return u"8=FIX.";
+		}
+
+		template<char8_t c>
+		inline constexpr auto begin_fix() -> const char8_t*
+		{
+			return u8"8=FIX.";
+		}
+	} // namespace detail
+
+	template <typename char_type>
 	struct range final
 	{
-		char*	 ascii_bytes_;
-		uint16_t length_;
+		char_type* ascii_bytes_;
+		uint16_t   length_;
+
+		bool isValid()
+		{
+			return ascii_bytes_ && length_ > 0;
+		}
 	};
 
 	/// @brief Convert range to usable string.
-	inline std::string to_string(range& range) noexcept
+	template <typename char_type>
+	inline std::string to_string(range<char_type>& range) noexcept
 	{
 		if (range.length_ < 0)
 			return "";
 
-		return std::string(range.ascii_bytes_, range.length_);
+		return std::basic_string<char_type>(range.ascii_bytes_, range.length_);
 	}
 
 	/// @brief a range object containing the FIX packet values.
+	template <typename char_type>
 	class range_data final
 	{
 	public:
-		std::string										 msg_magic_;
-		std::size_t										 msg_body_len_;
-		std::vector<std::pair<std::string, std::string>> msg_body_;
+		std::basic_string<char_type>													   msg_magic_;
+		std::size_t																		   msg_body_len_;
+		std::vector<std::pair<std::basic_string<char_type>, std::basic_string<char_type>>> msg_body_;
+
+		static constexpr char_type* begin = detail::begin_fix<char_type>();
+
+		explicit range_data() = default;
+		~range_data()		  = default;
+
+		range_data& operator=(const range_data&) = default;
+		range_data(const range_data&)			 = default;
+
+		bool isValid()
+		{
+			return !msg_magic_.empty() && msg_magic_.starts_with(range_data::begin);
+		}
 	};
 
 	/// @brief visitor object which returns a fix::range_data instance.
+	template <typename char_type>
 	class visitor final
 	{
 	public:
-		static constexpr auto soh  = '|';
-		static constexpr auto base = 10U;
+		static constexpr char_type soh	= '|';
+		static constexpr uint32_t  base = 10U;
 
 		explicit visitor() = default;
-		~visitor()		  = default;
+		~visitor()		   = default;
 
 		visitor& operator=(const visitor&) = default;
-		visitor(const visitor&)			 = default;
+		visitor(const visitor&)			   = default;
 
-		range_data visit(const std::string& in)
+		range_data<char_type> visit(const std::string& in)
 		{
-			range_data ret{};
+			thread_local range_data<char_type> ret{};
+			thread_local std::string		   in_tmp{};
 
-			static thread_local std::string in_tmp;
+			in_tmp.reserve(in.size());
 
 			try
 			{
@@ -77,8 +124,8 @@ namespace snu::fix
 						continue;
 					}
 
-					auto key = in_tmp.substr(0, in_tmp.find("="));
-					auto val = in_tmp.substr(in_tmp.find("=") + 1);
+					std::string key = in_tmp.substr(0, in_tmp.find("="));
+					std::string val = in_tmp.substr(in_tmp.find("=") + 1);
 
 					if (ret.msg_magic_.empty())
 					{
@@ -96,7 +143,7 @@ namespace snu::fix
 			catch (...)
 			{
 				in_tmp.clear();
-				return {};
+				return ret;
 			}
 
 			in_tmp.clear();
