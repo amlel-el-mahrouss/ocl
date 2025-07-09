@@ -54,10 +54,12 @@ namespace snu::fix
 		char_type* ascii_bytes_;
 		uint16_t   length_;
 
-		bool isValid()
+		bool is_valid()
 		{
 			return ascii_bytes_ && length_ > 0;
 		}
+
+		operator bool() { return this->is_valid(); }
 	};
 
 	/// @brief Convert range to usable string.
@@ -87,10 +89,12 @@ namespace snu::fix
 		range_data& operator=(const range_data&) = default;
 		range_data(const range_data&)			 = default;
 
-		bool isValid()
+		bool is_valid()
 		{
 			return !msg_magic_.empty() && msg_magic_.starts_with(range_data::begin);
 		}
+
+		operator bool() { return this->is_valid(); }
 	};
 
 	/// @brief visitor object which returns a fix::range_data instance.
