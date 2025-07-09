@@ -70,10 +70,10 @@ namespace snu::fix
 
 	/// @brief Convert range to usable string.
 	template <typename char_type>
-	inline std::string to_string(range<char_type>& range) noexcept
+	inline std::basic_string<char_type> to_string(range<char_type>& range) noexcept
 	{
 		if (range.length_ < 0)
-			return "";
+			return std::basic_string<char_type>{};
 
 		return std::basic_string<char_type>(range.ascii_bytes_, range.length_);
 	}
