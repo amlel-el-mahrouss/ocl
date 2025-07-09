@@ -29,22 +29,25 @@ namespace snu::fix
 
 	namespace detail
 	{
-		template<char c>
-		inline constexpr auto begin_fix() -> const char*
+		template <typename char_type>
+		const char_type* begin_fix();
+
+		template <>
+		inline const char* begin_fix<char>()
 		{
-			return "8=FIX.";
+			return "FIX.";
 		}
 
-		template<char16_t c>
-		inline constexpr auto begin_fix() -> const char16_t*
+		template <>
+		inline const char16_t* begin_fix<char16_t>()
 		{
-			return u"8=FIX.";
+			return u"FIX.";
 		}
 
-		template<char8_t c>
-		inline constexpr auto begin_fix() -> const char8_t*
+		template <>
+		inline const char8_t* begin_fix<char8_t>()
 		{
-			return u8"8=FIX.";
+			return u8"FIX.";
 		}
 	} // namespace detail
 
@@ -59,7 +62,10 @@ namespace snu::fix
 			return ascii_bytes_ && length_ > 0;
 		}
 
-		operator bool() { return this->is_valid(); }
+		operator bool()
+		{
+			return this->is_valid();
+		}
 	};
 
 	/// @brief Convert range to usable string.
@@ -81,7 +87,7 @@ namespace snu::fix
 		std::size_t																		   msg_body_len_;
 		std::vector<std::pair<std::basic_string<char_type>, std::basic_string<char_type>>> msg_body_;
 
-		static constexpr char_type* begin = detail::begin_fix<char_type>();
+		static inline const char_type* begin = detail::begin_fix<char_type>();
 
 		explicit range_data() = default;
 		~range_data()		  = default;
@@ -91,10 +97,13 @@ namespace snu::fix
 
 		bool is_valid()
 		{
-			return !msg_magic_.empty() && msg_magic_.starts_with(range_data::begin);
+			return msg_magic_.starts_with(range_data<char_type>::begin);
 		}
 
-		operator bool() { return this->is_valid(); }
+		operator bool()
+		{
+			return this->is_valid();
+		}
 	};
 
 	/// @brief visitor object which returns a fix::range_data instance.
@@ -111,10 +120,10 @@ namespace snu::fix
 		visitor& operator=(const visitor&) = default;
 		visitor(const visitor&)			   = default;
 
-		range_data<char_type> visit(const std::string& in)
+		range_data<char_type> visit(const std::basic_string<char_type>& in)
 		{
-			thread_local range_data<char_type> ret{};
-			thread_local std::string		   in_tmp{};
+			thread_local range_data<char_type>		  ret{};
+			thread_local std::basic_string<char_type> in_tmp{};
 
 			in_tmp.reserve(in.size());
 
