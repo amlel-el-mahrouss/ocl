@@ -137,8 +137,8 @@ namespace snu::fix
 						continue;
 					}
 
-					std::string key = in_tmp.substr(0, in_tmp.find("="));
-					std::string val = in_tmp.substr(in_tmp.find("=") + 1);
+					std::basic_string<char_type> key = in_tmp.substr(0, in_tmp.find("="));
+					std::basic_string<char_type> val = in_tmp.substr(in_tmp.find("=") + 1);
 
 					if (ret.msg_magic_.empty())
 					{
