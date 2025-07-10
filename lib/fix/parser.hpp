@@ -141,7 +141,7 @@ namespace snu::fix
 			{
 				for (auto& ch : in)
 				{
-					if (ch != soh)
+					if (ch != visitor::soh)
 					{
 						in_tmp += ch;
 						continue;
