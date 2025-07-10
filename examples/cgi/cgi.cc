@@ -50,7 +50,7 @@ const std::string g_not_found = R"(
 </head>
 <body>
   <h1>Uh Oh!</h1>
-  <address>No HTML file were found on this directory, please seek help from your systems administrator.</address>
+  <address>No index file was found in this directory.</address>
   <hr>
   <table>
     <tr><th>Name</th></tr>
