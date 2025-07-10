@@ -4,7 +4,7 @@
   licensed under the MIT license
  */
 
-#include <lib/cgi.hpp>
+#include <lib/utility/cgi.hpp>
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -73,7 +73,7 @@ int main(int argc, char** argv)
 {
 	// ... let's assume we serve data.
 
-	snu::web::cgi_writer writer;
+	snu::cgi::cgi_writer writer;
 	std::stringstream	  ss_file;
 
 	std::ifstream fp("index.html");

@@ -13,7 +13,7 @@
 
 namespace snu
 {
-	namespace web
+	namespace cgi
 	{
 		/// @brief CGI Writer class, writes to stdout; as CGI expects.
 		class cgi_writer final
@@ -56,7 +56,7 @@ namespace snu
 				return this->eval_("text/javascript", ss_html);
 			}
 		};
-	} // namespace web
+	} // namespace cgi
 } // namespace snu
 
 #endif // ifndef _SNU_CGI_HPP

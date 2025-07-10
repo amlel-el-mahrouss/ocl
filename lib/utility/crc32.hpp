@@ -14,7 +14,7 @@
 /// @brief Crc32 implementation in C++
 /// @author Amlal EL Mahrouss (founder@snu.systems)
 
-namespace snu
+namespace snu::crc32
 {
 	namespace details
 	{
@@ -69,6 +69,6 @@ namespace snu
 			return ~crc;
 		}
 	} // namespace details
-} // namespace snu
+} // namespace snu::crc32
 
 #endif // !_SNU_CRC32_HPP

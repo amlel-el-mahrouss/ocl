@@ -7,12 +7,12 @@
 #ifndef _SNU_OPT_HPP
 #define _SNU_OPT_HPP
 
-#include <stdexcept>
+#include <lib/detail/error.hpp>
 #include <utility>
 
-namespace snu
+namespace snu::opt
 {
-	enum class ret
+	enum class return_type
 	{
 		invalid = 0,
 		okay	= 100,
@@ -22,14 +22,14 @@ namespace snu
 
 	struct opt final
 	{
-		explicit opt(const ret& ret)
-			: m_ret(ret)
+		explicit opt(const return_type& return_type)
+			: m_ret(return_type)
 		{
 		}
 
 		opt& expect(const char* input)
 		{
-			if (m_ret == ret::err)
+			if (m_ret == return_type::err)
 			{
 				throw std::runtime_error(input);
 			}
@@ -38,13 +38,13 @@ namespace snu
 		}
 
 	private:
-		ret m_ret;
+		return_type m_ret;
 	};
 
 	template <typename Teller, typename... Lst>
-	inline snu::ret eval(Teller tell, Lst&&... arg)
+	inline return_type eval(Teller tell, Lst&&... arg)
 	{
-		return tell(std::forward<Lst>(arg)...) ? snu::ret::okay : snu::ret::err;
+		return tell(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
 	}
 
 	namespace traits
@@ -87,26 +87,26 @@ namespace snu
 	} // namespace traits
 
 	template <typename... Lst>
-	inline ret eval_less_than(Lst&&... arg)
+	inline return_type eval_less_than(Lst&&... arg)
 	{
 		static traits::int_less_than_teller eq;
-		return eq(std::forward<Lst>(arg)...) ? ret::okay : ret::err;
+		return eq(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
 	}
 
 	template <typename... Lst>
-	inline ret eval_eq(Lst&&... arg)
+	inline return_type eval_eq(Lst&&... arg)
 	{
 		static traits::int_eq_teller less_than;
-		return less_than(std::forward<Lst>(arg)...) ? ret::okay : ret::err;
+		return less_than(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
 	}
 
 	template <typename... Lst>
-	inline ret eval_greater_than(Lst&&... arg)
+	inline return_type eval_greater_than(Lst&&... arg)
 	{
 		static traits::int_greater_than_teller greater_than;
-		return greater_than(std::forward<Lst>(arg)...) ? ret::okay : ret::err;
+		return greater_than(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
 	}
 
-} /* namespace snu */
+} // namespace snu::opt
 
 #endif /* ifndef _SNU_OPT_HPP */

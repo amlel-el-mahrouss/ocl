@@ -4,7 +4,7 @@
   licensed under the MIT license
  */
 
-#include <lib/equiv.hpp>
+#include <lib/logic/equiv.hpp>
 #include <iostream>
 
 /* finally test it */
