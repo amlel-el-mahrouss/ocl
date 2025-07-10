@@ -15,7 +15,7 @@ namespace snu
 	enum class ret
 	{
 		invalid = 0,
-		okay = 100,
+		okay	= 100,
 		err,
 		count = err - okay + 1,
 	};

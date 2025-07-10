@@ -111,8 +111,9 @@ namespace snu::fix
 	class visitor final
 	{
 	public:
-		static constexpr char_type soh	= '|';
-		static constexpr uint32_t  base = 10U;
+		static constexpr const char_type soh  = '|';
+		static constexpr const char_type eq	  = '=';
+		static constexpr uint32_t		 base = 10U;
 
 		explicit visitor() = default;
 		~visitor()		   = default;
@@ -120,9 +121,18 @@ namespace snu::fix
 		visitor& operator=(const visitor&) = default;
 		visitor(const visitor&)			   = default;
 
+		range<char_type> operator()(const std::basic_string<char_type>& in)
+		{
+			return this->visit(in);
+		}
+
 		range_data<char_type> visit(const std::basic_string<char_type>& in)
 		{
-			thread_local range_data<char_type>		  ret{};
+			thread_local range_data<char_type> ret{};
+
+			if (in.empty())
+				return ret;
+
 			thread_local std::basic_string<char_type> in_tmp{};
 
 			in_tmp.reserve(in.size());
@@ -137,8 +147,8 @@ namespace snu::fix
 						continue;
 					}
 
-					std::basic_string<char_type> key = in_tmp.substr(0, in_tmp.find("="));
-					std::basic_string<char_type> val = in_tmp.substr(in_tmp.find("=") + 1);
+					std::basic_string<char_type> key = in_tmp.substr(0, in_tmp.find(visitor::eq));
+					std::basic_string<char_type> val = in_tmp.substr(in_tmp.find(visitor::eq) + 1);
 
 					if (ret.msg_magic_.empty())
 					{

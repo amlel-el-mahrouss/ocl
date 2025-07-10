@@ -99,4 +99,4 @@ namespace snu::equiv
 			return left_ / right_;
 		}
 	};
-} // namespace snu
+} // namespace snu::equiv

@@ -13,7 +13,8 @@
 
 namespace snu::fix
 {
-
+    class network_rx;
+    class network_tx;
 }
 
 #endif // ifndef _SNU_FIX_NETWORK_HPP
