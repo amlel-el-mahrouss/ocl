@@ -1,4 +1,4 @@
-# SNU C++ Library
+# SNU Open C++ Library
 
 [![License: GPL-2.0](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
@@ -11,7 +11,7 @@ A C++ library with additional modules for your C++ SDLC.
 Here is an example of how snu::opt works.
 
 ```cpp
-#include <lib/opt.hpp>
+#include <lib/logic/opt.hpp>
 
 int main(int argc, char** argv)
 {
@@ -19,8 +19,8 @@ int main(int argc, char** argv)
   opt = snu::opt(snu::eval_eq(50, 40));
   opt.expect("this time it doesn't.");
   
-  return 0;
+  return EXIT_SUCCESS;
 }
 ```
 
-##### (c) SNU Systems Corp 2025, all rights reserved.
+##### (c) 2025 SNU Systems, Corp all rights reserved.
