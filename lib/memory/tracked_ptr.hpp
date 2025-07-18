@@ -150,14 +150,12 @@ namespace snu::memory
 		}
 
 	public:
-		/// Move constructor
 		tracked_ptr(tracked_ptr&& other) noexcept
 			: ptr_(other.ptr_)
 		{
 			other.ptr_ = nullptr;
 		}
 
-		/// Move assignment operator
 		tracked_ptr& operator=(tracked_ptr&& other) noexcept
 		{
 			if (this != &other)
@@ -173,4 +171,15 @@ namespace snu::memory
 	private:
 		T* ptr_ = nullptr;
 	};
+
+	template <typename T>
+	inline auto make_tracked(T arg) -> auto {
+		return tracked_ptr<T>{std::forward<T>(arg)};
+	}
+
+
+	template <typename U, typename... T>
+	inline auto make_tracked(T&&... arg) -> auto {
+		return tracked_ptr<U>{std::forward<T>(arg)...};
+	}
 } // namespace snu::memory

@@ -9,7 +9,7 @@
 
 void foo()
 {
-	snu::memory::tracked_ptr<int> ptr;
+	snu::memory::tracked_ptr<int> ptr = snu::memory::make_tracked(42);
 	std::cout << ptr.data() << "=" << ptr.manager().allocator().allocated_count_ << std::endl;
 }
 
