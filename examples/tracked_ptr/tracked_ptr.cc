@@ -9,7 +9,8 @@
 
 void foo()
 {
-	snu::memory::tracked_ptr<int> ptr9;
+	snu::memory::tracked_ptr<int> ptr;
+	std::cout << ptr.data() << "=" << ptr.manager().allocator().allocated_count_ << std::endl;
 }
 
 /* finally test it */
@@ -22,8 +23,8 @@ int main(int argc, char** argv)
 
 	snu::memory::tracked_ptr<int> ptr;
 
-	std::cout << ptr.manager().allocator().allocated_count_ << std::endl;
-	std::cout << ptr.manager().allocator().deallocated_count_ << std::endl;
+	std::cout << ptr.data() << "=" << ptr.manager().allocator().allocated_count_ << std::endl;
+	std::cout << "total=" << ptr.manager().allocator().deallocated_count_ << std::endl;
 
 	return 0;
 }
