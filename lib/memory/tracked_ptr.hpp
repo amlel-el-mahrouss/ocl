@@ -60,7 +60,7 @@ namespace snu::memory
 
 				++deallocated_count_;
 
-				::operator delete(ptr);
+				delete ptr;
 				ptr = nullptr;
 			}
 		}
