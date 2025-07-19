@@ -18,8 +18,10 @@ namespace snu::fix
 {
 	template <typename char_type>
 	struct visitor;
+
 	template <typename char_type>
 	struct range;
+
 	template <typename char_type>
 	struct range_data;
 
