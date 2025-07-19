@@ -10,6 +10,7 @@
 #include <cstddef>
 #include <utility>
 #include <memory>
+#include <atomic>
 
 namespace snu::memory
 {
@@ -26,19 +27,13 @@ namespace snu::memory
 	class tracked_allocator
 	{
 	public:
-		std::size_t allocated_count_   = 0;
-		std::size_t deallocated_count_ = 0;
-		bool		is_initialized_	   = false;
+		std::atomic<size_t> allocated_count_   = 0;
+		std::atomic<size_t> deallocated_count_ = 0;
 
 	public:
 		template <typename... U>
-		void allocate(T*& ptr, U&&... args)
+		void retain(T*& ptr, U&&... args)
 		{
-			if (!is_initialized_)
-			{
-				is_initialized_ = true;
-			}
-
 			ptr = new T(args...);
 
 			if (ptr)
@@ -51,7 +46,7 @@ namespace snu::memory
 			}
 		}
 
-		void deallocate(T*& ptr)
+		void dispose(T* ptr)
 		{
 			if (ptr)
 			{
@@ -82,13 +77,13 @@ namespace snu::memory
 		T* retain(U&&... args)
 		{
 			T* ptr = nullptr;
-			allocator_.allocate(ptr, std::forward<U>(args)...);
+			allocator_.retain(ptr, std::forward<U>(args)...);
 			return ptr;
 		}
 
 		void dispose(T* ptr)
 		{
-			allocator_.deallocate(ptr);
+			allocator_.dispose(ptr);
 		}
 	};
 
@@ -173,13 +168,13 @@ namespace snu::memory
 	};
 
 	template <typename T>
-	inline auto make_tracked(T arg) -> auto {
-		return tracked_ptr<T>{std::forward<T>(arg)};
+	inline auto make_tracked(T arg) -> tracked_ptr<T> {
+		return tracked_ptr<T>(std::forward<T>(arg));
 	}
 
 
 	template <typename U, typename... T>
-	inline auto make_tracked(T&&... arg) -> auto {
-		return tracked_ptr<U>{std::forward<T>(arg)...};
+	inline auto make_tracked(T&&... arg) -> tracked_ptr<U> {
+		return tracked_ptr<U>(std::forward<T>(arg)...);
 	}
 } // namespace snu::memory
