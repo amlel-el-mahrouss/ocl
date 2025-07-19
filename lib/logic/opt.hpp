@@ -107,6 +107,15 @@ namespace snu::opt
 		return greater_than(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
 	}
 
+	inline return_type eval_true()
+	{
+		return return_type::okay;
+	}
+
+	inline return_type eval_false()
+	{
+		return return_type::err;
+	}
 } // namespace snu::opt
 
 #endif /* ifndef _SNU_OPT_HPP */

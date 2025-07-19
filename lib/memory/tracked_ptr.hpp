@@ -107,13 +107,22 @@ namespace snu::memory
 
 		~tracked_ptr() noexcept
 		{
-			tracked_ptr::manager().dispose(ptr_);
+			this->reset();
 		}
 
 		tracked_ptr(const tracked_ptr&)			   = delete;
 		tracked_ptr& operator=(const tracked_ptr&) = delete;
 
 	public:
+		void reset()
+		{
+			if (ptr_)
+			{
+				tracked_ptr::manager().dispose(ptr_);
+				ptr_ = nullptr;
+			}
+		}
+
 		T* get() const
 		{
 			return ptr_;
@@ -176,5 +185,11 @@ namespace snu::memory
 	template <typename U, typename... T>
 	inline auto make_tracked(T&&... arg) -> tracked_ptr<U> {
 		return tracked_ptr<U>(std::forward<T>(arg)...);
+	}
+
+	template <typename T>
+	inline void swap(tracked_ptr<T>& a, tracked_ptr<T>& b)
+	{
+		a.swap(b);
 	}
 } // namespace snu::memory
