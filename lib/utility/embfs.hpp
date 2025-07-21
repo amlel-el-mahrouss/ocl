@@ -31,6 +31,8 @@ namespace snu::embfs
 		typedef std::uint32_t lba_t;
 #elif defined(EMBFS_48BIT_LBA)
 		typedef std::uint64_t lba_t;
+#else
+		typedef std::uint32_t lba_t;
 #endif
 
 		typedef std::int16_t sword_t;

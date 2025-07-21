@@ -7,6 +7,9 @@
 *.o
 *.obj
 
+docs/html
+docs/latex
+
 .idea
 
 # Precompiled Headers
