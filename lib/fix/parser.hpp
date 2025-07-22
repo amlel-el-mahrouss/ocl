@@ -56,12 +56,12 @@ namespace snu::fix
 	template <typename char_type>
 	struct range final
 	{
-		char_type* ascii_bytes_;
-		uint16_t   length_;
+		char_type* bytes_;
+		size_t   length_;
 
 		bool is_valid()
 		{
-			return ascii_bytes_ && length_ > 0;
+			return bytes_ && length_ > 0;
 		}
 
 		operator bool()
@@ -71,6 +71,7 @@ namespace snu::fix
 	};
 
 	/// @brief Convert range to usable string.
+	/// @note This function assumes that the range is valid and contains ASCII bytes.
 	template <typename char_type>
 	inline std::basic_string<char_type> to_string(range<char_type>& range) noexcept
 	{
