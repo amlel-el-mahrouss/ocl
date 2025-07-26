@@ -13,11 +13,11 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_executable(TrackedPtrTest tracked_ptr_test.cc)
-target_link_libraries(TrackedPtrTest gtest_main)
+add_executable(TrackedPtrTestLeak tracked_ptr_test.cc)
+target_link_libraries(TrackedPtrTestLeak gtest_main)
 
-set_property(TARGET TrackedPtrTest PROPERTY CXX_STANDARD 20)
-target_include_directories(TrackedPtrTest PUBLIC ../../)
+set_property(TARGET TrackedPtrTestLeak PROPERTY CXX_STANDARD 20)
+target_include_directories(TrackedPtrTestLeak PUBLIC ../../)
 
 include(GoogleTest)
-gtest_discover_tests(TrackedPtrTest)
+gtest_discover_tests(TrackedPtrTestLeak)

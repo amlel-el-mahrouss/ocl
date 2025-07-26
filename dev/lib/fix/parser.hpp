@@ -57,7 +57,7 @@ namespace snu::fix
 	struct range final
 	{
 		char_type* bytes_;
-		size_t   length_;
+		size_t	   length_;
 
 		bool is_valid()
 		{
@@ -97,6 +97,23 @@ namespace snu::fix
 
 		range_data& operator=(const range_data&) = default;
 		range_data(const range_data&)			 = default;
+
+		std::basic_string<char_type> operator[](const std::basic_string<char_type>& key)
+		{
+			if (key.empty())
+			{
+				return std::basic_string<char_type>{};
+			}
+
+			for (const auto& pair : msg_body_)
+			{
+				if (pair.first == key)
+				{
+					return pair.second;
+				}
+			}
+			return std::basic_string<char_type>{};
+		}
 
 		bool is_valid()
 		{

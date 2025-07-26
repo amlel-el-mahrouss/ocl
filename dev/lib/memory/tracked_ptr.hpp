@@ -110,7 +110,7 @@ namespace snu::memory
 			this->reset();
 		}
 
-		tracked_ptr(const tracked_ptr&)			   = delete;
+		tracked_ptr(const tracked_ptr&) = delete;
 		tracked_ptr& operator=(const tracked_ptr&) = delete;
 
 	public:
@@ -177,13 +177,14 @@ namespace snu::memory
 	};
 
 	template <typename T>
-	inline auto make_tracked(T arg) -> tracked_ptr<T> {
+	inline auto make_tracked(T arg) -> tracked_ptr<T>
+	{
 		return tracked_ptr<T>(std::forward<T>(arg));
 	}
 
-
 	template <typename U, typename... T>
-	inline auto make_tracked(T&&... arg) -> tracked_ptr<U> {
+	inline auto make_tracked(T&&... arg) -> tracked_ptr<U>
+	{
 		return tracked_ptr<U>(std::forward<T>(arg)...);
 	}
 

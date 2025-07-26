@@ -16,7 +16,7 @@
 
 namespace snu::embfs
 {
-	namespace details
+	namespace traits
 	{
 		struct embfs_superblock;
 		struct embfs_inode;
@@ -73,7 +73,7 @@ namespace snu::embfs
 
 		/// @brief Indexed node linear array.
 		typedef embfs_inode embfs_inode_arr_t[_inode_arr_len];
-	} // namespace details
+	} // namespace traits
 } // namespace snu::embfs
 
 #endif // ifndef _SNU_EMBFS_HPP
