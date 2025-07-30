@@ -11,7 +11,7 @@
 
 namespace snu::math
 {
-	template <size_t T>
+	template <std::size_t T>
 	struct is_non_boolean_integer final
 	{
 		static constexpr const bool value = true;

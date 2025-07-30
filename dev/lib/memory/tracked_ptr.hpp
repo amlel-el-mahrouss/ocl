@@ -46,7 +46,7 @@ namespace snu::memory
 			}
 		}
 
-		void dispose(T* ptr)
+		void dispose(T*& ptr)
 		{
 			if (ptr)
 			{
@@ -68,7 +68,7 @@ namespace snu::memory
 		tracked_allocator<T> allocator_;
 
 	public:
-		const tracked_allocator<T>& allocator()
+		const tracked_allocator<T>& allocator() noexcept
 		{
 			return allocator_;
 		}
@@ -81,7 +81,7 @@ namespace snu::memory
 			return ptr;
 		}
 
-		void dispose(T* ptr)
+		void dispose(T*& ptr)
 		{
 			allocator_.dispose(ptr);
 		}
@@ -91,7 +91,7 @@ namespace snu::memory
 	class tracked_ptr
 	{
 	public:
-		static Mgr& manager()
+		static Mgr& manager() noexcept
 		{
 			static Mgr mgr;
 			return mgr;
@@ -99,7 +99,7 @@ namespace snu::memory
 
 	public:
 		template <typename... U>
-		explicit tracked_ptr(U&&... args)
+		tracked_ptr(U&&... args)
 			: ptr_(nullptr)
 		{
 			ptr_ = tracked_ptr::manager().retain(std::forward<U>(args)...);
@@ -119,7 +119,6 @@ namespace snu::memory
 			if (ptr_)
 			{
 				tracked_ptr::manager().dispose(ptr_);
-				ptr_ = nullptr;
 			}
 		}
 
