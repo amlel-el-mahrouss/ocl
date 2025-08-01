@@ -86,9 +86,9 @@ namespace snu::fix
 	class range_data final
 	{
 	public:
-		std::basic_string<char_type>													   msg_magic_;
-		std::size_t																		   msg_body_len_;
-		std::vector<std::pair<std::basic_string<char_type>, std::basic_string<char_type>>> msg_body_;
+		std::basic_string<char_type>													   magic_;
+		std::size_t																		   body_len_;
+		std::vector<std::pair<std::basic_string<char_type>, std::basic_string<char_type>>> body_;
 
 		static inline const char_type* begin = detail::begin_fix<char_type>();
 
@@ -105,19 +105,20 @@ namespace snu::fix
 				return std::basic_string<char_type>{};
 			}
 
-			for (const auto& pair : msg_body_)
+			for (const auto& pair : this->body_)
 			{
 				if (pair.first == key)
 				{
 					return pair.second;
 				}
 			}
+
 			return std::basic_string<char_type>{};
 		}
 
 		bool is_valid()
 		{
-			return msg_magic_.starts_with(range_data<char_type>::begin);
+			return magic_.starts_with(range_data<char_type>::begin);
 		}
 
 		operator bool()
@@ -170,14 +171,14 @@ namespace snu::fix
 					std::basic_string<char_type> key = in_tmp.substr(0, in_tmp.find(visitor::eq));
 					std::basic_string<char_type> val = in_tmp.substr(in_tmp.find(visitor::eq) + 1);
 
-					if (ret.msg_magic_.empty())
+					if (ret.magic_.empty())
 					{
-						ret.msg_magic_ = val;
+						ret.magic_ = val;
 					}
 					else
 					{
-						ret.msg_body_.emplace_back(std::make_pair(key, val));
-						ret.msg_body_len_ += in_tmp.size();
+						ret.body_.emplace_back(std::make_pair(key, val));
+						ret.body_len_ += in_tmp.size();
 					}
 
 					in_tmp.clear();

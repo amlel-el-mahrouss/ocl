@@ -25,7 +25,7 @@ static auto do_some(const std::string recv_data, const std::string check_data)
 	const int hash_to_check = do_hash(check_data); /* here we assume this should match opt_hash */
 	const int opt_hash		= do_hash(recv_data);  /* we assume that the hash is correct */
 
-	auto opt = snu::opt::opt(snu::opt::eval_eq(hash_to_check, opt_hash)); /* do the compute */
+	auto opt = snu::opt(snu::eval_eq(hash_to_check, opt_hash)); /* do the compute */
 	return opt;
 }
 
@@ -34,7 +34,7 @@ int main(int argc, char** argv)
 {
 	// ... let's assume we fetch data from network...
 
-	snu::println("Testing data...");
+	snu::io::println("Testing data...");
 
 	auto opt = do_some("Ohio", "Ohio");
 	opt.expect("Checksum failed, Ohio isn't Ohio!");

@@ -31,6 +31,13 @@ namespace snu::memory
 		std::atomic<size_t> deallocated_count_ = 0;
 
 	public:
+		explicit tracked_allocator() = default;
+		virtual ~tracked_allocator() = default;
+
+		tracked_allocator& operator=(const tracked_allocator&) = default;
+		tracked_allocator(const tracked_allocator&)			   = default;
+
+	public:
 		template <typename... U>
 		void retain(T*& ptr, U&&... args)
 		{
@@ -66,6 +73,13 @@ namespace snu::memory
 	{
 	private:
 		tracked_allocator<T> allocator_;
+
+	public:
+		explicit tracked_mgr() = default;
+		virtual ~tracked_mgr() = default;
+
+		tracked_mgr& operator=(const tracked_mgr&) = default;
+		tracked_mgr(const tracked_mgr&)			   = default;
 
 	public:
 		const tracked_allocator<T>& allocator() noexcept
@@ -105,7 +119,7 @@ namespace snu::memory
 			ptr_ = tracked_ptr::manager().retain(std::forward<U>(args)...);
 		}
 
-		~tracked_ptr() noexcept
+		virtual ~tracked_ptr() noexcept
 		{
 			this->reset();
 		}
@@ -191,5 +205,12 @@ namespace snu::memory
 	inline void swap(tracked_ptr<T>& a, tracked_ptr<T>& b)
 	{
 		a.swap(b);
+	}
+
+	/// @brief a Must Pass function is a standard way to verify a container' validity, inspired from NeKernel/VMKernel.
+	template <typename T>
+	inline void must_pass(tracked_ptr<T>& ptr) noexcept
+	{
+		assert(ptr.manager().allocator().allocated_count_ < ptr.manager().allocator().deallocated_count_);
 	}
 } // namespace snu::memory

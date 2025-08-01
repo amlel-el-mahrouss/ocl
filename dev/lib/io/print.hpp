@@ -10,7 +10,7 @@
 
 #include <iostream>
 
-namespace snu
+namespace snu::io
 {
 	template <typename... T>
 	inline void print(T... fmt)
@@ -24,6 +24,6 @@ namespace snu
 		std::cout << std::move(fmt...);
 		std::cout << std::endl;
 	}
-} // namespace snu
+} // namespace snu::io
 
 #endif // ifndef _SNU_PRINT_HPP

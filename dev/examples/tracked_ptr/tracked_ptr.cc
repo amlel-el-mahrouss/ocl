@@ -48,5 +48,7 @@ int main(int argc, char** argv)
 
 	std::cout << "leak-detected=" << std::boolalpha << (ptr.manager().allocator().allocated_count_ > ptr.manager().allocator().deallocated_count_) << std::endl;
 
-	return 0;
+	snu::memory::must_pass(ptr);
+
+	return EXIT_SUCCESS;
 }

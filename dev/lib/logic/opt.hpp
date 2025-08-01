@@ -7,10 +7,10 @@
 #ifndef _SNU_OPT_HPP
 #define _SNU_OPT_HPP
 
-#include <lib/detail/error.hpp>
+#include <lib/except/error.hpp>
 #include <utility>
 
-namespace snu::opt
+namespace snu
 {
 	enum class return_type
 	{
@@ -116,6 +116,6 @@ namespace snu::opt
 	{
 		return return_type::err;
 	}
-} // namespace snu::opt
+} // namespace snu
 
 #endif /* ifndef _SNU_OPT_HPP */
