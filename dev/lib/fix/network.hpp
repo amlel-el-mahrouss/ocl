@@ -62,13 +62,14 @@ namespace snu::fix
 			return ret > 0;
 		}
 
-		template <int32_t PF, int32_t Kind, int32_t IPProto, int32_t Port>
+		template <int32_t AF, int32_t Kind, int32_t IPProto, int32_t Port>
 		bool construct(const char* addr = local_address, const bool& is_server = false) noexcept
 		{
+			static_assert(AF != 0, "AF is zero");
 			static_assert(Kind != 0, "Kind is zero");
 			static_assert(IPProto != 0, "IPProto is zero");
 
-			fd_ = ::socket(PF, Kind, IPProto);
+			fd_ = ::socket(AF, Kind, IPProto);
 
 			if (fd_ < 1)
 				return false;
