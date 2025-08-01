@@ -10,7 +10,6 @@
 
 #include <arpa/inet.h>
 #include <sys/socket.h>
-
 #include <cstddef>
 
 namespace snu::fix
@@ -29,16 +28,23 @@ namespace snu::fix
 		delivery_modem& operator=(const delivery_modem&) = default;
 		delivery_modem(const delivery_modem&)			 = default;
 
+		static constexpr auto local_address = "127.0.0.1";
+		static constexpr auto backlog_cnt	= 18U;
+
 	public:
 		delivery_socket_type fd_{};
 
 		template <typename T>
 		bool receive(T& out, std::size_t len) noexcept
 		{
+			if (!out)
+				return false;
+
 			if (!len)
 				return false;
 
-			auto ret = ::recv(fd_, &out, len, 0);
+			auto ret = ::recv(fd_, out, len, MSG_WAITALL);
+
 			return ret > 0;
 		}
 
@@ -47,17 +53,42 @@ namespace snu::fix
 		{
 			if (!out)
 				return false;
+
 			if (!len)
 				return false;
 
 			auto ret = ::send(fd_, out, len, 0);
+
 			return ret > 0;
 		}
 
-		bool construct() noexcept
+		template <int32_t PF, int32_t Kind, int32_t IPProto, int32_t Port>
+		bool construct(const char* addr = local_address, const bool& is_server = false) noexcept
 		{
-			fd_ = ::socket(SOCK_STREAM, AF_INET, 0);
-			return fd_ > 0;
+			static_assert(Kind != 0, "Kind is zero");
+			static_assert(IPProto != 0, "IPProto is zero");
+
+			fd_ = ::socket(PF, Kind, IPProto);
+
+			if (fd_ < 1)
+				return false;
+
+			struct sockaddr_in addr_
+			{
+			};
+
+			addr_.sin_addr.s_addr = ::inet_addr(addr);
+			addr_.sin_port		  = Port;
+
+			if (!is_server)
+			{
+				auto ret = ::connect(fd_, (struct sockaddr*)&addr_, sizeof(decltype(addr_)));
+				return ret == 0;
+			}
+
+			::listen(fd_, backlog_cnt);
+
+			return true;
 		}
 
 		bool destroy() noexcept
