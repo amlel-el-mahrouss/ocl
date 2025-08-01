@@ -1,5 +1,5 @@
 /*
- * File: fix/netowrk.hpp
+ * File: fix/network.hpp
  * Purpose: Financial Information Exchange in C++
  * Author: Amlal El Mahrouss (founder@snu.systems)
  * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp all rights reserved.
@@ -17,7 +17,7 @@ namespace snu::fix
 {
 	class delivery_modem;
 
-	typedef int delivery_type;
+	typedef int32_t delivery_socket_type;
 
 	/// @brief a delivery modem is a container which establishes a comm. channel between the FIX session and application.
 	class delivery_modem final
@@ -30,7 +30,7 @@ namespace snu::fix
 		delivery_modem(const delivery_modem&)			 = default;
 
 	public:
-		delivery_type fd_{};
+		delivery_socket_type fd_{};
 
 		template <typename T>
 		bool receive(T& out, std::size_t len) noexcept
