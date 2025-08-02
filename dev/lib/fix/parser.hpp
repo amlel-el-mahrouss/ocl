@@ -24,14 +24,14 @@ namespace snu::fix
 	struct basic_visitor;
 
 	template <typename char_type>
-	struct range;
+	struct basic_range;
 
 	template <typename char_type>
-	struct range_data;
+	struct basic_range_data;
 
 	/// @brief Buffer+Length structure
 	template <typename char_type>
-	using range_ptr_t = range<char_type>;
+	using range_ptr_t = basic_range<char_type>;
 
 	namespace detail
 	{
@@ -58,7 +58,7 @@ namespace snu::fix
 	} // namespace detail
 
 	template <typename char_type>
-	struct range final
+	struct basic_range final
 	{
 		char_type* bytes_;
 		size_t	   length_;
@@ -74,20 +74,20 @@ namespace snu::fix
 		}
 	};
 
-	/// @brief Convert range to usable string.
-	/// @note This function assumes that the range is valid and contains ASCII bytes.
+	/// @brief Convert basic_range to usable string.
+	/// @note This function assumes that the basic_range is valid and contains ASCII bytes.
 	template <typename char_type>
-	inline std::basic_string<char_type> to_string(range<char_type>& range) noexcept
+	inline std::basic_string<char_type> to_string(basic_range<char_type>& basic_range) noexcept
 	{
-		if (range.length_ < 0)
+		if (basic_range.length_ < 0)
 			return std::basic_string<char_type>{};
 
-		return std::basic_string<char_type>(range.ascii_bytes_, range.length_);
+		return std::basic_string<char_type>(basic_range.ascii_bytes_, basic_range.length_);
 	}
 
-	/// @brief a range object containing the FIX packet values.
+	/// @brief a basic_range object containing the FIX packet values.
 	template <typename char_type>
-	class range_data final
+	class basic_range_data final
 	{
 	public:
 		std::size_t																		   magic_len_;
@@ -97,11 +97,11 @@ namespace snu::fix
 
 		static inline const char_type* begin = detail::begin_fix<char_type>();
 
-		explicit range_data() = default;
-		~range_data()		  = default;
+		explicit basic_range_data() = default;
+		~basic_range_data()		  = default;
 
-		range_data& operator=(const range_data&) = default;
-		range_data(const range_data&)			 = default;
+		basic_range_data& operator=(const basic_range_data&) = default;
+		basic_range_data(const basic_range_data&)			 = default;
 
 		std::basic_string<char_type> operator[](const std::basic_string<char_type>& key)
 		{
@@ -123,7 +123,7 @@ namespace snu::fix
 
 		bool is_valid()
 		{
-			return magic_.starts_with(range_data<char_type>::begin);
+			return magic_.starts_with(basic_range_data<char_type>::begin);
 		}
 
 		operator bool()
@@ -132,7 +132,7 @@ namespace snu::fix
 		}
 	};
 
-	/// @brief basic_visitor object which returns a fix::range_data instance.
+	/// @brief basic_visitor object which returns a fix::basic_range_data instance.
 	template <typename char_type>
 	class basic_visitor final
 	{
@@ -147,14 +147,14 @@ namespace snu::fix
 		basic_visitor& operator=(const basic_visitor&) = default;
 		basic_visitor(const basic_visitor&)			   = default;
 
-		range<char_type> operator()(const std::basic_string<char_type>& in)
+		basic_range<char_type> operator()(const std::basic_string<char_type>& in)
 		{
 			return this->visit(in);
 		}
 
-		range_data<char_type> visit(const std::basic_string<char_type>& in)
+		basic_range_data<char_type> visit(const std::basic_string<char_type>& in)
 		{
-			thread_local range_data<char_type> ret{};
+			thread_local basic_range_data<char_type> ret{};
 
 			if (in.empty())
 				return ret;
@@ -202,9 +202,9 @@ namespace snu::fix
 	};
 
 	template <typename char_type = char>
-	inline void must_pass(range_data<char_type>& range)
+	inline void must_pass(basic_range_data<char_type>& basic_range)
 	{
-		if (!range.is_valid())
+		if (!basic_range.is_valid())
 		{
 			::kill(::getpid(), SIGTRAP);
 		}
