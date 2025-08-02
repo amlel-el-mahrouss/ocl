@@ -28,8 +28,9 @@ namespace snu::fix
 		delivery_modem& operator=(const delivery_modem&) = default;
 		delivery_modem(const delivery_modem&)			 = default;
 
+	public:
 		static constexpr auto local_address = "127.0.0.1";
-		static constexpr auto backlog_cnt	= 18U;
+		static constexpr auto backlog_count = 18U;
 
 	public:
 		delivery_socket_type fd_{};
@@ -63,7 +64,7 @@ namespace snu::fix
 		}
 
 		template <int32_t AF, int32_t Kind, int32_t IPProto, int32_t Port>
-		bool construct(const char* addr = local_address, const bool& is_server = false) noexcept
+		bool construct(const char* addr = delivery_modem::local_address, const bool& is_server = false) noexcept
 		{
 			static_assert(AF != 0, "AF is zero");
 			static_assert(Kind != 0, "Kind is zero");
@@ -87,7 +88,7 @@ namespace snu::fix
 				return ret == 0;
 			}
 
-			::listen(fd_, backlog_cnt);
+			::listen(fd_, delivery_modem::backlog_count);
 
 			return true;
 		}

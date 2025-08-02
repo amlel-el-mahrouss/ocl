@@ -16,12 +16,14 @@ namespace snu
 	namespace cgi
 	{
 		/// @brief CGI Writer class, writes to stdout; as CGI expects.
-		class writer final
+		template <typename char_type = char>
+		class basic_writer
 		{
-			writer& eval_(const std::string& mime, const std::stringstream& ss) noexcept
+		private:
+			basic_writer& eval_(const std::basic_string<char>& mime, const std::basic_stringstream<char_type>& ss) noexcept
 			{
 				std::printf("Content-Type: %s\r\n", mime.c_str());
-				std::printf("Server: %s\r\n", "snu-cpp-library");
+				std::printf("Server: %s\r\n", "socl-cgi-system");
 				std::printf("Content-Length: %ld\r\n\r\n", ss.str().size());
 				std::printf("%s", ss.str().c_str());
 
@@ -29,29 +31,34 @@ namespace snu
 			}
 
 		public:
-			explicit writer() = default;
-			~writer()		  = default;
+			explicit basic_writer() = default;
+			~basic_writer()		  = default;
 
-			writer& operator=(const writer&) = default;
-			writer(const writer&)			 = default;
+			basic_writer& operator=(const basic_writer&) = default;
+			basic_writer(const basic_writer&)			 = default;
 
 		public:
-			writer& eval_html(const std::stringstream& ss_html)
+			basic_writer& binary(const std::basic_stringstream<char_type>& ss_html)
+			{
+				return this->eval_("application/octet-stream", ss_html);
+			}
+
+			basic_writer& html(const std::basic_stringstream<char_type>& ss_html)
 			{
 				return this->eval_("text/html", ss_html);
 			}
 
-			writer& eval_xml(const std::stringstream& ss_html)
+			basic_writer& xml(const std::basic_stringstream<char_type>& ss_html)
 			{
 				return this->eval_("application/xml", ss_html);
 			}
 
-			writer& eval_json(const std::stringstream& ss_html)
+			basic_writer& json(const std::basic_stringstream<char_type>& ss_html)
 			{
 				return this->eval_("application/json", ss_html);
 			}
 
-			writer& eval_js(const std::stringstream& ss_html)
+			basic_writer& js(const std::basic_stringstream<char_type>& ss_html)
 			{
 				return this->eval_("text/javascript", ss_html);
 			}

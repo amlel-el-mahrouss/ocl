@@ -12,6 +12,10 @@
 #include <memory>
 #include <atomic>
 
+#include <sys/types.h>
+#include <unistd.h>
+#include <signal.h>
+
 namespace snu::memory
 {
 	template <typename T>
@@ -211,6 +215,9 @@ namespace snu::memory
 	template <typename T>
 	inline void must_pass(tracked_ptr<T>& ptr) noexcept
 	{
-		assert(ptr.manager().allocator().allocated_count_ < ptr.manager().allocator().deallocated_count_);
+		if (ptr.manager().allocator().allocated_count_ < ptr.manager().allocator().deallocated_count_)
+		{
+			::kill(::getpid(), SIGTRAP);
+		}
 	}
 } // namespace snu::memory

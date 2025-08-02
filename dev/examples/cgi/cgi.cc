@@ -1,4 +1,4 @@
-/* 
+/*
   cgi example
   written by Amlal El Mahrouss.
   licensed under the MIT license
@@ -9,12 +9,12 @@
 #include <sstream>
 #include <string>
 
-const std::string g_not_found = R"(
+const std::string error_html = R"(
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>error | snu-lib</title>
+  <title>Error | SOCL</title>
   <style>
     body {
       font-family: monospace;
@@ -62,7 +62,7 @@ const std::string g_not_found = R"(
 
     <tr><td colspan="3"><hr></td></tr>
   </table>
-  <address>snu's Common Gateway Server.</address>
+  <address>SOCL's Common Gateway Server.</address>
 </body>
 </html>
 )";
@@ -71,21 +71,12 @@ const std::string g_not_found = R"(
 /* @brief this stub loads a 'index.html' or returns an error message if not found. */
 int main(int argc, char** argv)
 {
-	// ... let's assume we serve data.
+	snu::cgi::basic_writer<> writer;
 
-	snu::cgi::cgi_writer writer;
-	std::stringstream	  ss_file;
+	std::stringstream		 ss_file;
+	ss_file << error_html;
 
-	std::ifstream fp("index.html");
-
-	if (fp.good())
-		ss_file << fp.rdbuf();
-	else
-		ss_file << g_not_found;
-
-	fp.close();
-
-	writer.eval_html(ss_file);
+	writer.html(ss_file);
 
 	return 0;
 }
