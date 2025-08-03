@@ -30,12 +30,12 @@ namespace snu::fix
 	struct basic_range_data;
 
 	/// @brief Buffer+Length structure
-	template <typename char_type>
+	template <typename char_type = char>
 	using range_ptr_t = basic_range<char_type>;
 
 	namespace detail
 	{
-		template <typename char_type>
+		template <typename char_type = char>
 		const char_type* begin_fix();
 
 		template <>
@@ -57,7 +57,7 @@ namespace snu::fix
 		}
 	} // namespace detail
 
-	template <typename char_type>
+	template <typename char_type = char>
 	struct basic_range final
 	{
 		char_type* bytes_;
@@ -76,7 +76,7 @@ namespace snu::fix
 
 	/// @brief Convert basic_range to usable string.
 	/// @note This function assumes that the basic_range is valid and contains ASCII bytes.
-	template <typename char_type>
+	template <typename char_type = char>
 	inline std::basic_string<char_type> to_string(basic_range<char_type>& basic_range) noexcept
 	{
 		if (basic_range.length_ < 0)
@@ -86,7 +86,7 @@ namespace snu::fix
 	}
 
 	/// @brief a basic_range object containing the FIX packet values.
-	template <typename char_type>
+	template <typename char_type = char>
 	class basic_range_data final
 	{
 	public:
@@ -133,7 +133,7 @@ namespace snu::fix
 	};
 
 	/// @brief basic_visitor object which returns a fix::basic_range_data instance.
-	template <typename char_type>
+	template <typename char_type = char>
 	class basic_visitor final
 	{
 	public:

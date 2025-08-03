@@ -6,6 +6,7 @@
 
 #include <lib/logic/opt.hpp>
 #include <lib/io/print.hpp>
+#include <lib/utility/crc32.hpp>
 #include <string>
 
 static const char do_hash(const std::string& in)
