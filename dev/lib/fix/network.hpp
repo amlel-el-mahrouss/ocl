@@ -2,7 +2,7 @@
  * File: fix/network.hpp
  * Purpose: Financial Information Exchange in C++
  * Author: Amlal El Mahrouss (founder@snu.systems)
- * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp all rights reserved.
+ * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp.
  */
 
 #ifndef _SNU_FIX_NETWORK_HPP
@@ -10,23 +10,24 @@
 
 #include <arpa/inet.h>
 #include <sys/socket.h>
+#include <utility>
 #include <cstddef>
 
 namespace snu::fix
 {
-	class delivery_modem;
+	class basic_delivery_modem;
 
 	typedef int32_t delivery_socket_type;
 
 	/// @brief a delivery modem is a container which establishes a comm. channel between the FIX session and application.
-	class delivery_modem final
+	class basic_delivery_modem final
 	{
 	public:
-		explicit delivery_modem() = default;
-		~delivery_modem()		  = default;
+		explicit basic_delivery_modem() = default;
+		~basic_delivery_modem()		  = default;
 
-		delivery_modem& operator=(const delivery_modem&) = default;
-		delivery_modem(const delivery_modem&)			 = default;
+		basic_delivery_modem& operator=(const basic_delivery_modem&) = default;
+		basic_delivery_modem(const basic_delivery_modem&)			 = default;
 
 	public:
 		static constexpr auto local_address = "127.0.0.1";
@@ -38,6 +39,8 @@ namespace snu::fix
 		template <typename T>
 		bool receive(T& out, std::size_t len) noexcept
 		{
+			static_assert(std::is_pointer<T>::value, "T is not a pointer!");
+
 			if (!out)
 				return false;
 
@@ -52,6 +55,8 @@ namespace snu::fix
 		template <typename T>
 		bool transmit(T& out, std::size_t len) noexcept
 		{
+			static_assert(std::is_pointer<T>::value, "T is not a pointer!");
+
 			if (!out)
 				return false;
 
@@ -64,7 +69,7 @@ namespace snu::fix
 		}
 
 		template <int32_t AF, int32_t Kind, int32_t IPProto, int32_t Port>
-		bool construct(const char* addr = delivery_modem::local_address, const bool& is_server = false) noexcept
+		bool construct(const char* addr = basic_delivery_modem::local_address, const bool& is_server = false) noexcept
 		{
 			static_assert(AF != 0, "AF is zero");
 			static_assert(Kind != 0, "Kind is zero");
@@ -88,7 +93,7 @@ namespace snu::fix
 				return ret == 0;
 			}
 
-			::listen(fd_, delivery_modem::backlog_count);
+			::listen(fd_, basic_delivery_modem::backlog_count);
 
 			return true;
 		}

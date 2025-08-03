@@ -2,7 +2,7 @@
  * File: print.hpp
  * Purpose: SNU Print library
  * Author: Amlal El Mahrouss. (founder@snu.systems)
- * Copyright 2025, SNU Systems Corp all rights reserved.
+ * Copyright 2025, SNU Systems Corp.
  */
 
 #ifndef _SNU_PRINT_HPP

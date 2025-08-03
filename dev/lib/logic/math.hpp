@@ -2,7 +2,7 @@
  * File: math.hpp
  * Purpose: Mathematics c++ header.
  * Author: Amlal El Mahrouss (founder@snu.systems)
- * Copyright 2025, Amlal El Mahrouss all rights reserved.
+ * Copyright 2025, Amlal El Mahrouss.
  */
 
 #pragma once

@@ -2,7 +2,7 @@
  * File: embfs.hpp
  * Purpose: Embedded File System.
  * Author: Amlal El Mahrouss (founder@snu.systems)
- * Copyright 2025, Amlal El Mahrouss all rights reserved.
+ * Copyright 2025, Amlal El Mahrouss.
  */
 
 #ifndef _SNU_EMBFS_HPP

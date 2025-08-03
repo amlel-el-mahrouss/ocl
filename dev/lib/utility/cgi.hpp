@@ -1,7 +1,7 @@
 /*
  * File: cgi.hpp
  * Author: Amlal El Mahrouss,
- * Copyright 2023-2025, Amlal El Mahrouss all rights reserved.
+ * Copyright 2023-2025, Amlal El Mahrouss.
  */
 
 #ifndef _SNU_CGI_HPP

@@ -23,4 +23,4 @@ int main(int argc, char** argv)
 }
 ```
 
-##### (c) 2025 SNU Systems, Corp all rights reserved.
+##### (c) 2025 SNU Systems, Corp.

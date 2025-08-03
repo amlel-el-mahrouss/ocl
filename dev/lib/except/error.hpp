@@ -1,7 +1,7 @@
 /*
  * File: opt.hpp
  * Author: Amlal El Mahrouss,
- * Copyright 2023-2025, Amlal El Mahrouss/SNU Systems Corp all rights reserved.
+ * Copyright 2023-2025, Amlal El Mahrouss/SNU Systems Corp.
  */
 
 #ifndef _SNU_ERR_HPP
