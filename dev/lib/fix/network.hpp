@@ -13,6 +13,8 @@
 #include <utility>
 #include <cstddef>
 
+#define SNU_MODEM : protected snu::fix::basic_delivery_modem
+
 namespace snu::fix
 {
 	class basic_delivery_modem;
@@ -20,11 +22,11 @@ namespace snu::fix
 	typedef int32_t delivery_socket_type;
 
 	/// @brief a delivery modem is a container which establishes a comm. channel between the FIX session and application.
-	class basic_delivery_modem final
+	class basic_delivery_modem
 	{
 	public:
 		explicit basic_delivery_modem() = default;
-		~basic_delivery_modem()		  = default;
+		virtual ~basic_delivery_modem()		  = default;
 
 		basic_delivery_modem& operator=(const basic_delivery_modem&) = default;
 		basic_delivery_modem(const basic_delivery_modem&)			 = default;
