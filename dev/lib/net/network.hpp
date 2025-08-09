@@ -1,32 +1,32 @@
 /*
- * File: fix/network.hpp
- * Purpose: Financial Information Exchange in C++
+ * File: net/network.hpp
+ * Purpose: Modem concept in modern C++
  * Author: Amlal El Mahrouss (founder@snu.systems)
  * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp.
  */
 
-#ifndef _SNU_FIX_NETWORK_HPP
-#define _SNU_FIX_NETWORK_HPP
+#ifndef _SNU_NET_NETWORK_HPP
+#define _SNU_NET_NETWORK_HPP
 
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <utility>
 #include <cstddef>
 
-#define SNU_MODEM : protected snu::fix::basic_delivery_modem
+#define SNU_MODEM : protected snu::net::basic_delivery_modem
 
-namespace snu::fix
+namespace snu::net
 {
 	class basic_delivery_modem;
 
-	typedef int32_t delivery_socket_type;
+	typedef int64_t socket_type;
 
-	/// @brief a delivery modem is a container which establishes a comm. channel between the FIX session and application.
+	/// @brief Delivery modem concept, a container to read and write on a network stream.
 	class basic_delivery_modem
 	{
 	public:
 		explicit basic_delivery_modem() = default;
-		virtual ~basic_delivery_modem()		  = default;
+		virtual ~basic_delivery_modem() = default;
 
 		basic_delivery_modem& operator=(const basic_delivery_modem&) = default;
 		basic_delivery_modem(const basic_delivery_modem&)			 = default;
@@ -36,7 +36,7 @@ namespace snu::fix
 		static constexpr auto backlog_count = 18U;
 
 	public:
-		delivery_socket_type fd_{};
+		socket_type fd_{};
 
 		template <typename T>
 		bool receive(T& out, std::size_t len) noexcept
@@ -112,6 +112,6 @@ namespace snu::fix
 			return true;
 		}
 	};
-} // namespace snu::fix
+} // namespace snu::net
 
-#endif // ifndef _SNU_FIX_NETWORK_HPP
+#endif // ifndef _SNU_NET_NETWORK_HPP

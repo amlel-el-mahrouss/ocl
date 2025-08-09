@@ -27,7 +27,7 @@ namespace snu::fix
 	struct basic_range;
 
 	template <typename char_type>
-	struct basic_range_data;
+	class basic_range_data;
 
 	/// @brief Buffer+Length structure
 	template <typename char_type = char>
@@ -65,7 +65,7 @@ namespace snu::fix
 
 		bool is_valid()
 		{
-			return bytes_ && length_ > 0;
+			return this->bytes_ && this->length_ > 0;
 		}
 
 		operator bool()
@@ -98,7 +98,7 @@ namespace snu::fix
 		static inline const char_type* begin = detail::begin_fix<char_type>();
 
 		explicit basic_range_data() = default;
-		~basic_range_data()		  = default;
+		~basic_range_data()			= default;
 
 		basic_range_data& operator=(const basic_range_data&) = default;
 		basic_range_data(const basic_range_data&)			 = default;

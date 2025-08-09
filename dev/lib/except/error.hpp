@@ -14,7 +14,7 @@ namespace snu::except
 	using runtime_error = std::runtime_error;
 	using fix_error		= runtime_error;
 	using math_error	= runtime_error;
-	using cgi_error	= runtime_error;
+	using cgi_error		= runtime_error;
 } // namespace snu::except
 
 #endif // _SNU_ERR_HPP

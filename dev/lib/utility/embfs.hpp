@@ -23,10 +23,10 @@ namespace snu::embfs
 
 		inline constexpr const size_t _superblock_name_len	  = 16;
 		inline constexpr const size_t _superblock_reserve_len = 462;
-		
-		inline constexpr const size_t _inode_name_len		  = 128;
-		inline constexpr const size_t _inode_arr_len		  = 12;
-		inline constexpr const size_t _inode_lookup_len		  = 8;
+
+		inline constexpr const size_t _inode_name_len	= 128;
+		inline constexpr const size_t _inode_arr_len	= 12;
+		inline constexpr const size_t _inode_lookup_len = 8;
 
 #ifdef EMBFS_28BIT_LBA
 		typedef std::uint32_t lba_t;
