@@ -37,7 +37,7 @@ namespace snu::net
 
 		static constexpr auto local_address_ip6 = "127.0.0.1";
 		static constexpr auto local_address_ip4 = "::1";
-		
+
 		static constexpr auto backlog_count		= 18U;
 
 		socket_type fd_{};
