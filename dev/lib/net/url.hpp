@@ -9,10 +9,38 @@
 
 #include <string>
 #include <iostream>
+#include <sstream>
+
+/// @author Amlal El Mahrouss (founder@snu.systems)
 
 namespace snu::net
 {
 	template <typename char_type>
 	class basic_url;
 
-}
+	/// @brief Basic URL parser container.
+	template <typename char_type>
+	class basic_url final
+	{
+		std::basic_stringstream<char_type> ss_{};
+
+	public:
+		explicit basic_url() = default;
+		~basic_url()		 = default;
+
+		basic_url& operator=(const basic_url&) = default;
+		basic_url(const basic_url&)			   = default;
+
+		basic_url& operator/=(const std::basic_string<char_type>& in)
+		{
+			ss_ += in;
+			return *this;
+		}
+
+		basic_url& operator/=(const char_type& in)
+		{
+			ss_ += in;
+			return *this;
+		}
+	};
+} // namespace snu::net
