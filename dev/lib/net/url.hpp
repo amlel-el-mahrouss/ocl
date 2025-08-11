@@ -6,3 +6,13 @@
  */
 
 #pragma once
+
+#include <string>
+#include <iostream>
+
+namespace snu::net
+{
+	template <typename char_type>
+	class basic_url;
+
+}

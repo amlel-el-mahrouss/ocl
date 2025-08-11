@@ -21,7 +21,7 @@
 namespace snu::fix
 {
 	template <typename char_type>
-	struct basic_visitor;
+	class basic_visitor;
 
 	template <typename char_type>
 	struct basic_range;
@@ -63,12 +63,12 @@ namespace snu::fix
 		char_type* bytes_;
 		size_t	   length_;
 
-		bool is_valid()
+		bool is_valid() noexcept
 		{
 			return this->bytes_ && this->length_ > 0;
 		}
 
-		operator bool()
+		explicit operator bool()
 		{
 			return this->is_valid();
 		}
@@ -77,7 +77,7 @@ namespace snu::fix
 	/// @brief Convert basic_range to usable string.
 	/// @note This function assumes that the basic_range is valid and contains ASCII bytes.
 	template <typename char_type = char>
-	inline std::basic_string<char_type> to_string(basic_range<char_type>& basic_range) noexcept
+	std::basic_string<char_type> to_string(basic_range<char_type>& basic_range) noexcept
 	{
 		if (basic_range.length_ < 0)
 			return std::basic_string<char_type>{};
@@ -126,7 +126,7 @@ namespace snu::fix
 			return magic_.starts_with(basic_range_data<char_type>::begin);
 		}
 
-		operator bool()
+		explicit operator bool()
 		{
 			return this->is_valid();
 		}
