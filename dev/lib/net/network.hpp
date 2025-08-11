@@ -8,12 +8,14 @@
 #ifndef _SNU_NET_NETWORK_HPP
 #define _SNU_NET_NETWORK_HPP
 
+#include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
+
 #include <utility>
 #include <cstddef>
 
-#define SNU_MODEM_INTERFACE : protected snu::net::basic_delivery_modem
+#define SNU_MODEM_INTERFACE : protected snu::net::basic_modem
 
 namespace snu::net
 {
@@ -33,8 +35,10 @@ namespace snu::net
 		basic_modem& operator=(const basic_modem&) = default;
 		basic_modem(const basic_modem&)			   = default;
 
-		static constexpr auto local_address = "127.0.0.1";
-		static constexpr auto backlog_count = 18U;
+		static constexpr auto local_address_ip6 = "127.0.0.1";
+		static constexpr auto local_address_ip4 = "::1";
+		
+		static constexpr auto backlog_count		= 18U;
 
 		socket_type fd_{};
 
@@ -43,9 +47,10 @@ namespace snu::net
 			return this->fd_ != -1;
 		}
 
-		bool receive(char_type& out, std::size_t len) noexcept
+		template <typename ptr_type>
+		bool receive(ptr_type& out, std::size_t len) noexcept
 		{
-			static_assert(std::is_pointer<char_type>::value, "char_type is not a pointer!");
+			static_assert(std::is_pointer<ptr_type>::value, "ptr_type is not a pointer!");
 
 			if (!out)
 				return false;
@@ -58,9 +63,10 @@ namespace snu::net
 			return ret > 0;
 		}
 
-		bool transmit(char_type& out, std::size_t len) noexcept
+		template <typename ptr_type>
+		bool transmit(ptr_type& out, std::size_t len) noexcept
 		{
-			static_assert(std::is_pointer<char_type>::value, "char_type is not a pointer!");
+			static_assert(std::is_pointer<ptr_type>::value, "char_type is not a pointer!");
 
 			if (!out)
 				return false;
@@ -73,14 +79,14 @@ namespace snu::net
 			return ret > 0;
 		}
 
-		template <int32_t AF, int32_t Kind, int32_t IPProto, int32_t Port>
-		bool construct(const char* addr = basic_modem::local_address, const bool& is_server = false) noexcept
+		template <int32_t af, int32_t kind, int32_t ip_proto, int32_t port>
+		bool construct(const char* addr = basic_modem::local_address_ip4, const bool& is_server = false) noexcept
 		{
-			static_assert(AF != 0, "AF is zero");
-			static_assert(Kind != 0, "Kind is zero");
-			static_assert(IPProto != 0, "IPProto is zero");
+			static_assert(af != 0, "AF is zero");
+			static_assert(kind != 0, "Kind is zero");
+			static_assert(ip_proto != 0, "IPProto is zero");
 
-			fd_ = ::socket(AF, Kind, IPProto);
+			fd_ = ::socket(af, kind, ip_proto);
 
 			if (fd_ == -1)
 				return false;
@@ -90,7 +96,7 @@ namespace snu::net
 			};
 
 			addr_.sin_addr.s_addr = ::inet_addr(addr);
-			addr_.sin_port		  = Port;
+			addr_.sin_port		  = port;
 
 			if (!is_server)
 			{
@@ -109,6 +115,7 @@ namespace snu::net
 				return false;
 
 			::shutdown(fd_, SHUT_RDWR);
+			::close(fd_);
 
 			fd_ = 0U;
 
