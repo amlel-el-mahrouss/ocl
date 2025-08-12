@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(TrackedPtrTests)
+project(SOCLTests)
 
 include(FetchContent)
 FetchContent_Declare(

@@ -11,7 +11,7 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
-
+#include <string>
 #include <utility>
 #include <cstddef>
 
@@ -38,7 +38,7 @@ namespace snu::net
 		static constexpr auto local_address_ip6 = "127.0.0.1";
 		static constexpr auto local_address_ip4 = "::1";
 
-		static constexpr auto backlog_count		= 18U;
+		static constexpr auto backlog_count = 18U;
 
 		socket_type fd_{};
 
@@ -58,7 +58,7 @@ namespace snu::net
 			if (!len)
 				return false;
 
-			auto ret = ::recv(fd_, out, len, MSG_WAITALL);
+			auto ret = ::recv(fd_, out, len, 0);
 
 			return ret > 0;
 		}
@@ -79,12 +79,22 @@ namespace snu::net
 			return ret > 0;
 		}
 
+		template <typename ptr_type>
+		bool transmit(std::basic_string<ptr_type> out) noexcept
+		{
+			if (out.empty())
+				return false;
+
+			auto ret = ::send(fd_, out.data(), out.size(), 0);
+
+			return ret > 0;
+		}
+
 		template <int32_t af, int32_t kind, int32_t ip_proto, int32_t port>
 		bool construct(const char* addr = basic_modem::local_address_ip4, const bool& is_server = false) noexcept
 		{
-			static_assert(af != 0, "AF is zero");
-			static_assert(kind != 0, "Kind is zero");
-			static_assert(ip_proto != 0, "IPProto is zero");
+			static_assert(af != 0, "Address family is zero");
+			static_assert(kind != 0, "Type is zero");
 
 			fd_ = ::socket(af, kind, ip_proto);
 
