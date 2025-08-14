@@ -50,5 +50,15 @@ namespace snu::net
 			ss_ += in;
 			return *this;
 		}
+
+    explicit operator bool()
+    {
+      return this->is_valid();
+    }
+
+    bool is_valid()
+    {
+      return ss_.size() > 0;
+    }
 	};
 } // namespace snu::net
