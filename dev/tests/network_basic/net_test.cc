@@ -7,8 +7,8 @@
 
 #include <lib/net/network.hpp>
 #include <lib/io/print.hpp>
+#include <lib/tests/gtest.hpp>
 #include <cstring>
-#include <gtest/gtest.h>
 
 TEST(NetworkTest, BasicNetworkUsage)
 {
@@ -27,8 +27,9 @@ TEST(NetworkTest, BasicNetworkUsage)
 	modem_cl.transmit(buf_dst);
 	modem.receive<char*>(buf, buf_dst.size());
 
-	snu::io::println<>(buf);
-	snu::io::println<>(buf_dst);
+	snu::io::print(buf_dst);
+	snu::io::print(buf);
+	snu::io::print();
 
 	delete[] buf;
 	buf = nullptr;

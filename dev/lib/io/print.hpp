@@ -13,30 +13,29 @@
 #include <ostream>
 
 namespace snu::io
-{	
+{
+	template <typename T, typename... Args>
+	inline void print(T fmt, Args... other) noexcept
+	{
+		std::cout << fmt;
+		print(other...);
+	}
+
 	template <typename T>
-	inline void printv(T fmt) noexcept
+	inline void print(T fmt) noexcept
 	{
 		std::cout << fmt;
 	}
 
-	template <typename T>
-	inline void printv(std::initializer_list<T> fmt) noexcept
+	inline void print() noexcept
 	{
-		std::cout << fmt;
-	}
-
-	template <typename... T>
-	inline void print(T... fmt) noexcept
-	{
-		(printv(fmt), ...);
+		std::cout << std::endl;
 	}
 
 	template <typename... T>
 	inline void println(T... fmt) noexcept
 	{
-		print(static_cast<T>(fmt)...);
-		std::cout << std::endl;
+		print(fmt...);
 	}
 } // namespace snu::io
 

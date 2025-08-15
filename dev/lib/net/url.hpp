@@ -51,14 +51,14 @@ namespace snu::net
 			return *this;
 		}
 
-    explicit operator bool()
-    {
-      return this->is_valid();
-    }
+		explicit operator bool()
+		{
+			return this->is_valid();
+		}
 
-    bool is_valid()
-    {
-      return ss_.size() > 0;
-    }
+		bool is_valid()
+		{
+			return ss_.size() > 0;
+		}
 	};
 } // namespace snu::net

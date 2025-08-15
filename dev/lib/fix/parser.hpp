@@ -159,7 +159,7 @@ namespace snu::fix
 			if (in.empty())
 				return ret;
 
-			thread_local std::basic_string<char_type> in_tmp{};
+			static thread_local std::basic_string<char_type> in_tmp{};
 
 			in_tmp.reserve(in.size());
 
