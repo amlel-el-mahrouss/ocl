@@ -4,7 +4,7 @@
   licensed under the MIT license
  */
 
-#include <lib/fix/network.hpp>
+#include <lib/net/network.hpp>
 #include <lib/fix/parser.hpp>
 #include <iostream>
 #include <unistd.h>

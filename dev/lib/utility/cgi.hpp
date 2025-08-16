@@ -32,35 +32,35 @@ namespace snu
 
 		public:
 			explicit basic_writer() = default;
-			~basic_writer()		  = default;
+			~basic_writer()			= default;
 
 			basic_writer& operator=(const basic_writer&) = default;
 			basic_writer(const basic_writer&)			 = default;
 
 		public:
-			basic_writer& binary(const std::basic_stringstream<char_type>& ss_html)
+			basic_writer& binary(const std::basic_stringstream<char_type>& ss_in)
 			{
-				return this->eval_("application/octet-stream", ss_html);
+				return this->eval_("application/octet-stream", ss_in);
 			}
 
-			basic_writer& html(const std::basic_stringstream<char_type>& ss_html)
+			basic_writer& html(const std::basic_stringstream<char_type>& ss_in)
 			{
-				return this->eval_("text/html", ss_html);
+				return this->eval_("text/html", ss_in);
 			}
 
-			basic_writer& xml(const std::basic_stringstream<char_type>& ss_html)
+			basic_writer& xml(const std::basic_stringstream<char_type>& ss_in)
 			{
-				return this->eval_("application/xml", ss_html);
+				return this->eval_("application/xml", ss_in);
 			}
 
-			basic_writer& json(const std::basic_stringstream<char_type>& ss_html)
+			basic_writer& json(const std::basic_stringstream<char_type>& ss_in)
 			{
-				return this->eval_("application/json", ss_html);
+				return this->eval_("application/json", ss_in);
 			}
 
-			basic_writer& js(const std::basic_stringstream<char_type>& ss_html)
+			basic_writer& js(const std::basic_stringstream<char_type>& ss_in)
 			{
-				return this->eval_("text/javascript", ss_html);
+				return this->eval_("text/javascript", ss_in);
 			}
 		};
 	} // namespace cgi

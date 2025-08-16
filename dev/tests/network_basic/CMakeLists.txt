@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.10)
-project(SOCLTests)
+cmake_minimum_required(VERSION 3.28)
+project(SOCLTests LANGUAGES CXX)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -13,11 +13,11 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_executable(TrackedPtrTestLeak tracked_ptr_test.cc)
-target_link_libraries(TrackedPtrTestLeak gtest_main)
+add_executable(NetworkTestBasic net_test.cc)
+target_link_libraries(NetworkTestBasic gtest_main)
 
-set_property(TARGET TrackedPtrTestLeak PROPERTY CXX_STANDARD 20)
-target_include_directories(TrackedPtrTestLeak PUBLIC ../../)
+set_property(TARGET NetworkTestBasic PROPERTY CXX_STANDARD 20)
+target_include_directories(NetworkTestBasic PUBLIC ../../)
 
 include(GoogleTest)
-gtest_discover_tests(TrackedPtrTestLeak)
+gtest_discover_tests(NetworkTestBasic)

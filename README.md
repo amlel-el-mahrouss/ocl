@@ -6,9 +6,15 @@
 
 A C++ library with additional modules for your C++ SDLC.
 
-## Getting Started:
+## Requirements:
 
-Here is an example of how snu::opt works.
+- Boost C++ libraries (https://www.boost.org/)
+- Clang (https://clang.llvm.org/)
+- Git (https://git-scm.com/)
+
+## Examples:
+
+### Logic Module (Option container)
 
 ```cpp
 #include <lib/logic/opt.hpp>

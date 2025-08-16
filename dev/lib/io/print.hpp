@@ -8,21 +8,34 @@
 #ifndef _SNU_PRINT_HPP
 #define _SNU_PRINT_HPP
 
+#include <initializer_list>
 #include <iostream>
+#include <ostream>
 
 namespace snu::io
 {
-	template <typename... T>
-	inline void print(T... fmt)
+	template <typename T, typename... Args>
+	inline void print(T fmt, Args... other) noexcept
 	{
-		std::cout << std::move(fmt...);
+		std::cout << fmt;
+		print(other...);
+	}
+
+	template <typename T>
+	inline void print(T fmt) noexcept
+	{
+		std::cout << fmt;
+	}
+
+	inline void print() noexcept
+	{
+		std::cout << std::endl;
 	}
 
 	template <typename... T>
-	inline void println(T... fmt)
+	inline void println(T... fmt) noexcept
 	{
-		std::cout << std::move(fmt...);
-		std::cout << std::endl;
+		print(fmt...);
 	}
 } // namespace snu::io
 

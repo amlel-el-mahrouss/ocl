@@ -13,7 +13,7 @@
 #include <utility>
 #include <string>
 #include <vector>
-
+#include <cstdint>
 #include <sys/types.h>
 #include <unistd.h>
 #include <signal.h>
@@ -21,13 +21,13 @@
 namespace snu::fix
 {
 	template <typename char_type>
-	struct basic_visitor;
+	class basic_visitor;
 
 	template <typename char_type>
 	struct basic_range;
 
 	template <typename char_type>
-	struct basic_range_data;
+	class basic_range_data;
 
 	/// @brief Buffer+Length structure
 	template <typename char_type = char>
@@ -63,12 +63,12 @@ namespace snu::fix
 		char_type* bytes_;
 		size_t	   length_;
 
-		bool is_valid()
+		bool is_valid() noexcept
 		{
-			return bytes_ && length_ > 0;
+			return this->bytes_ && this->length_ > 0;
 		}
 
-		operator bool()
+		explicit operator bool()
 		{
 			return this->is_valid();
 		}
@@ -77,7 +77,7 @@ namespace snu::fix
 	/// @brief Convert basic_range to usable string.
 	/// @note This function assumes that the basic_range is valid and contains ASCII bytes.
 	template <typename char_type = char>
-	inline std::basic_string<char_type> to_string(basic_range<char_type>& basic_range) noexcept
+	std::basic_string<char_type> to_string(basic_range<char_type>& basic_range) noexcept
 	{
 		if (basic_range.length_ < 0)
 			return std::basic_string<char_type>{};
@@ -98,7 +98,7 @@ namespace snu::fix
 		static inline const char_type* begin = detail::begin_fix<char_type>();
 
 		explicit basic_range_data() = default;
-		~basic_range_data()		  = default;
+		~basic_range_data()			= default;
 
 		basic_range_data& operator=(const basic_range_data&) = default;
 		basic_range_data(const basic_range_data&)			 = default;
@@ -126,7 +126,7 @@ namespace snu::fix
 			return magic_.starts_with(basic_range_data<char_type>::begin);
 		}
 
-		operator bool()
+		explicit operator bool()
 		{
 			return this->is_valid();
 		}
@@ -159,7 +159,7 @@ namespace snu::fix
 			if (in.empty())
 				return ret;
 
-			thread_local std::basic_string<char_type> in_tmp{};
+			static thread_local std::basic_string<char_type> in_tmp{};
 
 			in_tmp.reserve(in.size());
 
