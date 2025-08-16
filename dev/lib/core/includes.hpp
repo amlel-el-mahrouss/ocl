@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <boost/config.hpp>
 #include <boost/core/nvp.hpp>
 #include <boost/core/demangle.hpp>
 #include <boost/core/null_deleter.hpp>
