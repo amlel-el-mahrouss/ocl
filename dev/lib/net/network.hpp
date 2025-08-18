@@ -37,8 +37,7 @@ namespace snu::net
 
 		static constexpr auto local_address_ip6 = "127.0.0.1";
 		static constexpr auto local_address_ip4 = "::1";
-
-		static constexpr auto backlog_count = 18U;
+		static constexpr const auto backlog_count = 18U;
 
 		socket_type fd_{};
 
@@ -60,7 +59,7 @@ namespace snu::net
 
 			auto ret = ::recv(fd_, out, len, 0);
 
-			return ret > 0;
+			return ret > 0L;
 		}
 
 		template <typename ptr_type>
@@ -76,7 +75,7 @@ namespace snu::net
 
 			auto ret = ::send(fd_, out, len, 0);
 
-			return ret > 0;
+			return ret > 0L;
 		}
 
 		template <typename ptr_type>
@@ -87,7 +86,7 @@ namespace snu::net
 
 			auto ret = ::send(fd_, out.data(), out.size(), 0);
 
-			return ret > 0;
+			return ret > 0L;
 		}
 
 		template <int32_t af, int32_t kind, int32_t ip_proto, int32_t port>
@@ -111,7 +110,7 @@ namespace snu::net
 			if (!is_server)
 			{
 				const auto ret = ::connect(fd_, reinterpret_cast<struct sockaddr*>(&addr_), sizeof(decltype(addr_)));
-				return ret == 0;
+				return ret == 0L;
 			}
 
 			::listen(fd_, basic_modem::backlog_count);
@@ -127,7 +126,7 @@ namespace snu::net
 			::shutdown(fd_, SHUT_RDWR);
 			::close(fd_);
 
-			fd_ = 0U;
+			fd_ = 0L;
 
 			return true;
 		}
