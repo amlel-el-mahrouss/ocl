@@ -73,7 +73,7 @@ namespace snu
 	template <typename char_type>
 	inline void print(basic_chunk_string<char_type>& fmt) noexcept
 	{
-		std::cout << fmt.print();
+		fmt.print();
 	}
 } // namespace snu
 #endif // ifndef SOCL_UTILITY_CHUNK_STRING_HPP
