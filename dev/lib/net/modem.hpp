@@ -29,7 +29,7 @@ namespace snu::net
 	class basic_modem
 	{
 		socket_type fd_{};
-		bool server_fd_{};
+		bool		server_fd_{};
 
 	public:
 		explicit basic_modem() = default;
@@ -38,9 +38,9 @@ namespace snu::net
 		basic_modem& operator=(const basic_modem&) = default;
 		basic_modem(const basic_modem&)			   = default;
 
-		static constexpr auto local_address_ip4 = "127.0.0.1";
-		static constexpr auto local_address_ip6 = "::1";
-		static constexpr const auto backlog_count = 5U;
+		static constexpr auto		local_address_ip4 = "127.0.0.1";
+		static constexpr auto		local_address_ip6 = "::1";
+		static constexpr const auto backlog_count	  = 5U;
 
 		bool is_valid() const noexcept
 		{
@@ -101,7 +101,7 @@ namespace snu::net
 			static_assert(af != 0, "Address family is zero");
 			static_assert(kind != 0, "Kind is zero");
 
-			fd_ = ::socket(af, kind, 0);
+			fd_		   = ::socket(af, kind, 0);
 			server_fd_ = is_server;
 
 			if (fd_ == -1)
@@ -112,7 +112,7 @@ namespace snu::net
 
 			addr_.sin_addr.s_addr = ::inet_addr(addr);
 			addr_.sin_port		  = htons(port);
-			addr_.sin_family = af;
+			addr_.sin_family	  = af;
 
 			if (!is_server)
 			{

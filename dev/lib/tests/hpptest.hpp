@@ -7,7 +7,6 @@
 
 #pragma once
 
-
 #ifdef SOCL_HPPTEST
 namespace snu::hpptest
 {

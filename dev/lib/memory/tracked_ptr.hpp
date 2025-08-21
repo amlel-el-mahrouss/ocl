@@ -128,7 +128,7 @@ namespace snu::memory
 			this->reset();
 		}
 
-		tracked_ptr(const tracked_ptr&)			   = delete;
+		tracked_ptr(const tracked_ptr&) = delete;
 		tracked_ptr& operator=(const tracked_ptr&) = delete;
 
 	public:
