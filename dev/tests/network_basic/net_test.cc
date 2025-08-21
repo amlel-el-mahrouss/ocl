@@ -5,7 +5,7 @@
  * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp.
  */
 
-#include <lib/net/network.hpp>
+#include <lib/net/modem.hpp>
 #include <lib/io/print.hpp>
 #include <lib/tests/gtest.hpp>
 #include <cstring>
@@ -18,5 +18,5 @@ TEST(NetworkTest, BasicNetworkUsage)
 	EXPECT_TRUE(modem.is_valid());
 
 	std::basic_string<char> buf_dst = "HELLO, NET!";
-	modem.transmit(buf_dst);
+	EXPECT_TRUE(modem.transmit(buf_dst));
 }

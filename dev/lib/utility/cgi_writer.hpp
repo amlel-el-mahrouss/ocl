@@ -1,5 +1,5 @@
 /*
- * File: cgi.hpp
+ * File: cgi_writer.hpp
  * Author: Amlal El Mahrouss,
  * Copyright 2023-2025, Amlal El Mahrouss.
  */

@@ -4,7 +4,7 @@
   licensed under the MIT license
  */
 
-#include <lib/utility/cgi.hpp>
+#include <lib/utility/cgi_writer.hpp>
 #include <fstream>
 #include <sstream>
 #include <string>
