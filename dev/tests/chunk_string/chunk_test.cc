@@ -1,6 +1,6 @@
 /*
- * File: tests/net_test.cc
- * Purpose: Network unit tests in C++
+ * File: tests/chunk_test.cc
+ * Purpose: Chunk unit tests in C++
  * Author: Amlal El Mahrouss (founder@snu.systems)
  * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp.
  */
