@@ -61,7 +61,7 @@ namespace snu
 			return packed_chunks_;
 		}
 
-		inline void print() noexcept
+		void print() noexcept
 		{
 			snu::io::print(packed_chunks_);
 
