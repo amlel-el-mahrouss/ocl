@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.28)
-project(SOCLTests LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.27)
+project(NetworkTestBasic LANGUAGES CXX)
 
 include(FetchContent)
 FetchContent_Declare(
