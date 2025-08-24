@@ -209,6 +209,8 @@ namespace snu::fix
 			::kill(::getpid(), SIGTRAP);
 		}
 	}
+
+	using fix_tag_type = std::uint32_t;
 } // namespace snu::fix
 
 #endif // ifndef _SNU_FIX_PARSER_HPP

@@ -8,7 +8,6 @@
 #ifndef _SNU_PRINT_HPP
 #define _SNU_PRINT_HPP
 
-#include <initializer_list>
 #include <iostream>
 #include <ostream>
 

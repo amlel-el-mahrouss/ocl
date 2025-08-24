@@ -7,9 +7,10 @@
 #ifndef _SNU_CGI_WRITER_HPP
 #define _SNU_CGI_WRITER_HPP
 
-#include <cstdio>
-#include <string>
+#include <lib/io/print.hpp>
+#include <lib/utility/chunk_string.hpp>
 #include <sstream>
+#include <format>
 
 namespace snu
 {
@@ -20,18 +21,16 @@ namespace snu
 		class basic_writer
 		{
 		private:
-			basic_writer& eval_(const std::basic_string<char>& mime, const std::basic_stringstream<char_type>& ss) noexcept
+			basic_writer& eval_(const snu::basic_chunk_string<char_type>& mime, const snu::basic_chunk_string<char_type>& ss) noexcept
 			{
-				std::printf("Content-Type: %s\r\n", mime.c_str());
-				std::printf("Server: %s\r\n", "socl-cgi-system");
-				std::printf("Content-Length: %ld\r\n\r\n", ss.str().size());
+				std::basic_stringstream<char_type> ss_out;
 
-				auto ss_cc = ss.str();
+				ss_out << std::format("Content-Type: {}\r\n", mime.str());
+				ss_out << std::format("Server: {}\r\n", "SOCL-CGI/1.0");
+				ss_out << std::format("Content-Length: {}\r\n\r\n", ss.str().size());
+				ss_out << ss.str();
 
-				for (auto& ch : ss_cc)
-				{
-					std::printf("%c", ch);
-				}
+				snu::io::print(ss_out.str());
 
 				return *this;
 			}
@@ -44,27 +43,32 @@ namespace snu
 			basic_writer(const basic_writer&)			 = default;
 
 		public:
-			basic_writer& binary(const std::basic_stringstream<char_type>& ss_in)
+			friend void operator<<(basic_writer& self, const snu::basic_chunk_string<char_type>& ss_in)
+			{
+				self = self.eval_("text/plain", ss_in);
+			}
+
+			basic_writer& binary(const snu::basic_chunk_string<char_type>& ss_in)
 			{
 				return this->eval_("application/octet-stream", ss_in);
 			}
 
-			basic_writer& html(const std::basic_stringstream<char_type>& ss_in)
+			basic_writer& html(const snu::basic_chunk_string<char_type>& ss_in)
 			{
 				return this->eval_("text/html", ss_in);
 			}
 
-			basic_writer& xml(const std::basic_stringstream<char_type>& ss_in)
+			basic_writer& xml(const snu::basic_chunk_string<char_type>& ss_in)
 			{
 				return this->eval_("application/xml", ss_in);
 			}
 
-			basic_writer& json(const std::basic_stringstream<char_type>& ss_in)
+			basic_writer& json(const snu::basic_chunk_string<char_type>& ss_in)
 			{
 				return this->eval_("application/json", ss_in);
 			}
 
-			basic_writer& js(const std::basic_stringstream<char_type>& ss_in)
+			basic_writer& js(const snu::basic_chunk_string<char_type>& ss_in)
 			{
 				return this->eval_("text/javascript", ss_in);
 			}

@@ -5,11 +5,8 @@
  */
 
 #include <lib/utility/cgi_writer.hpp>
-#include <fstream>
-#include <sstream>
-#include <string>
 
-const std::string error_html = R"(
+static snu::basic_chunk_string<char> text_sample = R"(
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,11 +69,7 @@ const std::string error_html = R"(
 int main(int argc, char** argv)
 {
 	snu::cgi::basic_writer<> writer;
-
-	std::stringstream		 ss_file;
-	ss_file << error_html;
-
-	writer.html(ss_file);
+	writer << text_sample;
 
 	return 0;
 }

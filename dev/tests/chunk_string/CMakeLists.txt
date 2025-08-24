@@ -21,8 +21,5 @@ target_link_libraries(BasicChunkUsage PRIVATE gtest_main Boost::container)
 set_property(TARGET BasicChunkUsage PROPERTY CXX_STANDARD 20)
 target_include_directories(BasicChunkUsage PUBLIC ../../)
 
-# FIXME: Make a pkg-config for the boost library here!
-target_include_directories(BasicChunkUsage PUBLIC /opt/homebrew/Cellar/boost/1.87.0/include)
-
 include(GoogleTest)
 gtest_discover_tests(BasicChunkUsage)

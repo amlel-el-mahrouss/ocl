@@ -29,8 +29,19 @@ namespace snu
 		constexpr const static auto max_chunk_size = 4096;
 
 	public:
-		explicit basic_chunk_string() = default;
-		virtual ~basic_chunk_string() = default;
+		basic_chunk_string() = default;
+
+		basic_chunk_string(const char_type* in)
+		{
+			this->operator+=(in);
+		}
+
+		basic_chunk_string(const std::basic_string<char_type>& in)
+		{
+			this->operator+=(in);
+		}
+
+		~basic_chunk_string() = default;
 
 		basic_chunk_string& operator=(const basic_chunk_string&) = default;
 		basic_chunk_string(const basic_chunk_string&)			 = default;
@@ -56,7 +67,7 @@ namespace snu
 			return *this;
 		}
 
-		const std::basic_string<char_type>& str() noexcept
+		const std::basic_string<char_type>& str() const noexcept
 		{
 			return packed_chunks_;
 		}

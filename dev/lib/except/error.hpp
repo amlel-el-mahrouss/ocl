@@ -9,12 +9,12 @@
 
 #include <stdexcept>
 
-namespace snu::except
+namespace snu
 {
 	using runtime_error = std::runtime_error;
 	using fix_error		= runtime_error;
 	using math_error	= runtime_error;
 	using cgi_error		= runtime_error;
-} // namespace snu::except
+} // namespace snu
 
 #endif // _SNU_ERR_HPP

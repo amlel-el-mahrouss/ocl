@@ -9,7 +9,7 @@
 
 #include <cstddef>
 #include <utility>
-#include <memory>
+#include <new>
 #include <atomic>
 
 #include <sys/types.h>
@@ -45,19 +45,24 @@ namespace snu::memory
 		template <typename... U>
 		void retain(T*& ptr, U&&... args)
 		{
-			ptr = new T(args...);
+			ptr = new T(std::forward<U>(args)...);
 
 			if (ptr)
 			{
 				++allocated_count_;
+				return;
 			}
-			else
-			{
-				throw std::bad_alloc();
-			}
+
+			throw std::bad_alloc();
 		}
 
-		void dispose(T*& ptr)
+		template <typename... U>
+		void must_retain(T*& ptr, U&&... args) noexcept
+		{
+			this->retain(ptr, args...);
+		}
+
+		void dispose(T*& ptr) noexcept
 		{
 			if (ptr)
 			{
@@ -96,10 +101,17 @@ namespace snu::memory
 		{
 			T* ptr = nullptr;
 			allocator_.retain(ptr, std::forward<U>(args)...);
+
 			return ptr;
 		}
 
-		void dispose(T*& ptr)
+		template <typename... U>
+		T* must_retain(U&&... args) noexcept
+		{
+			return this->retain(std::forward<U>(args)...);
+		}
+
+		void dispose(T*& ptr) noexcept
 		{
 			allocator_.dispose(ptr);
 		}
@@ -190,7 +202,7 @@ namespace snu::memory
 		}
 
 	private:
-		T* ptr_ = nullptr;
+		T* ptr_{nullptr};
 	};
 
 	template <typename T>
