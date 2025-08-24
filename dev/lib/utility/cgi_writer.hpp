@@ -4,8 +4,8 @@
  * Copyright 2023-2025, Amlal El Mahrouss.
  */
 
-#ifndef _SNU_CGI_HPP
-#define _SNU_CGI_HPP
+#ifndef _SNU_CGI_WRITER_HPP
+#define _SNU_CGI_WRITER_HPP
 
 #include <cstdio>
 #include <string>
@@ -25,7 +25,13 @@ namespace snu
 				std::printf("Content-Type: %s\r\n", mime.c_str());
 				std::printf("Server: %s\r\n", "socl-cgi-system");
 				std::printf("Content-Length: %ld\r\n\r\n", ss.str().size());
-				std::printf("%s", ss.str().c_str());
+
+				auto ss_cc = ss.str();
+
+				for (auto& ch : ss_cc)
+				{
+					std::printf("%c", ch);
+				}
 
 				return *this;
 			}
@@ -66,4 +72,4 @@ namespace snu
 	} // namespace cgi
 } // namespace snu
 
-#endif // ifndef _SNU_CGI_HPP
+#endif // ifndef _SNU_CGI_WRITER_HPP

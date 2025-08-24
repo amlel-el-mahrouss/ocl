@@ -194,9 +194,9 @@ namespace snu::memory
 	};
 
 	template <typename T>
-	inline auto make_tracked(T arg) -> tracked_ptr<T>
+	inline auto make_tracked() -> tracked_ptr<T>
 	{
-		return tracked_ptr<T>(std::forward<T>(arg));
+		return tracked_ptr<T>();
 	}
 
 	template <typename U, typename... T>
