@@ -60,8 +60,8 @@ namespace snu::fix
 	template <typename char_type = char>
 	struct basic_range final
 	{
-		char_type* bytes_;
-		size_t	   length_;
+		char_type* bytes_{nullptr};
+		size_t	   length_{};
 
 		bool is_valid() noexcept
 		{
