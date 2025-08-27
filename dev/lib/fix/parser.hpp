@@ -201,12 +201,12 @@ namespace ocl::fix
 		}
 	};
 
-	template <typename char_type = char>
-	inline void must_pass(basic_range_data<char_type>& basic_range)
+	template <typename char_type = char, typename error_handler>
+	inline void must_pass(basic_range_data<char_type>& basic_range, error_handler& handler)
 	{
 		if (!basic_range.is_valid())
 		{
-			::kill(::getpid(), SIGTRAP);
+			handler("Invalid FIX packet");
 		}
 	}
 

@@ -15,28 +15,34 @@
 #include <utility>
 #include <cstddef>
 
-#define OCL_MODEM_INTERFACE : protected ocl::net::basic_modem
+#define OCL_MODEM_INTERFACE : public ocl::net::basic_modem
 
 namespace ocl::net
 {
-	template <typename char_type>
 	class basic_modem;
 
 	typedef int64_t socket_type;
 
 	/// @brief Modem container concept, a container to read and write on a network stream.
-	template <typename char_type>
 	class basic_modem
 	{
+	private:
 		socket_type fd_{};
-		bool		server_fd_{};
+		bool		server_fd_{false};
+		bool		bad_{true};
 
 	public:
-		explicit basic_modem() = default;
-		virtual ~basic_modem() = default;
+		const bool& bad{bad_};
 
-		basic_modem& operator=(const basic_modem&) = default;
-		basic_modem(const basic_modem&)			   = default;
+		explicit basic_modem() = default;
+		
+		virtual ~basic_modem()
+		{
+			this->destroy();
+		}
+
+		basic_modem& operator=(const basic_modem&) = delete;
+		basic_modem(const basic_modem&)			   = delete;
 
 		static constexpr auto		local_address_ip4 = "127.0.0.1";
 		static constexpr auto		local_address_ip6 = "::1";
@@ -44,7 +50,7 @@ namespace ocl::net
 
 		bool is_valid() const noexcept
 		{
-			return this->fd_ != -1;
+			return this->fd_ != -1 && !this->bad_;
 		}
 
 		template <typename ptr_type>
@@ -71,7 +77,7 @@ namespace ocl::net
 		template <typename ptr_type>
 		bool transmit(ptr_type& out, std::size_t len) noexcept
 		{
-			static_assert(std::is_pointer<ptr_type>::value, "char_type is not a pointer!");
+			static_assert(std::is_pointer<ptr_type>::value, "ptr_type is not a pointer!");
 
 			if (!out)
 				return false;
@@ -81,18 +87,22 @@ namespace ocl::net
 
 			auto ret = ::send(fd_, out, len, 0);
 
-			return ret > 0L;
+			bad_ = !(ret >= 0L);
+
+			return ret >= 0L;
 		}
 
-		template <typename ptr_type>
-		bool transmit(std::basic_string<ptr_type> out) noexcept
+		template <typename char_type>
+		bool transmit(const std::basic_string<char_type>& out) noexcept
 		{
 			if (out.empty())
 				return false;
 
 			auto ret = ::send(fd_, out.data(), out.size(), 0);
 
-			return ret > 0L;
+			bad_ = !(ret >= 0L);
+			
+			return ret >= 0L;
 		}
 
 		template <int32_t af, int32_t kind, int32_t port>
@@ -122,6 +132,8 @@ namespace ocl::net
 
 			::bind(fd_, (struct sockaddr*)&addr_, sizeof(addr_));
 			::listen(fd_, basic_modem::backlog_count);
+
+			bad_ = false;
 
 			return true;
 		}
