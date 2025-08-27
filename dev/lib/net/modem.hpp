@@ -35,7 +35,7 @@ namespace ocl::net
 		const bool& bad{bad_};
 
 		explicit basic_modem() = default;
-		
+
 		virtual ~basic_modem()
 		{
 			this->destroy();
@@ -101,7 +101,7 @@ namespace ocl::net
 			auto ret = ::send(fd_, out.data(), out.size(), 0);
 
 			bad_ = !(ret >= 0L);
-			
+
 			return ret >= 0L;
 		}
 
