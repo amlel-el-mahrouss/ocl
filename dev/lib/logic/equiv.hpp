@@ -1,14 +1,14 @@
 /*
  * File: equiv.hpp
  * Purpose: Equivalence runtime c++ header.
- * Author: Amlal El Mahrouss (founder@snu.systems)
- * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp.
+ * Author: Amlal El Mahrouss (amlal@nekernel.org)
+ * Copyright 2025, Amlal El Mahrouss 
  */
 
 #pragma once
 
 /// @brief SOCL equivalence namespace.
-namespace snu::equiv
+namespace ocl::equiv
 {
 	template <typename T>
 	struct basic_hash_trait
@@ -101,4 +101,4 @@ namespace snu::equiv
 			return left_ / right_ == 1;
 		}
 	};
-} // namespace snu::equiv
+} // namespace ocl::equiv

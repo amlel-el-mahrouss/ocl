@@ -1,12 +1,12 @@
 /*
  * File: fix/parser.hpp
  * Purpose: Financial Information Exchange parser in C++
- * Author: Amlal El Mahrouss (founder@snu.systems)
- * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp.
+ * Author: Amlal El Mahrouss (amlal@nekernel.org)
+ * Copyright 2025, Amlal El Mahrouss 
  */
 
-#ifndef _SNU_FIX_PARSER_HPP
-#define _SNU_FIX_PARSER_HPP
+#ifndef _OCL_FIX_PARSER_HPP
+#define _OCL_FIX_PARSER_HPP
 
 #include <cstddef>
 #include <cassert>
@@ -18,7 +18,7 @@
 #include <unistd.h>
 #include <signal.h>
 
-namespace snu::fix
+namespace ocl::fix
 {
 	template <typename char_type>
 	class basic_visitor;
@@ -211,6 +211,6 @@ namespace snu::fix
 	}
 
 	using fix_tag_type = std::uint32_t;
-} // namespace snu::fix
+} // namespace ocl::fix
 
-#endif // ifndef _SNU_FIX_PARSER_HPP
+#endif // ifndef _OCL_FIX_PARSER_HPP

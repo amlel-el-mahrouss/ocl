@@ -1,8 +1,8 @@
 /*
  * File: tests/net_test.cc
  * Purpose: Network unit tests in C++
- * Author: Amlal El Mahrouss (founder@snu.systems)
- * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp.
+ * Author: Amlal El Mahrouss (amlal@nekernel.org)
+ * Copyright 2025, Amlal El Mahrouss 
  */
 
 #include <lib/net/modem.hpp>
@@ -12,8 +12,8 @@
 
 TEST(NetworkTest, BasicNetworkUsage)
 {
-	snu::net::basic_modem<char> modem;
-	modem.construct<AF_INET, SOCK_STREAM, 8000>(snu::net::basic_modem<char>::local_address_ip4, true);
+	ocl::net::basic_modem<char> modem;
+	modem.construct<AF_INET, SOCK_STREAM, 8000>(ocl::net::basic_modem<char>::local_address_ip4, true);
 
 	EXPECT_TRUE(modem.is_valid());
 

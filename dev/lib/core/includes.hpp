@@ -1,8 +1,8 @@
 /*
  * File: core/includes.hpp
  * Purpose: Core includes for the SOCL library.
- * Author: Amlal El Mahrouss (founder@snu.systems)
- * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp.
+ * Author: Amlal El Mahrouss (amlal@nekernel.org)
+ * Copyright 2025, Amlal El Mahrouss 
  */
 
 #pragma once

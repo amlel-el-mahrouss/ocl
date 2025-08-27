@@ -1,12 +1,12 @@
 /*
  * File: net/modem.hpp
  * Purpose: Modem concept in modern C++
- * Author: Amlal El Mahrouss (founder@snu.systems)
- * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp.
+ * Author: Amlal El Mahrouss (amlal@nekernel.org)
+ * Copyright 2025, Amlal El Mahrouss 
  */
 
-#ifndef _SNU_NET_NETWORK_HPP
-#define _SNU_NET_NETWORK_HPP
+#ifndef _OCL_NET_NETWORK_HPP
+#define _OCL_NET_NETWORK_HPP
 
 #include <unistd.h>
 #include <arpa/inet.h>
@@ -15,9 +15,9 @@
 #include <utility>
 #include <cstddef>
 
-#define SNU_MODEM_INTERFACE : protected snu::net::basic_modem
+#define OCL_MODEM_INTERFACE : protected ocl::net::basic_modem
 
-namespace snu::net
+namespace ocl::net
 {
 	template <typename char_type>
 	class basic_modem;
@@ -139,6 +139,6 @@ namespace snu::net
 			return true;
 		}
 	};
-} // namespace snu::net
+} // namespace ocl::net
 
-#endif // ifndef _SNU_NET_NETWORK_HPP
+#endif // ifndef _OCL_NET_NETWORK_HPP

@@ -1,8 +1,8 @@
 /*
  * File: tests/tracked_ptr_test.cc
  * Purpose: Custom smart pointer unit tests in C++
- * Author: Amlal El Mahrouss (founder@snu.systems)
- * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp.
+ * Author: Amlal El Mahrouss (amlal@nekernel.org)
+ * Copyright 2025, Amlal El Mahrouss 
  */
 
 #include <lib/memory/tracked_ptr.hpp>
@@ -10,10 +10,10 @@
 
 TEST(TrackedPtrTest, LeakTrackedPtrUsage)
 {
-	snu::memory::tracked_ptr<int>* ptr = new snu::memory::tracked_ptr<int>(42);
-	snu::memory::tracked_ptr<int>* ptr2 = new snu::memory::tracked_ptr<int>(42);
-	snu::memory::tracked_ptr<int>* ptr3 = new snu::memory::tracked_ptr<int>(42);
+	ocl::memory::tracked_ptr<int>* ptr = new ocl::memory::tracked_ptr<int>(42);
+	ocl::memory::tracked_ptr<int>* ptr2 = new ocl::memory::tracked_ptr<int>(42);
+	ocl::memory::tracked_ptr<int>* ptr3 = new ocl::memory::tracked_ptr<int>(42);
 
-	EXPECT_EQ(snu::memory::tracked_ptr<int>::manager().allocator().allocated_count_, 3);
-	ASSERT_TRUE(snu::memory::tracked_ptr<int>::manager().allocator().deallocated_count_ == 0);
+	EXPECT_EQ(ocl::memory::tracked_ptr<int>::manager().allocator().allocated_count_, 3);
+	ASSERT_TRUE(ocl::memory::tracked_ptr<int>::manager().allocator().deallocated_count_ == 0);
 }

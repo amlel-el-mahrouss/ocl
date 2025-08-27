@@ -1,8 +1,8 @@
 /*
  * File: tests/chunk_test.cc
  * Purpose: Chunk unit tests in C++
- * Author: Amlal El Mahrouss (founder@snu.systems)
- * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp.
+ * Author: Amlal El Mahrouss (amlal@nekernel.org)
+ * Copyright 2025, Amlal El Mahrouss 
  */
 
 #include <lib/io/print.hpp>
@@ -16,7 +16,7 @@ TEST(ChunkTest, BasicChunkUsage)
 
 	auto start = std::chrono::high_resolution_clock::now();
 
-	snu::basic_chunk_string<char> optimized;
+	ocl::basic_chunk_string<char> optimized;
 
 	for (unsigned i = 0; i < iterations; ++i)
  	{

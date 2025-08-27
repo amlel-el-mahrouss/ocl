@@ -1,17 +1,17 @@
 /*
 * File: core/chunk_string.hpp
  * Purpose: String implementation for the SOCL C++ library.
- * Author: Amlal El Mahrouss (founder@snu.systems)
- * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp.
+ * Author: Amlal El Mahrouss (amlal@nekernel.org)
+ * Copyright 2025, Amlal El Mahrouss 
  */
 
-#ifndef SOCL_UTILITY_CHUNK_STRING_HPP
-#define SOCL_UTILITY_CHUNK_STRING_HPP
+#ifndef OCL_UTILITY_CHUNK_STRING_HPP
+#define OCL_UTILITY_CHUNK_STRING_HPP
 
 #include <lib/core/includes.hpp>
 #include <boost/container/flat_set.hpp>
 
-namespace snu
+namespace ocl
 {
 	template <typename char_type>
 	class basic_chunk_string;
@@ -74,7 +74,7 @@ namespace snu
 
 		void print() noexcept
 		{
-			snu::io::print(packed_chunks_);
+			ocl::io::print(packed_chunks_);
 
 			if (next_chunk_string_)
 				this->next_chunk_string_->print();
@@ -86,5 +86,5 @@ namespace snu
 	{
 		fmt.print();
 	}
-} // namespace snu
-#endif // ifndef SOCL_UTILITY_CHUNK_STRING_HPP
+} // namespace ocl
+#endif // ifndef OCL_UTILITY_CHUNK_STRING_HPP

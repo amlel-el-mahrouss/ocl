@@ -1,7 +1,7 @@
 /*
  * File: math.hpp
  * Purpose: Mathematics c++ header.
- * Author: Amlal El Mahrouss (founder@snu.systems)
+ * Author: Amlal El Mahrouss (amlal@nekernel.org)
  * Copyright 2025, Amlal El Mahrouss.
  */
 
@@ -9,7 +9,7 @@
 
 #include <cmath>
 
-namespace snu
+namespace ocl
 {
 	template <std::size_t T>
 	struct is_non_boolean_integer final
@@ -32,4 +32,4 @@ namespace snu
 	constexpr inline auto not_a_number		= NAN;
 	constexpr inline auto positive_infinity = INFINITY;
 	constexpr inline auto negative_infinity = -positive_infinity;
-} // namespace snu
+} // namespace ocl

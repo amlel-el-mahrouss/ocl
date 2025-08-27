@@ -1,8 +1,8 @@
 /*
  * File: memory/tracked_ptr.hpp
  * Purpose: Custom smart pointer implementation in C++
- * Author: Amlal El Mahrouss (founder@snu.systems)
- * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp.
+ * Author: Amlal El Mahrouss (amlal@nekernel.org)
+ * Copyright 2025, Amlal El Mahrouss 
  */
 
 #pragma once
@@ -16,7 +16,7 @@
 #include <unistd.h>
 #include <signal.h>
 
-namespace snu::memory
+namespace ocl::memory
 {
 	template <typename T>
 	class tracked_allocator;
@@ -232,4 +232,4 @@ namespace snu::memory
 			::kill(::getpid(), SIGTRAP);
 		}
 	}
-} // namespace snu::memory
+} // namespace ocl::memory
