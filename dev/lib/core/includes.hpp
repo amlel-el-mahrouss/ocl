@@ -1,6 +1,6 @@
 /*
  * File: core/includes.hpp
- * Purpose: Core includes for the SOCL library.
+ * Purpose: Core includes for the OCL library.
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
  * Copyright 2025, Amlal El Mahrouss 
  */

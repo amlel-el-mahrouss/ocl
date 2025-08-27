@@ -11,7 +11,7 @@ static ocl::basic_chunk_string<char> text_sample = R"(
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Error | SOCL</title>
+  <title>Error | OCL</title>
   <style>
     body {
       font-family: monospace;
@@ -59,7 +59,7 @@ static ocl::basic_chunk_string<char> text_sample = R"(
 
     <tr><td colspan="3"><hr></td></tr>
   </table>
-  <address>SOCL's Common Gateway Server.</address>
+  <address>OCL's Common Gateway Server.</address>
 </body>
 </html>
 )";

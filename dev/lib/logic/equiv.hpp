@@ -7,7 +7,7 @@
 
 #pragma once
 
-/// @brief SOCL equivalence namespace.
+/// @brief OCL equivalence namespace.
 namespace ocl::equiv
 {
 	template <typename T>

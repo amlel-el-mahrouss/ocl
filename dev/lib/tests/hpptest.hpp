@@ -1,6 +1,6 @@
 /*
  * File: tests/hpptest.hpp
- * Purpose: HPP Test wrapper for the SOCL library.
+ * Purpose: HPP Test wrapper for the OCL library.
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
  * Copyright 2025, Amlal El Mahrouss 
  */

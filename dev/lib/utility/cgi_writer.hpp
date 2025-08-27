@@ -26,7 +26,7 @@ namespace ocl
 				std::basic_stringstream<char_type> ss_out;
 
 				ss_out << std::format("Content-Type: {}\r\n", mime.str());
-				ss_out << std::format("Server: {}\r\n", "SOCL-CGI/1.0");
+				ss_out << std::format("Server: {}\r\n", "OCL-CGI/1.0");
 				ss_out << std::format("Content-Length: {}\r\n\r\n", ss.str().size());
 				ss_out << ss.str();
 
