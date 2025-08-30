@@ -2,7 +2,7 @@
 * File: core/chunk_string.hpp
  * Purpose: String implementation for the OCL C++ library.
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
- * Copyright 2025, Amlal El Mahrouss 
+ * Copyright 2025, Amlal El Mahrouss
  */
 
 #ifndef OCL_UTILITY_CHUNK_STRING_HPP
@@ -13,22 +13,23 @@
 
 namespace ocl
 {
-	template <typename char_type>
+	template <typename char_type, std::size_t max_chunk_size = 8196>
 	class basic_chunk_string;
 
-	template <typename char_type>
+	template <typename char_type, std::size_t max_chunk_size>
 	struct basic_chunk_string final
 	{
 	private:
-		std::unique_ptr<basic_chunk_string<char_type>> next_chunk_string_{};
-		basic_chunk_string<char_type>*				   prev_chunk_string_{nullptr};
+		char_type  packed_chunks_[max_chunk_size / 4];
+		char_type* extended_chunks_ = new char_type[max_chunk_size];
 
-		std::basic_string<char_type> packed_chunks_{};
-		int64_t						 chunk_total{};
+		std::size_t chunk_total_{};
 
-		constexpr const static auto max_chunk_size = 4096;
+		bool bad_{false};
 
 	public:
+    const bool& bad{bad_};
+
 		basic_chunk_string() = default;
 
 		basic_chunk_string(const char_type* in)
@@ -48,21 +49,23 @@ namespace ocl
 
 		basic_chunk_string& operator+=(const std::basic_string<char_type>& in)
 		{
-			if (in.empty())
+			if (in.empty() || bad_)
 				return *this;
 
-			if (chunk_total > max_chunk_size)
+			if (chunk_total_ > max_chunk_size)
 			{
-				next_chunk_string_ = std::make_unique<basic_chunk_string<char_type>>();
-				*next_chunk_string_ += in;
-
-				next_chunk_string_->prev_chunk_string_ = this;
-
-				return *next_chunk_string_;
+        bad_ = true;
+				return *this;
 			}
 
-			packed_chunks_ += in;
-			chunk_total += in.size();
+			const static auto size_max_chunk = max_chunk_size / 4;
+
+			if (chunk_total_ < size_max_chunk)
+				std::memcpy(packed_chunks_ + chunk_total_, in.data(), in.size());
+			else
+				std::memcpy(extended_chunks_ + chunk_total_, in.data(), in.size());
+
+			chunk_total_ += in.size();
 
 			return *this;
 		}
@@ -76,8 +79,8 @@ namespace ocl
 		{
 			ocl::io::print(packed_chunks_);
 
-			if (next_chunk_string_)
-				this->next_chunk_string_->print();
+			if (extended_chunks_)
+				ocl::io::print(extended_chunks_);
 		}
 	};
 

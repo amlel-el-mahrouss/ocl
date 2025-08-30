@@ -25,7 +25,7 @@ namespace ocl
 
 		virtual void operator()(const std::basic_string<char>& msg)
 		{
-      ((void)msg);
+			((void)msg);
 		}
 	};
 

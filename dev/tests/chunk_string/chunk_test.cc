@@ -16,7 +16,7 @@ TEST(ChunkTest, BasicChunkUsage)
 
 	auto start = std::chrono::high_resolution_clock::now();
 
-	ocl::basic_chunk_string<char> optimized;
+	ocl::basic_chunk_string<char, 1000000> optimized;
 
 	for (unsigned i = 0; i < iterations; ++i)
  	{
@@ -26,5 +26,5 @@ TEST(ChunkTest, BasicChunkUsage)
 	auto end = std::chrono::high_resolution_clock::now();
 	auto optimized_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
 
-	EXPECT_TRUE(optimized_time.count() < 200U);
+	EXPECT_TRUE(optimized_time.count() < 30U);
 }
