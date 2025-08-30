@@ -16,7 +16,7 @@ namespace ocl
 	class basic_chunk_string;
 
 	template <typename char_type, std::size_t max_chunk_size>
-	struct basic_chunk_string final
+	class basic_chunk_string final
 	{
 	private:
 		char_type  packed_chunks_[max_chunk_size / 4];
