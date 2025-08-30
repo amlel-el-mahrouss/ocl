@@ -19,9 +19,7 @@ namespace ocl
 	class basic_chunk_string final
 	{
 	private:
-		char_type  packed_chunks_[max_chunk_size / 4];
-		char_type* extended_chunks_ = new char_type[max_chunk_size];
-
+		char_type	packed_chunks_[max_chunk_size] = {0};
 		std::size_t chunk_total_{};
 
 		bool bad_{false};
@@ -41,12 +39,7 @@ namespace ocl
 			this->operator+=(in);
 		}
 
-		~basic_chunk_string()
-		{
-			if (extended_chunks_)
-				delete[] extended_chunks_;
-			extended_chunks_ = nullptr;
-		}
+		~basic_chunk_string() = default;
 
 		basic_chunk_string& operator=(const basic_chunk_string&) = delete;
 		basic_chunk_string(const basic_chunk_string&)			 = delete;
@@ -57,30 +50,39 @@ namespace ocl
 			if (in.empty() || bad_)
 				return *this;
 
+			if (in.size() > max_chunk_size)
+			{
+				bad_ = true;
+				return *this;
+			}
+
 			if (chunk_total_ > max_chunk_size)
 			{
 				bad_ = true;
 				return *this;
 			}
 
-			const static auto size_max_chunk = max_chunk_size / 4;
+			const auto&		  sz			 = in.size();
+			const static auto size_max_chunk = max_chunk_size;
+			const auto&		  ptr			 = in.data();
 
 			if (chunk_total_ < size_max_chunk)
-				std::memcpy(packed_chunks_ + chunk_total_, in.data(), in.size());
-			else
-				std::memcpy(extended_chunks_ + chunk_total_, in.data(), in.size());
-
-			chunk_total_ += in.size();
+			{
+				std::memcpy(packed_chunks_ + chunk_total_, ptr, sz);
+				chunk_total_ += sz;
+			}
 
 			return *this;
 		}
 
 		std::basic_string<char_type> str() const noexcept
 		{
-			std::basic_string<char_type> ret;
+			static std::basic_string<char_type> ret;
+
+			if (ret.size() > 0)
+				ret.clear();
 
 			ret += packed_chunks_;
-			ret += extended_chunks_;
 
 			return ret;
 		}
@@ -88,9 +90,6 @@ namespace ocl
 		void print() noexcept
 		{
 			ocl::io::print(packed_chunks_);
-
-			if (extended_chunks_)
-				ocl::io::print(extended_chunks_);
 		}
 	};
 
