@@ -9,7 +9,6 @@
 #define OCL_UTILITY_CHUNK_STRING_HPP
 
 #include <lib/core/includes.hpp>
-#include <boost/container/flat_set.hpp>
 
 namespace ocl
 {
