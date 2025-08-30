@@ -9,7 +9,7 @@
 
 static void summon_tracked_ptr()
 {
-	ocl::memory::tracked_ptr<int> ptr = ocl::memory::make_tracked(42);
+	ocl::memory::tracked_ptr<int> ptr = ocl::memory::make_tracked<int>(42);
 	std::cout << ptr.data() << "=" << ptr.manager().allocator().allocated_count_ << std::endl;
 }
 

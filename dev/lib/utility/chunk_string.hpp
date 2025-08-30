@@ -27,7 +27,7 @@ namespace ocl
 		bool bad_{false};
 
 	public:
-    const bool& bad{bad_};
+		const bool& bad{bad_};
 
 		basic_chunk_string() = default;
 
@@ -41,11 +41,17 @@ namespace ocl
 			this->operator+=(in);
 		}
 
-		~basic_chunk_string() = default;
+		~basic_chunk_string()
+		{
+			if (extended_chunks_)
+				delete[] extended_chunks_;
+			extended_chunks_ = nullptr;
+		}
 
-		basic_chunk_string& operator=(const basic_chunk_string&) = default;
-		basic_chunk_string(const basic_chunk_string&)			 = default;
+		basic_chunk_string& operator=(const basic_chunk_string&) = delete;
+		basic_chunk_string(const basic_chunk_string&)			 = delete;
 
+	public:
 		basic_chunk_string& operator+=(const std::basic_string<char_type>& in)
 		{
 			if (in.empty() || bad_)
@@ -53,7 +59,7 @@ namespace ocl
 
 			if (chunk_total_ > max_chunk_size)
 			{
-        bad_ = true;
+				bad_ = true;
 				return *this;
 			}
 
@@ -69,9 +75,14 @@ namespace ocl
 			return *this;
 		}
 
-		const std::basic_string<char_type>& str() const noexcept
+		std::basic_string<char_type> str() const noexcept
 		{
-			return packed_chunks_;
+			std::basic_string<char_type> ret;
+
+			ret += packed_chunks_;
+			ret += extended_chunks_;
+
+			return ret;
 		}
 
 		void print() noexcept
