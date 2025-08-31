@@ -59,7 +59,7 @@ namespace ocl
 		template <typename ret_type, typename... var_type>
 		auto construct(var_type&&... args) -> std::shared_ptr<ret_type>
 		{
-			return std::shared_ptr<ret_type>(allocator_new(ret_type{std::forward(args...)}), del_());
+			return std::shared_ptr<ret_type>(allocator_new(ret_type{std::forward<var_type...>(args...)}), del_());
 		}
 
 		template <typename ret_type>
