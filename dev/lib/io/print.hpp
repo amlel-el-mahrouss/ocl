@@ -1,18 +1,17 @@
 /*
  * File: print.hpp
- * Purpose: SNU Print library
- * Author: Amlal El Mahrouss. (founder@snu.systems)
- * Copyright 2025, SNU Systems Corp.
+ * Purpose: OCL Print library
+ * Author: Amlal El Mahrouss. (amlal@nekernel.org)
+ * Copyright 2025
  */
 
-#ifndef _SNU_PRINT_HPP
-#define _SNU_PRINT_HPP
+#ifndef _OCL_PRINT_HPP
+#define _OCL_PRINT_HPP
 
-#include <initializer_list>
 #include <iostream>
 #include <ostream>
 
-namespace snu::io
+namespace ocl::io
 {
 	template <typename T, typename... Args>
 	inline void print(T fmt, Args... other) noexcept
@@ -37,6 +36,6 @@ namespace snu::io
 	{
 		print(fmt...);
 	}
-} // namespace snu::io
+} // namespace ocl::io
 
-#endif // ifndef _SNU_PRINT_HPP
+#endif // ifndef _OCL_PRINT_HPP

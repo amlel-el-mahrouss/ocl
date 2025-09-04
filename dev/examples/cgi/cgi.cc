@@ -4,17 +4,14 @@
   licensed under the MIT license
  */
 
-#include <lib/utility/cgi.hpp>
-#include <fstream>
-#include <sstream>
-#include <string>
+#include <lib/utility/cgi_writer.hpp>
 
-const std::string error_html = R"(
+static ocl::basic_chunk_string<char> text_sample = R"(
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Error | SOCL</title>
+  <title>Error | OCL</title>
   <style>
     body {
       font-family: monospace;
@@ -62,7 +59,7 @@ const std::string error_html = R"(
 
     <tr><td colspan="3"><hr></td></tr>
   </table>
-  <address>SOCL's Common Gateway Server.</address>
+  <address>OCL's Common Gateway Server.</address>
 </body>
 </html>
 )";
@@ -71,12 +68,8 @@ const std::string error_html = R"(
 /* @brief this stub loads a 'index.html' or returns an error message if not found. */
 int main(int argc, char** argv)
 {
-	snu::cgi::basic_writer<> writer;
-
-	std::stringstream		 ss_file;
-	ss_file << error_html;
-
-	writer.html(ss_file);
+	ocl::cgi::basic_writer<> writer;
+	writer << text_sample;
 
 	return 0;
 }

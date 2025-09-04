@@ -1,16 +1,16 @@
 /*
  * File: opt.hpp
  * Author: Amlal El Mahrouss,
- * Copyright 2023-2025, Amlal El Mahrouss/SNU Systems Corp.
+ * Copyright 2023-2025, Amlal El Mahrouss
  */
 
-#ifndef _SNU_OPT_HPP
-#define _SNU_OPT_HPP
+#ifndef _OCL_OPT_HPP
+#define _OCL_OPT_HPP
 
 #include <lib/except/error.hpp>
 #include <utility>
 
-namespace snu
+namespace ocl
 {
 	enum class return_type
 	{
@@ -116,6 +116,6 @@ namespace snu
 	{
 		return return_type::err;
 	}
-} // namespace snu
+} // namespace ocl
 
-#endif /* ifndef _SNU_OPT_HPP */
+#endif /* ifndef _OCL_OPT_HPP */

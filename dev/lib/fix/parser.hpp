@@ -1,12 +1,12 @@
 /*
  * File: fix/parser.hpp
  * Purpose: Financial Information Exchange parser in C++
- * Author: Amlal El Mahrouss (founder@snu.systems)
- * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp.
+ * Author: Amlal El Mahrouss (amlal@nekernel.org)
+ * Copyright 2025, Amlal El Mahrouss 
  */
 
-#ifndef _SNU_FIX_PARSER_HPP
-#define _SNU_FIX_PARSER_HPP
+#ifndef _OCL_FIX_PARSER_HPP
+#define _OCL_FIX_PARSER_HPP
 
 #include <cstddef>
 #include <cassert>
@@ -18,7 +18,7 @@
 #include <unistd.h>
 #include <signal.h>
 
-namespace snu::fix
+namespace ocl::fix
 {
 	template <typename char_type>
 	class basic_visitor;
@@ -60,8 +60,8 @@ namespace snu::fix
 	template <typename char_type = char>
 	struct basic_range final
 	{
-		char_type* bytes_;
-		size_t	   length_;
+		char_type* bytes_{nullptr};
+		size_t	   length_{};
 
 		bool is_valid() noexcept
 		{
@@ -77,7 +77,7 @@ namespace snu::fix
 	/// @brief Convert basic_range to usable string.
 	/// @note This function assumes that the basic_range is valid and contains ASCII bytes.
 	template <typename char_type = char>
-	std::basic_string<char_type> to_string(basic_range<char_type>& basic_range) noexcept
+	inline std::basic_string<char_type> to_string(basic_range<char_type>& basic_range) noexcept
 	{
 		if (basic_range.length_ < 0)
 			return std::basic_string<char_type>{};
@@ -201,14 +201,16 @@ namespace snu::fix
 		}
 	};
 
-	template <typename char_type = char>
-	inline void must_pass(basic_range_data<char_type>& basic_range)
+	template <typename char_type = char, typename error_handler>
+	inline void must_pass(basic_range_data<char_type>& basic_range, error_handler& handler)
 	{
 		if (!basic_range.is_valid())
 		{
-			::kill(::getpid(), SIGTRAP);
+			handler("Invalid FIX packet");
 		}
 	}
-} // namespace snu::fix
 
-#endif // ifndef _SNU_FIX_PARSER_HPP
+	using fix_tag_type = std::uint32_t;
+} // namespace ocl::fix
+
+#endif // ifndef _OCL_FIX_PARSER_HPP

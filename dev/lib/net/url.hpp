@@ -1,8 +1,8 @@
 /*
  * File: net/url.hpp
  * Purpose: URL container in modern C++
- * Author: Amlal El Mahrouss (founder@snu.systems)
- * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp.
+ * Author: Amlal El Mahrouss (amlal@nekernel.org)
+ * Copyright 2025, Amlal El Mahrouss 
  */
 
 #pragma once
@@ -11,9 +11,9 @@
 #include <iostream>
 #include <sstream>
 
-/// @author Amlal El Mahrouss (founder@snu.systems)
+/// @author Amlal El Mahrouss (amlal@nekernel.org)
 
-namespace snu::net
+namespace ocl::net
 {
 	template <typename char_type>
 	class basic_url;
@@ -61,4 +61,4 @@ namespace snu::net
 			return ss_.size() > 0;
 		}
 	};
-} // namespace snu::net
+} // namespace ocl::net

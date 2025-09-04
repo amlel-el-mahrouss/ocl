@@ -5,17 +5,17 @@
  * Copyright 2025, Amlal El Mahrouss.
  */
 
-#ifndef _SNU_CRC32_HPP
-#define _SNU_CRC32_HPP
+#ifndef _OCL_CRC32_HPP
+#define _OCL_CRC32_HPP
 
 #include <cstdint>
 #include <string>
 #include <cstddef>
 
 /// @brief Crc32 implementation in C++
-/// @author Amlal EL Mahrouss (founder@snu.systems)
+/// @author Amlal EL Mahrouss (amlal@nekernel.org)
 
-namespace snu::crc32
+namespace ocl::crc32
 {
 	namespace detail
 	{
@@ -76,6 +76,6 @@ namespace snu::crc32
 	{
 		return detail::crc32(in.c_str(), in.size());
 	}
-} // namespace snu::crc32
+} // namespace ocl::crc32
 
-#endif // !_SNU_CRC32_HPP
+#endif // !_OCL_CRC32_HPP

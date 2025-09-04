@@ -1,22 +1,22 @@
 /*
  * File: memory/tracked_ptr.hpp
  * Purpose: Custom smart pointer implementation in C++
- * Author: Amlal El Mahrouss (founder@snu.systems)
- * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp.
+ * Author: Amlal El Mahrouss (amlal@nekernel.org)
+ * Copyright 2025, Amlal El Mahrouss 
  */
 
 #pragma once
 
 #include <cstddef>
 #include <utility>
-#include <memory>
+#include <new>
 #include <atomic>
 
 #include <sys/types.h>
 #include <unistd.h>
 #include <signal.h>
 
-namespace snu::memory
+namespace ocl::memory
 {
 	template <typename T>
 	class tracked_allocator;
@@ -45,19 +45,24 @@ namespace snu::memory
 		template <typename... U>
 		void retain(T*& ptr, U&&... args)
 		{
-			ptr = new T(args...);
+			ptr = new T(std::forward<U>(args)...);
 
 			if (ptr)
 			{
 				++allocated_count_;
+				return;
 			}
-			else
-			{
-				throw std::bad_alloc();
-			}
+
+			throw std::bad_alloc();
 		}
 
-		void dispose(T*& ptr)
+		template <typename... U>
+		void must_retain(T*& ptr, U&&... args) noexcept
+		{
+			this->retain(ptr, args...);
+		}
+
+		void dispose(T*& ptr) noexcept
 		{
 			if (ptr)
 			{
@@ -96,10 +101,17 @@ namespace snu::memory
 		{
 			T* ptr = nullptr;
 			allocator_.retain(ptr, std::forward<U>(args)...);
+
 			return ptr;
 		}
 
-		void dispose(T*& ptr)
+		template <typename... U>
+		T* must_retain(U&&... args) noexcept
+		{
+			return this->retain(std::forward<U>(args)...);
+		}
+
+		void dispose(T*& ptr) noexcept
 		{
 			allocator_.dispose(ptr);
 		}
@@ -128,7 +140,7 @@ namespace snu::memory
 			this->reset();
 		}
 
-		tracked_ptr(const tracked_ptr&)			   = delete;
+		tracked_ptr(const tracked_ptr&) = delete;
 		tracked_ptr& operator=(const tracked_ptr&) = delete;
 
 	public:
@@ -190,13 +202,13 @@ namespace snu::memory
 		}
 
 	private:
-		T* ptr_ = nullptr;
+		T* ptr_{nullptr};
 	};
 
 	template <typename T>
-	inline auto make_tracked(T arg) -> tracked_ptr<T>
+	inline auto make_tracked() -> tracked_ptr<T>
 	{
-		return tracked_ptr<T>(std::forward<T>(arg));
+		return tracked_ptr<T>();
 	}
 
 	template <typename U, typename... T>
@@ -220,4 +232,4 @@ namespace snu::memory
 			::kill(::getpid(), SIGTRAP);
 		}
 	}
-} // namespace snu::memory
+} // namespace ocl::memory

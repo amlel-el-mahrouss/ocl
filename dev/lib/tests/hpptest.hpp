@@ -1,22 +1,21 @@
 /*
  * File: tests/hpptest.hpp
- * Purpose: HPP Test wrapper for the SOCL library.
- * Author: Amlal El Mahrouss (founder@snu.systems)
- * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp.
+ * Purpose: HPP Test wrapper for the OCL library.
+ * Author: Amlal El Mahrouss (amlal@nekernel.org)
+ * Copyright 2025, Amlal El Mahrouss 
  */
 
 #pragma once
 
-
-#ifdef SOCL_HPPTEST
-namespace snu::hpptest
+#ifdef OCL_HPPTEST
+namespace ocl::hpptest
 {
 	typedef bool condition_type;
 
 	template <condition_type expr = true>
 	consteval inline void must_pass()
 	{
-		SOCL_HPPTEST_ASSERT(expr);
+		OCL_HPPTEST_ASSERT(expr);
 	}
-} // namespace snu::hpptest
+} // namespace ocl::hpptest
 #endif

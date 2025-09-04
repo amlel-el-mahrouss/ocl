@@ -1,4 +1,4 @@
-# SNU Open C++ Library
+# Open C++ Library
 
 [![License: GPL-2.0](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
@@ -21,12 +21,12 @@ A C++ library with additional modules for your C++ SDLC.
 
 int main(int argc, char** argv)
 {
-  auto opt = snu::opt(snu::eval_eq(50, 50)).expect("snu::eval_eq, does not match!");
-  opt = snu::opt(snu::eval_eq(50, 40));
+  auto opt = ocl::opt(ocl::eval_eq(50, 50)).expect("ocl::eval_eq, does not match!");
+  opt = ocl::opt(ocl::eval_eq(50, 40));
   opt.expect("this time it doesn't.");
   
   return EXIT_SUCCESS;
 }
 ```
 
-##### (c) 2025 SNU Systems, Corp.
+##### (c) 2025 Amlal El Mahrouss, licensed under the MIT license.

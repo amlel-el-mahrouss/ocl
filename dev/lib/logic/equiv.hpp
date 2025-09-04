@@ -1,13 +1,14 @@
 /*
  * File: equiv.hpp
  * Purpose: Equivalence runtime c++ header.
- * Author: Amlal El Mahrouss (founder@snu.systems)
- * Copyright 2025, Amlal El Mahrouss and SNU Systems Corp.
+ * Author: Amlal El Mahrouss (amlal@nekernel.org)
+ * Copyright 2025, Amlal El Mahrouss 
  */
 
 #pragma once
 
-namespace snu::equiv
+/// @brief OCL equivalence namespace.
+namespace ocl::equiv
 {
 	template <typename T>
 	struct basic_hash_trait
@@ -59,7 +60,7 @@ namespace snu::equiv
 	struct equiv_is_int8
 	{
 	private:
-		T left_ = 255, right_ = 255;
+		T left_ = 127, right_ = 127;
 
 	public:
 		using result = T;
@@ -74,7 +75,8 @@ namespace snu::equiv
 	struct equiv_not_int8
 	{
 	private:
-		T left_ = 255, right_ = 255;
+		// these shall overflow if not int8.
+		T left_ = 127, right_ = 127;
 
 	public:
 		using result = T;
@@ -96,7 +98,7 @@ namespace snu::equiv
 
 		constexpr result hash()
 		{
-			return left_ / right_;
+			return left_ / right_ == 1;
 		}
 	};
-} // namespace snu::equiv
+} // namespace ocl::equiv
