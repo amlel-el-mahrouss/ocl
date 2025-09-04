@@ -77,7 +77,7 @@ namespace ocl::fix
 	/// @brief Convert basic_range to usable string.
 	/// @note This function assumes that the basic_range is valid and contains ASCII bytes.
 	template <typename char_type = char>
-	std::basic_string<char_type> to_string(basic_range<char_type>& basic_range) noexcept
+	inline std::basic_string<char_type> to_string(basic_range<char_type>& basic_range) noexcept
 	{
 		if (basic_range.length_ < 0)
 			return std::basic_string<char_type>{};
