@@ -5,7 +5,7 @@
  * Copyright 2025, Amlal El Mahrouss 
  */
 
-#include <lib/fix/parser.hpp>
+#include <lib/fix/fix.hpp>
 #include <gtest/gtest.h>
 
 TEST(FIXTest, BasicFIXUsage)

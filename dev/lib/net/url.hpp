@@ -61,4 +61,12 @@ namespace ocl::net
 			return ss_.size() > 0;
 		}
 	};
+
+	enum class protocol
+	{
+		http,
+		https,
+		mailto,
+		bad
+	};
 } // namespace ocl::net
