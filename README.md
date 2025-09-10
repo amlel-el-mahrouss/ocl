@@ -1,10 +1,10 @@
-# Open C++ Library
+# SIMD C++ Library
 
 [![License: GPL-2.0](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ## Brief:
 
-A C++ library with additional modules for your C++ SDLC.
+A C++ library with additional modules for your C++ SDLC. Based on the Open C++ Library.
 
 ## Requirements:
 
@@ -21,10 +21,10 @@ A C++ library with additional modules for your C++ SDLC.
 
 int main(int argc, char** argv)
 {
-  auto opt = ocl::opt(ocl::eval_eq(50, 50)).expect("ocl::eval_eq, does not match!");
+  auto opt = ocl::opt(ocl::eval_eq(50, 50)).try_or_throw("ocl::eval_eq, does not match!");
   opt = ocl::opt(ocl::eval_eq(50, 40));
-  opt.expect("this time it doesn't.");
-  
+  opt.try_or_throw("this time it doesn't.");
+
   return EXIT_SUCCESS;
 }
 ```
