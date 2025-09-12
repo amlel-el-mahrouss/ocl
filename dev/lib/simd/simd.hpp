@@ -14,11 +14,11 @@
 
 namespace ocl::snu::simd
 {
-	template <typename SimdBackend>
+	template <typename backend_type>
 	class basic_simd_processor
 	{
 	private:
-		SimdBackend processor_;
+		backend_type processor_;
 
 		enum opcode
 		{
@@ -35,7 +35,7 @@ namespace ocl::snu::simd
 		basic_simd_processor& operator=(const basic_simd_processor&) = delete;
 		basic_simd_processor(const basic_simd_processor&)			 = delete;
 
-		typename SimdBackend::Register& call(const opcode& op, typename SimdBackend::Register& lhs, typename SimdBackend::Register& rhs)
+		typename backend_type::register_type& call(const opcode& op, typename backend_type::register_type& lhs, typename backend_type::register_type& rhs)
 		{
 			switch (op)
 			{
@@ -48,7 +48,8 @@ namespace ocl::snu::simd
 			default:
 				break;
 			}
-			return SimdBackend::Register::bad;
+
+			return processor_.is_bad();
 		}
 
 		std::basic_string<char> isa()
