@@ -5,7 +5,7 @@
  * Copyright 2025, Amlal El Mahrouss. Licensed under the BSL 1.0 license
  */
 
-#include <lib/core/allocator_system.hpp>
+#include <lib/memory/allocator_system.hpp>
 #include <iostream>
 
 struct MyClass
