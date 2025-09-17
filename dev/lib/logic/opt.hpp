@@ -20,7 +20,7 @@ namespace ocl
 		count = err - okay + 1,
 	};
 
-  template <typename char_type = char>
+	template <typename char_type = char>
 	struct opt final
 	{
 		explicit opt(const return_type& return_type)
@@ -38,14 +38,14 @@ namespace ocl
 			return *this;
 		}
 
-    template <typename ErrorHandler>
+		template <typename ErrorHandler>
 		opt& expect_or_handle(const char_type* input)
 		{
 			if (m_ret == return_type::err)
-        {
-          ErrorHandler err_handler;
-          err_handler(input ? input : "opt::error");
-        }
+			{
+				ErrorHandler err_handler;
+				err_handler(input ? input : "opt::error");
+			}
 
 			return *this;
 		}
