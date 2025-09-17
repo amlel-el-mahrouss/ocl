@@ -9,6 +9,7 @@
 #define _OCL_ERROR_HANDLER_HPP
 
 #include <lib/core/includes.hpp>
+#include <lib/io/print.hpp>
 #include <stdexcept>
 
 namespace ocl
@@ -25,11 +26,12 @@ namespace ocl
 
 		virtual void operator()(const std::basic_string<char>& msg)
 		{
-			((void)msg);
+			ocl::io::print(msg);
 		}
 	};
 
 	using standard_error_handler = basic_error_handler;
+	using error_handler_type	 = basic_error_handler;
 } // namespace ocl
 
 #endif // ifndef _OCL_ERROR_HANDLER_HPP
