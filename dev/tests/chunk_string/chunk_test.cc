@@ -7,7 +7,7 @@
 
 #include <lib/io/print.hpp>
 #include <lib/tests/gtest.hpp>
-#include <lib/utility/chunk_string.hpp>
+#include <lib/core/chunk_string.hpp>
 
 TEST(ChunkTest, BasicChunkUsage)
 {

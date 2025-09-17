@@ -35,6 +35,7 @@ namespace ocl::io
 	inline void println(T... fmt) noexcept
 	{
 		print(fmt...);
+		print();
 	}
 } // namespace ocl::io
 
