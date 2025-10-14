@@ -21,8 +21,8 @@ A C++ library with additional modules for your C++ SDLC. Based on the Open C++ L
 
 int main(int argc, char** argv)
 {
-  auto opt = ocl::opt(ocl::eval_eq(50, 50)).try_or_throw("ocl::eval_eq, does not match!");
-  opt = ocl::opt(ocl::eval_eq(50, 40));
+  auto opt = scl::opt(scl::eval_eq(50, 50)).try_or_throw("scl::eval_eq, does not match!");
+  opt = scl::opt(scl::eval_eq(50, 40));
   opt.try_or_throw("this time it doesn't.");
 
   return EXIT_SUCCESS;

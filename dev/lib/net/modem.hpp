@@ -5,19 +5,18 @@
  * Copyright 2025, Amlal El Mahrouss 
  */
 
-#ifndef _OCL_NET_NETWORK_HPP
-#define _OCL_NET_NETWORK_HPP
+#ifndef _SCL_NET_NETWORK_HPP
+#define _SCL_NET_NETWORK_HPP
 
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <string>
-#include <utility>
 #include <cstddef>
 
-#define OCL_MODEM_INTERFACE : public ocl::net::basic_modem
+#define OCL_MODEM_INTERFACE : public scl::net::basic_modem
 
-namespace ocl::net
+namespace scl::net
 {
 	class basic_modem;
 
@@ -130,12 +129,13 @@ namespace ocl::net
 				return ret == 0L;
 			}
 
-			::bind(fd_, (struct sockaddr*)&addr_, sizeof(addr_));
+			int ret = ::bind(fd_, (struct sockaddr*)&addr_, sizeof(addr_));
+
+			bad_ = ret == -1;
+			
 			::listen(fd_, basic_modem::backlog_count);
 
-			bad_ = false;
-
-			return true;
+			return bad_ == false;
 		}
 
 		bool destroy() noexcept
@@ -151,6 +151,6 @@ namespace ocl::net
 			return true;
 		}
 	};
-} // namespace ocl::net
+} // namespace scl::net
 
-#endif // ifndef _OCL_NET_NETWORK_HPP
+#endif // ifndef _SCL_NET_NETWORK_HPP

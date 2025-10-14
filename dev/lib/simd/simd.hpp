@@ -12,7 +12,7 @@
 /// @author Amlal El Mahrouss
 /// @brief Basic SIMD processor.
 
-namespace ocl::snu::simd
+namespace scl::snu::simd
 {
 	template <typename backend_type>
 	class basic_simd_processor
@@ -57,4 +57,4 @@ namespace ocl::snu::simd
 			return processor_.isa();
 		}
 	};
-} // namespace ocl::snu::simd
+} // namespace scl::snu::simd

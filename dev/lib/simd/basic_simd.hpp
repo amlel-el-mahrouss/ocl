@@ -22,7 +22,7 @@ using simd_type = __m256;
 using simd_type = float32x4_t;
 #endif
 
-namespace ocl::snu::simd
+namespace scl::snu::simd
 {
 	struct basic_simd_backend final
 	{
@@ -47,4 +47,4 @@ namespace ocl::snu::simd
 			return "basic-backend";
 		}
 	};
-} // namespace ocl::snu::simd
+} // namespace scl::snu::simd

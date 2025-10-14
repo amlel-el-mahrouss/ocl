@@ -5,14 +5,14 @@
  * Copyright 2025, Amlal El Mahrouss. Licensed under the BSL 1.0 license
  */
 
-#ifndef _OCL_ALLOCATOR_SYSTEM_HPP
-#define _OCL_ALLOCATOR_SYSTEM_HPP
+#ifndef _SCL_ALLOCATOR_SYSTEM_HPP
+#define _SCL_ALLOCATOR_SYSTEM_HPP
 
 #include <lib/core/includes.hpp>
 #include <stdexcept>
 #include <memory>
 
-namespace ocl
+namespace scl
 {
 	template <typename type>
 	struct new_op final
@@ -70,6 +70,6 @@ namespace ocl
 
 	template <typename type>
 	using standard_allocator_type = allocator_system<type, new_op<type>, delete_op<type>>;
-} // namespace ocl
+} // namespace scl
 
-#endif // ifndef _OCL_ALLOCATOR_SYSTEM_HPP
+#endif // ifndef _SCL_ALLOCATOR_SYSTEM_HPP

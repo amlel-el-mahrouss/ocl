@@ -5,13 +5,13 @@
  * Copyright 2025
  */
 
-#ifndef _OCL_PRINT_HPP
-#define _OCL_PRINT_HPP
+#ifndef _SCL_PRINT_HPP
+#define _SCL_PRINT_HPP
 
 #include <iostream>
 #include <ostream>
 
-namespace ocl::io
+namespace scl::io
 {
 	template <typename T, typename... Args>
 	inline void print(T fmt, Args... other) noexcept
@@ -37,6 +37,6 @@ namespace ocl::io
 		print(fmt...);
 		print();
 	}
-} // namespace ocl::io
+} // namespace scl::io
 
-#endif // ifndef _OCL_PRINT_HPP
+#endif // ifndef _SCL_PRINT_HPP

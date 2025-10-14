@@ -10,10 +10,10 @@
 
 TEST(TrackedPtrTest, LeakTrackedPtrUsage)
 {
-	ocl::memory::tracked_ptr<int>* ptr = new ocl::memory::tracked_ptr<int>(42);
-	ocl::memory::tracked_ptr<int>* ptr2 = new ocl::memory::tracked_ptr<int>(42);
-	ocl::memory::tracked_ptr<int>* ptr3 = new ocl::memory::tracked_ptr<int>(42);
+	scl::memory::tracked_ptr<int>* ptr = new scl::memory::tracked_ptr<int>(42);
+	scl::memory::tracked_ptr<int>* ptr2 = new scl::memory::tracked_ptr<int>(42);
+	scl::memory::tracked_ptr<int>* ptr3 = new scl::memory::tracked_ptr<int>(42);
 
-	EXPECT_EQ(ocl::memory::tracked_ptr<int>::manager().allocator().allocated_count_, 3);
-	ASSERT_TRUE(ocl::memory::tracked_ptr<int>::manager().allocator().deallocated_count_ == 0);
+	EXPECT_EQ(scl::memory::tracked_ptr<int>::manager().allocator().allocated_count_, 3);
+	ASSERT_TRUE(scl::memory::tracked_ptr<int>::manager().allocator().deallocated_count_ == 0);
 }

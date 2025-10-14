@@ -13,7 +13,7 @@
 
 /// @author Amlal El Mahrouss (amlal@nekernel.org)
 
-namespace ocl::net
+namespace scl::net
 {
 	template <typename char_type>
 	class basic_url;
@@ -69,4 +69,4 @@ namespace ocl::net
 		mailto,
 		bad
 	};
-} // namespace ocl::net
+} // namespace scl::net
