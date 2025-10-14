@@ -10,7 +10,7 @@
 
 #include <lib/core/includes.hpp>
 
-namespace ocl
+namespace scl
 {
 	template <typename char_type, std::size_t max_chunk_size = 8196>
 	class basic_chunk_string;
@@ -89,7 +89,7 @@ namespace ocl
 
 		void print() noexcept
 		{
-			ocl::io::print(packed_chunks_);
+			scl::io::print(packed_chunks_);
 		}
 	};
 
@@ -98,5 +98,5 @@ namespace ocl
 	{
 		fmt.print();
 	}
-} // namespace ocl
+} // namespace scl
 #endif // ifndef OCL_UTILITY_CHUNK_STRING_HPP

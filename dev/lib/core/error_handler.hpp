@@ -5,14 +5,14 @@
 * Copyright 2025, Amlal El Mahrouss.
 */
 
-#ifndef _OCL_ERROR_HANDLER_HPP
-#define _OCL_ERROR_HANDLER_HPP
+#ifndef _SCL_ERROR_HANDLER_HPP
+#define _SCL_ERROR_HANDLER_HPP
 
 #include <lib/core/includes.hpp>
 #include <lib/io/print.hpp>
 #include <stdexcept>
 
-namespace ocl
+namespace scl
 {
 	struct basic_error_handler;
 
@@ -26,12 +26,12 @@ namespace ocl
 
 		virtual void operator()(const std::basic_string<char>& msg)
 		{
-			ocl::io::print(msg);
+			scl::io::print(msg);
 		}
 	};
 
 	using standard_error_handler = basic_error_handler;
 	using error_handler_type	 = basic_error_handler;
-} // namespace ocl
+} // namespace scl
 
-#endif // ifndef _OCL_ERROR_HANDLER_HPP
+#endif // ifndef _SCL_ERROR_HANDLER_HPP

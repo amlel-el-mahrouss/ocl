@@ -8,7 +8,7 @@
 #pragma once
 
 #ifdef OCL_HPPTEST
-namespace ocl::hpptest
+namespace scl::hpptest
 {
 	typedef bool condition_type;
 
@@ -17,5 +17,5 @@ namespace ocl::hpptest
 	{
 		OCL_HPPTEST_ASSERT(expr);
 	}
-} // namespace ocl::hpptest
+} // namespace scl::hpptest
 #endif

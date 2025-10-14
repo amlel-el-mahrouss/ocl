@@ -12,8 +12,8 @@
 
 TEST(NetworkTest, BasicNetworkUsage)
 {
-	ocl::net::basic_modem modem;
-	modem.construct<AF_INET, SOCK_STREAM, 8000>(ocl::net::basic_modem::local_address_ip4, true);
+	scl::net::basic_modem modem;
+	modem.construct<AF_INET, SOCK_STREAM, 8000>(scl::net::basic_modem::local_address_ip4, true);
 
 	EXPECT_TRUE(modem.is_valid());
 
