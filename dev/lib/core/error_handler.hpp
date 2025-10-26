@@ -10,7 +10,6 @@
 
 #include <lib/core/includes.hpp>
 #include <lib/io/print.hpp>
-#include <stdexcept>
 
 namespace scl
 {

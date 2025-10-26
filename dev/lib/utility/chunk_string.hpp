@@ -5,8 +5,8 @@
  * Copyright 2025, Amlal El Mahrouss
  */
 
-#ifndef OCL_UTILITY_CHUNK_STRING_HPP
-#define OCL_UTILITY_CHUNK_STRING_HPP
+#ifndef SCL_UTILITY_CHUNK_STRING_HPP
+#define SCL_UTILITY_CHUNK_STRING_HPP
 
 #include <lib/core/includes.hpp>
 
@@ -99,4 +99,4 @@ namespace scl
 		fmt.print();
 	}
 } // namespace scl
-#endif // ifndef OCL_UTILITY_CHUNK_STRING_HPP
+#endif // ifndef SCL_UTILITY_CHUNK_STRING_HPP

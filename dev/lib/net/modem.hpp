@@ -14,7 +14,7 @@
 #include <string>
 #include <cstddef>
 
-#define OCL_MODEM_INTERFACE : public scl::net::basic_modem
+#define SCL_MODEM_INTERFACE : public scl::net::basic_modem
 
 namespace scl::net
 {

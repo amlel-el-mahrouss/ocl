@@ -8,7 +8,6 @@
 #pragma once
 
 #include <string>
-#include <iostream>
 #include <sstream>
 
 /// @author Amlal El Mahrouss (amlal@nekernel.org)

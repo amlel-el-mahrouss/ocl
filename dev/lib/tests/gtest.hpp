@@ -5,4 +5,6 @@
  * Copyright 2025, Amlal El Mahrouss 
  */
 
+#pragma once
+
 #include <gtest/gtest.h>
