@@ -8,17 +8,14 @@
 #pragma once
 
 #include <lib/core/includes.hpp>
-#include <cmath>
 
 #ifdef __x86_64__
 #include <immintrin.h>
-
 using simd_type = __m256;
 #endif
 
 #ifdef __aarch64__
 #include <arm_neon.h>
-
 using simd_type = float32x4_t;
 #endif
 
@@ -44,7 +41,7 @@ namespace scl::snu::simd
 
 		std::basic_string<char> isa()
 		{
-			return "basic-backend";
+			return "basic_simd_backend";
 		}
 	};
 } // namespace scl::snu::simd
