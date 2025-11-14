@@ -2,7 +2,7 @@
  * File: simd/basic_simd.hpp
  * Purpose: Basic SIMD backend C++ library.
  * Author: Amlal El Mahrouss (founder@snu.systems)
- * Copyright 2025, Amlal El Mahrouss, and SNU Systems, Corp, licensed under the BSL 1.0 license.
+ * Copyright 2025, Amlal El Mahrouss, and SNUPowered, licensed under the BSL 1.0 license.
  */
 
 #pragma once
