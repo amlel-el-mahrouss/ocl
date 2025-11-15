@@ -16,7 +16,6 @@
 #include <cstdint>
 #include <sys/types.h>
 #include <unistd.h>
-#include <signal.h>
 
 namespace ocl::fix
 {
