@@ -5,7 +5,7 @@
  */
 
 #include <lib/net/modem.hpp>
-#include <lib/fix/parser.hpp>
+#include <lib/fix/fix.hpp>
 #include <iostream>
 #include <unistd.h>
 #include <sys/socket.h>

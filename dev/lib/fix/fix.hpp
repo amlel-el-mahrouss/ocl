@@ -1,5 +1,5 @@
 /*
- * File: fix/parser.hpp
+ * File: fix/fix.hpp
  * Purpose: Financial Information Exchange parser in C++
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
  * Copyright 2025, Amlal El Mahrouss 
