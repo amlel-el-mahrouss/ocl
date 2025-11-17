@@ -9,6 +9,7 @@
 #define _OCL_ALLOCATOR_SYSTEM_HPP
 
 #include <lib/core/includes.hpp>
+#include <stdexcept>
 #include <memory>
 
 namespace ocl
