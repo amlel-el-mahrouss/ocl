@@ -5,8 +5,8 @@
  * Copyright 2025, Amlal El Mahrouss.
  */
 
-#ifndef _SCL_EMBFS_HPP
-#define _SCL_EMBFS_HPP
+#ifndef _OCL_EMBFS_HPP
+#define _OCL_EMBFS_HPP
 
 #include <cstdint>
 #include <cstddef>
@@ -14,7 +14,7 @@
 /// @brief A filesystem designed for tiny storage medias.
 /// @author Amlal EL Mahrouss (amlal@nekernel.org)
 
-namespace scl::embfs
+namespace ocl::embfs
 {
 	namespace traits
 	{
@@ -76,6 +76,6 @@ namespace scl::embfs
 		/// @brief Indexed node linear array.
 		typedef embfs_inode embfs_inode_arr_t[_inode_arr_len];
 	} // namespace traits
-} // namespace scl::embfs
+} // namespace ocl::embfs
 
-#endif // ifndef _SCL_EMBFS_HPP
+#endif // ifndef _OCL_EMBFS_HPP

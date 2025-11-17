@@ -9,7 +9,7 @@
 
 #include <cmath>
 
-namespace scl
+namespace ocl
 {
 	template <std::size_t T>
 	struct is_non_boolean_integer final
@@ -32,4 +32,4 @@ namespace scl
 	constexpr inline auto not_a_number		= NAN;
 	constexpr inline auto positive_infinity = INFINITY;
 	constexpr inline auto negative_infinity = -positive_infinity;
-} // namespace scl
+} // namespace ocl

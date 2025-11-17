@@ -32,7 +32,7 @@ public:
 
 int main()
 {
-	scl::standard_allocator_type<MyClass> allocator;
+	ocl::standard_allocator_type<MyClass> allocator;
 
 	// Test 1: claim() + unclaim()
 	std::cout << "=== Test 1: claim/unclaim ===\n";

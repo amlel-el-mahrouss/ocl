@@ -16,7 +16,7 @@
 #include <unistd.h>
 #include <signal.h>
 
-namespace scl::memory
+namespace ocl::memory
 {
 	template <typename T>
 	class tracked_allocator;
@@ -232,4 +232,4 @@ namespace scl::memory
 			::kill(::getpid(), SIGTRAP);
 		}
 	}
-} // namespace scl::memory
+} // namespace ocl::memory

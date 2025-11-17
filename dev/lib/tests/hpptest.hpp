@@ -7,15 +7,15 @@
 
 #pragma once
 
-namespace scl::hpptest
+namespace ocl::hpptest
 {
 	typedef bool condition_type;
 
 	template <condition_type expr = true>
 	consteval inline void must_pass()
 	{
-#ifdef SCL_HPPTEST
-		SCL_HPPTEST_ASSERT(expr);
+#ifdef OCL_HPPTEST
+		OCL_HPPTEST_ASSERT(expr);
 #endif
 	}
-} // namespace scl::hpptest
+} // namespace ocl::hpptest

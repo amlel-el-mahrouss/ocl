@@ -4,13 +4,13 @@
  * Copyright 2023-2025, Amlal El Mahrouss
  */
 
-#ifndef _SCL_OPT_HPP
-#define _SCL_OPT_HPP
+#ifndef _OCL_OPT_HPP
+#define _OCL_OPT_HPP
 
 #include <lib/except/error.hpp>
 #include <utility>
 
-namespace scl
+namespace ocl
 {
 	enum class return_type
 	{
@@ -129,6 +129,6 @@ namespace scl
 	{
 		return return_type::err;
 	}
-} // namespace scl
+} // namespace ocl
 
-#endif /* ifndef _SCL_OPT_HPP */
+#endif /* ifndef _OCL_OPT_HPP */

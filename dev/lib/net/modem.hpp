@@ -5,8 +5,8 @@
  * Copyright 2025, Amlal El Mahrouss 
  */
 
-#ifndef _SCL_NET_NETWORK_HPP
-#define _SCL_NET_NETWORK_HPP
+#ifndef _OCL_NET_NETWORK_HPP
+#define _OCL_NET_NETWORK_HPP
 
 #include <unistd.h>
 #include <arpa/inet.h>
@@ -14,9 +14,9 @@
 #include <string>
 #include <cstddef>
 
-#define SCL_MODEM_INTERFACE : public scl::net::basic_modem
+#define OCL_MODEM_INTERFACE : public ocl::net::basic_modem
 
-namespace scl::net
+namespace ocl::net
 {
 	class basic_modem;
 
@@ -151,6 +151,6 @@ namespace scl::net
 			return true;
 		}
 	};
-} // namespace scl::net
+} // namespace ocl::net
 
-#endif // ifndef _SCL_NET_NETWORK_HPP
+#endif // ifndef _OCL_NET_NETWORK_HPP

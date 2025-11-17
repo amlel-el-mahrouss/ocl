@@ -6,7 +6,7 @@
 
 #include <lib/utility/cgi_writer.hpp>
 
-static scl::basic_chunk_string<char> text_sample = R"(
+static ocl::basic_chunk_string<char> text_sample = R"(
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,7 +68,7 @@ static scl::basic_chunk_string<char> text_sample = R"(
 /* @brief this stub loads a 'index.html' or returns an error message if not found. */
 int main(int argc, char** argv)
 {
-	scl::cgi::basic_writer<> writer;
+	ocl::cgi::basic_writer<> writer;
 	writer << text_sample;
 
 	return 0;

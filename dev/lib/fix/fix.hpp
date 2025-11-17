@@ -5,8 +5,8 @@
  * Copyright 2025, Amlal El Mahrouss 
  */
 
-#ifndef _SCL_FIX_PARSER_HPP
-#define _SCL_FIX_PARSER_HPP
+#ifndef _OCL_FIX_PARSER_HPP
+#define _OCL_FIX_PARSER_HPP
 
 #include <cstddef>
 #include <cassert>
@@ -17,7 +17,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-namespace scl::fix
+namespace ocl::fix
 {
 	template <typename char_type>
 	class basic_visitor;
@@ -210,6 +210,6 @@ namespace scl::fix
 	}
 
 	using fix_tag_type = std::uint32_t;
-} // namespace scl::fix
+} // namespace ocl::fix
 
-#endif // ifndef _SCL_FIX_PARSER_HPP
+#endif // ifndef _OCL_FIX_PARSER_HPP

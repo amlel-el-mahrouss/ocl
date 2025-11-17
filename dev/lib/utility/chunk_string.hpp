@@ -5,12 +5,12 @@
  * Copyright 2025, Amlal El Mahrouss
  */
 
-#ifndef SCL_UTILITY_CHUNK_STRING_HPP
-#define SCL_UTILITY_CHUNK_STRING_HPP
+#ifndef OCL_UTILITY_CHUNK_STRING_HPP
+#define OCL_UTILITY_CHUNK_STRING_HPP
 
 #include <lib/core/includes.hpp>
 
-namespace scl
+namespace ocl
 {
 	template <typename char_type, std::size_t max_chunk_size = 8196>
 	class basic_chunk_string;
@@ -89,7 +89,7 @@ namespace scl
 
 		void print() noexcept
 		{
-			scl::io::print(packed_chunks_);
+			ocl::io::print(packed_chunks_);
 		}
 	};
 
@@ -98,5 +98,5 @@ namespace scl
 	{
 		fmt.print();
 	}
-} // namespace scl
-#endif // ifndef SCL_UTILITY_CHUNK_STRING_HPP
+} // namespace ocl
+#endif // ifndef OCL_UTILITY_CHUNK_STRING_HPP

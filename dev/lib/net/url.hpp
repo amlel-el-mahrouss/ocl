@@ -13,7 +13,7 @@
 /// @author Amlal El Mahrouss (amlal@nekernel.org)
 /// @brief Parse URLs (in a non-standard way).
 
-namespace scl::net
+namespace ocl::net
 {
 	template <typename char_type>
 	class basic_url;
@@ -91,4 +91,4 @@ namespace scl::net
 			return m_ss_.size() > 0 && this->protocol_exists();
 		}
 	};
-} // namespace scl::net
+} // namespace ocl::net

@@ -8,7 +8,7 @@
 #pragma once
 
 /// @brief OCL equivalence namespace.
-namespace scl::equiv
+namespace ocl::equiv
 {
 	template <typename T>
 	struct basic_hash_trait
@@ -101,4 +101,4 @@ namespace scl::equiv
 			return left_ / right_ == 1;
 		}
 	};
-} // namespace scl::equiv
+} // namespace ocl::equiv

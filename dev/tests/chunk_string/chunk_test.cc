@@ -16,7 +16,7 @@ TEST(ChunkTest, BasicChunkUsage)
 
 	auto start = std::chrono::high_resolution_clock::now();
 
-	scl::basic_chunk_string<char, 1000000> optimized;
+	ocl::basic_chunk_string<char, 1000000> optimized;
 
 	for (unsigned i = 0; i < iterations; ++i)
  	{

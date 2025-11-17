@@ -5,8 +5,8 @@
  * Copyright 2025, Amlal El Mahrouss.
  */
 
-#ifndef _SCL_CRC32_HPP
-#define _SCL_CRC32_HPP
+#ifndef _OCL_CRC32_HPP
+#define _OCL_CRC32_HPP
 
 #include <cstdint>
 #include <string>
@@ -15,7 +15,7 @@
 /// @brief Crc32 implementation in C++
 /// @author Amlal EL Mahrouss (amlal@nekernel.org)
 
-namespace scl::crc32
+namespace ocl::crc32
 {
 	namespace detail
 	{
@@ -76,6 +76,6 @@ namespace scl::crc32
 	{
 		return detail::crc32(in.c_str(), in.size());
 	}
-} // namespace scl::crc32
+} // namespace ocl::crc32
 
-#endif // !_SCL_CRC32_HPP
+#endif // !_OCL_CRC32_HPP

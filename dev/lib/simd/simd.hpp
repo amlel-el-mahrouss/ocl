@@ -1,8 +1,8 @@
 /*
  * File: simd/simd.hpp
  * Purpose: SIMD C++ library.
- * Author: Amlal El Mahrouss (founder@snu.systems)
- * Copyright 2025, Amlal El Mahrouss, and SNUPowered, licensed under the BSL 1.0 license.
+ * Author: Amlal El Mahrouss (amlal@nekernel.org)
+ * Copyright 2025, Amlal El Mahrouss, licensed under the BSL 1.0 license.
  */
 
 #pragma once
@@ -12,7 +12,7 @@
 /// @author Amlal El Mahrouss
 /// @brief Basic SIMD processor.
 
-namespace scl::snu::simd
+namespace ocl::snu::simd
 {
 	template <typename backend_type>
 	class basic_simd_processor
@@ -57,4 +57,4 @@ namespace scl::snu::simd
 			return processor_.isa();
 		}
 	};
-} // namespace scl::snu::simd
+} // namespace ocl::snu::simd

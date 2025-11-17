@@ -10,16 +10,16 @@
 
 TEST(TrackedPtrTest, BasicTrackedPtrUsage)
 {
-	scl::memory::tracked_ptr<int> ptr = scl::memory::make_tracked<int>(42);
+	ocl::memory::tracked_ptr<int> ptr = ocl::memory::make_tracked<int>(42);
 
 	ASSERT_TRUE(ptr);
 	EXPECT_EQ(*ptr, 42);
 
-	scl::memory::tracked_ptr<int> ptr2;
+	ocl::memory::tracked_ptr<int> ptr2;
 
-	scl::memory::swap(ptr, ptr2);
+	ocl::memory::swap(ptr, ptr2);
 
 	ptr2.reset();
 
-	EXPECT_EQ(scl::memory::tracked_ptr<int>::manager().allocator().allocated_count_, 1);
+	EXPECT_EQ(ocl::memory::tracked_ptr<int>::manager().allocator().allocated_count_, 1);
 }

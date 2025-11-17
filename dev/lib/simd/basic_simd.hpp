@@ -1,8 +1,8 @@
 /*
  * File: simd/basic_simd.hpp
  * Purpose: Basic SIMD backend C++ library.
- * Author: Amlal El Mahrouss (founder@snu.systems)
- * Copyright 2025, Amlal El Mahrouss, and SNUPowered, licensed under the BSL 1.0 license.
+ * Author: Amlal El Mahrouss (amlal@nekernel.org)
+ * Copyright 2025, Amlal El Mahrouss, licensed under the BSL 1.0 license.
  */
 
 #pragma once
@@ -19,7 +19,7 @@ using simd_type = __m256;
 using simd_type = float32x4_t;
 #endif
 
-namespace scl::snu::simd
+namespace ocl::snu::simd
 {
 	struct basic_simd_backend final
 	{
@@ -44,4 +44,4 @@ namespace scl::snu::simd
 			return "basic_simd_backend";
 		}
 	};
-} // namespace scl::snu::simd
+} // namespace ocl::snu::simd

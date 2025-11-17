@@ -4,17 +4,17 @@
  * Copyright 2023-2025, Amlal El Mahrouss
  */
 
-#ifndef _SCL_ERR_HPP
-#define _SCL_ERR_HPP
+#ifndef _OCL_ERR_HPP
+#define _OCL_ERR_HPP
 
 #include <stdexcept>
 
-namespace scl
+namespace ocl
 {
 	using runtime_error = std::runtime_error;
 	using fix_error		= runtime_error;
 	using math_error	= runtime_error;
 	using cgi_error		= runtime_error;
-} // namespace scl
+} // namespace ocl
 
-#endif // _SCL_ERR_HPP
+#endif // _OCL_ERR_HPP
