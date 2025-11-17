@@ -2,10 +2,10 @@
  * File: tests/tracked_ptr_test.cc
  * Purpose: Custom smart pointer unit tests in C++
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
- * Copyright 2025, Amlal El Mahrouss 
+ * Copyright 2025, Amlal El Mahrouss, licensed under the MIT license.
  */
 
-#include <lib/fix/parser.hpp>
+#include <lib/fix/fix.hpp>
 #include <gtest/gtest.h>
 
 TEST(FIXTest, BasicFIXUsage)

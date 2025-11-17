@@ -2,7 +2,7 @@
  * File: net/url.hpp
  * Purpose: URL container in modern C++
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
- * Copyright 2025, Amlal El Mahrouss 
+ * Copyright 2025, Amlal El Mahrouss, licensed under the MIT license.
  */
 
 #pragma once

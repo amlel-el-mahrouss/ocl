@@ -1,8 +1,8 @@
 /*
- * File: fix/parser.hpp
+ * File: fix/fix.hpp
  * Purpose: Financial Information Exchange parser in C++
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
- * Copyright 2025, Amlal El Mahrouss 
+ * Copyright 2025, Amlal El Mahrouss, licensed under the MIT license.
  */
 
 #ifndef _OCL_FIX_PARSER_HPP
@@ -16,7 +16,6 @@
 #include <cstdint>
 #include <sys/types.h>
 #include <unistd.h>
-#include <signal.h>
 
 namespace ocl::fix
 {

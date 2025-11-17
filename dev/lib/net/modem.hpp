@@ -2,7 +2,7 @@
  * File: net/modem.hpp
  * Purpose: Modem concept in modern C++
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
- * Copyright 2025, Amlal El Mahrouss 
+ * Copyright 2025, Amlal El Mahrouss, licensed under the MIT license.
  */
 
 #ifndef _OCL_NET_NETWORK_HPP
@@ -12,7 +12,6 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <string>
-#include <utility>
 #include <cstddef>
 
 #define OCL_MODEM_INTERFACE : public ocl::net::basic_modem
