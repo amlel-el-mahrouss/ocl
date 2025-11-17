@@ -1,4 +1,4 @@
-# Open C++ Library
+# SIMD C++ Library
 
 [![License: GPL-2.0](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
@@ -24,7 +24,7 @@ int main(int argc, char** argv)
   auto opt = ocl::opt(ocl::eval_eq(50, 50)).expect("ocl::eval_eq, does not match!");
   opt = ocl::opt(ocl::eval_eq(50, 40));
   opt.expect("this time it doesn't.");
-  
+
   return EXIT_SUCCESS;
 }
 ```
