@@ -2,7 +2,7 @@
  * File: core/includes.hpp
  * Purpose: Core includes for the OCL library.
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
- * Copyright 2025, Amlal El Mahrouss 
+ * Copyright 2025, Amlal El Mahrouss, licensed under the MIT license.
  */
 
 #pragma once

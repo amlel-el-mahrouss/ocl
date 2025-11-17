@@ -8,13 +8,14 @@
 #define _OCL_ERR_HPP
 
 #include <stdexcept>
+#include <lib/core/error_handler.hpp>
 
-namespace ocl
+namespace ocl::error
 {
 	using runtime_error = std::runtime_error;
 	using fix_error		= runtime_error;
 	using math_error	= runtime_error;
 	using cgi_error		= runtime_error;
-} // namespace ocl
+} // namespace ocl::error
 
 #endif // _OCL_ERR_HPP

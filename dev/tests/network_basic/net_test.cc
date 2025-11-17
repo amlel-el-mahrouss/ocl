@@ -2,7 +2,7 @@
  * File: tests/net_test.cc
  * Purpose: Network unit tests in C++
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
- * Copyright 2025, Amlal El Mahrouss 
+ * Copyright 2025, Amlal El Mahrouss, licensed under the MIT license.
  */
 
 #include <lib/net/modem.hpp>
