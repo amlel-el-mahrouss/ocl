@@ -4,7 +4,7 @@
 
 ## Brief:
 
-A C++ library with additional modules for your C++ SDLC. Based on the Open C++ Library.
+A C++ library with additional modules for your C++ SDLC.
 
 ## Requirements:
 
@@ -21,9 +21,9 @@ A C++ library with additional modules for your C++ SDLC. Based on the Open C++ L
 
 int main(int argc, char** argv)
 {
-  auto opt = ocl::opt(ocl::eval_eq(50, 50)).try_or_throw("ocl::eval_eq, does not match!");
+  auto opt = ocl::opt(ocl::eval_eq(50, 50)).expect("ocl::eval_eq, does not match!");
   opt = ocl::opt(ocl::eval_eq(50, 40));
-  opt.try_or_throw("this time it doesn't.");
+  opt.expect("this time it doesn't.");
 
   return EXIT_SUCCESS;
 }

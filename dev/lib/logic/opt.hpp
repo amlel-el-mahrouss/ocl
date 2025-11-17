@@ -28,23 +28,23 @@ namespace ocl
 		{
 		}
 
-		template <typename ErrorHandler>
-		opt& try_or_handle(const char_type* input)
+		opt& expect(const char_type* input)
 		{
 			if (m_ret == return_type::err)
 			{
-				ErrorHandler handler;
-				handler(input ? input : "");
+				throw std::runtime_error(input ? input : "opt::error");
 			}
 
 			return *this;
 		}
 
-		opt& try_or_throw(const char_type* input)
+		template <typename ErrorHandler>
+		opt& expect_or_handle(const char_type* input)
 		{
 			if (m_ret == return_type::err)
 			{
-				throw std::runtime_error(input ? input : "");
+				ErrorHandler err_handler;
+				err_handler(input ? input : "opt::error");
 			}
 
 			return *this;
