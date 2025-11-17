@@ -40,19 +40,19 @@ namespace ocl::fix
 		template <>
 		inline const char* begin_fix<char>()
 		{
-			return "FIX.";
+			return "FIX.4.2";
 		}
 
 		template <>
 		inline const char16_t* begin_fix<char16_t>()
 		{
-			return u"FIX.";
+			return u"FIX.4.2";
 		}
 
 		template <>
 		inline const char8_t* begin_fix<char8_t>()
 		{
-			return u8"FIX.";
+			return u8"FIX.4.2";
 		}
 	} // namespace detail
 
