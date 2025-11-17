@@ -28,7 +28,7 @@ namespace ocl::embfs
 		inline constexpr const size_t _inode_arr_len	= 12;
 		inline constexpr const size_t _inode_lookup_len = 8;
 
-#ifdef EMBFS_28BIT_LBA
+#if defined(EMBFS_28BIT_LBA)
 		typedef std::uint32_t lba_t;
 #elif defined(EMBFS_48BIT_LBA)
 		typedef std::uint64_t lba_t;
@@ -37,6 +37,7 @@ namespace ocl::embfs
 #endif
 
 		typedef std::int16_t sword_t;
+		
 		typedef std::int32_t sdword_t;
 
 		typedef std::uint8_t utf8_char_t;

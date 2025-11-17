@@ -129,12 +129,13 @@ namespace ocl::net
 				return ret == 0L;
 			}
 
-			::bind(fd_, (struct sockaddr*)&addr_, sizeof(addr_));
+			int ret = ::bind(fd_, (struct sockaddr*)&addr_, sizeof(addr_));
+
+			bad_ = ret == -1;
+			
 			::listen(fd_, basic_modem::backlog_count);
 
-			bad_ = false;
-
-			return true;
+			return bad_ == false;
 		}
 
 		bool destroy() noexcept
