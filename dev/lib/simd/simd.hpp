@@ -22,10 +22,11 @@ namespace ocl::snu::simd
 
 		enum opcode
 		{
-			bad,
+			bad = 0,
 			add,
 			mul,
 			div,
+			invalid = 0xfff,
 		};
 
 	public:
