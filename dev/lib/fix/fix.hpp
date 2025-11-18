@@ -89,10 +89,10 @@ namespace ocl::fix
 	class basic_range_data final
 	{
 	public:
-		std::size_t																		   magic_len_;
-		std::basic_string<char_type>													   magic_;
-		std::size_t																		   body_len_;
-		std::vector<std::pair<std::basic_string<char_type>, std::basic_string<char_type>>> body_;
+		std::size_t																		   magic_len_{};
+		std::basic_string<char_type>													   magic_{};
+		std::size_t																		   body_len_{};
+		std::vector<std::pair<std::basic_string<char_type>, std::basic_string<char_type>>> body_{};
 
 		static inline const char_type* begin = detail::begin_fix<char_type>();
 
@@ -205,7 +205,7 @@ namespace ocl::fix
 	{
 		if (!basic_range.is_valid())
 		{
-			handler("Invalid FIX packet");
+			handler.template error<true>("Invalid FIX packet");
 		}
 	}
 

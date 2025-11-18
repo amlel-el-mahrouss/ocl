@@ -13,13 +13,6 @@
 
 namespace ocl::io
 {
-	template <typename T, typename... Args>
-	inline void print(T fmt, Args... other) noexcept
-	{
-		std::cout << fmt;
-		print(other...);
-	}
-
 	template <typename T>
 	inline void print(T fmt) noexcept
 	{
@@ -28,14 +21,27 @@ namespace ocl::io
 
 	inline void print() noexcept
 	{
-		std::cout << std::endl;
+	}
+
+	template <typename... Args>
+	inline void print(Args... fmt) noexcept
+	{
+		print(fmt...);
+		print();
+	}
+
+	template <typename T, typename... Args>
+	inline void print(T fmt, Args... other) noexcept
+	{
+		std::cout << fmt;
+		print(other...);
 	}
 
 	template <typename... T>
 	inline void println(T... fmt) noexcept
 	{
 		print(fmt...);
-		print();
+		print("\n");
 	}
 } // namespace ocl::io
 

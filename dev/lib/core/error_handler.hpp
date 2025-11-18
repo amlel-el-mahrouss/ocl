@@ -23,7 +23,18 @@ namespace ocl
 		basic_error_handler& operator=(const basic_error_handler&) = delete;
 		basic_error_handler(const basic_error_handler&)			   = delete;
 
-		virtual void operator()(const std::basic_string<char>& msg)
+		template <bool throw_too = false>
+		void error(const std::basic_string<char>& msg)
+		{
+			this->operator()(msg);
+
+			if constexpr (throw_too)
+			{
+				throw std::runtime_error(msg);
+			}
+		}
+
+		void operator()(const std::basic_string<char>& msg)
 		{
 			ocl::io::print(msg);
 		}

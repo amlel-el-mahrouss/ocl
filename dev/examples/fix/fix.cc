@@ -4,10 +4,12 @@
   licensed under the MIT license
  */
 
+#include <lib/core/error_handler.hpp>
 #include <lib/net/modem.hpp>
 #include <lib/fix/fix.hpp>
 #include <iostream>
 #include <unistd.h>
+#include <lib/io/print.hpp>
 #include <sys/socket.h>
 
 /* finally test it */
@@ -22,12 +24,13 @@ int main(int argc, char** argv)
 	std::cout << "magic_len=" << fix.magic_len_ << std::endl;
 	std::cout << "is_valid=" << std::boolalpha << fix.is_valid() << std::endl;
 
-	ocl::fix::must_pass(fix);
+	ocl::basic_error_handler handler;
+	ocl::fix::must_pass<char, ocl::basic_error_handler>(fix, handler);
 
 	for (auto fields : fix.body_)
 	{
-		std::cout << "key=" << fields.first;
-		std::cout << ":value=" << fields.second << std::endl;
+		ocl::io::print("key=", fields.first); 
+		ocl::io::print(", value=", fields.second);
 	}
 
 	return 0;
