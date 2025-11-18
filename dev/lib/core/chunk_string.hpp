@@ -9,6 +9,7 @@
 #define OCL_UTILITY_CHUNK_STRING_HPP
 
 #include <lib/core/includes.hpp>
+#include <lib/io/print.hpp>
 
 namespace ocl
 {
