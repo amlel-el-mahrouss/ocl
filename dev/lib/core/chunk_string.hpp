@@ -9,6 +9,7 @@
 #define OCL_UTILITY_CHUNK_STRING_HPP
 
 #include <lib/core/includes.hpp>
+#include <lib/io/print.hpp>
 
 namespace ocl
 {
@@ -45,6 +46,19 @@ namespace ocl
 		basic_chunk_string(const basic_chunk_string&)			 = delete;
 
 	public:
+		/// @brief Append a std::basic_string to the chunk string.
+		basic_chunk_string& operator+=(const char_type* in)
+		{
+			if (in == nullptr || bad_)
+				return *this;
+
+			const auto& sz = std::strlen(in);
+
+			this->operator+=(std::basic_string<char_type>(in, sz));
+
+			return *this;
+		}
+
 		basic_chunk_string& operator+=(const std::basic_string<char_type>& in)
 		{
 			if (in.empty() || bad_)
@@ -75,14 +89,18 @@ namespace ocl
 			return *this;
 		}
 
+		/// @brief Convert to basic_string or return from cache.
 		std::basic_string<char_type> str() const noexcept
 		{
 			static std::basic_string<char_type> ret;
+			const auto& sz = ret.size();
 
-			if (ret.size() > 0)
+			if (chunk_total_ > sz)
 				ret.clear();
+			else
+				return ret;
 
-			ret += packed_chunks_;
+			ret = packed_chunks_;
 
 			return ret;
 		}
