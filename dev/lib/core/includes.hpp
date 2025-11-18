@@ -12,3 +12,12 @@
 #include <boost/core/demangle.hpp>
 #include <boost/core/null_deleter.hpp>
 #include <boost/container/allocator.hpp>
+
+namespace ocl
+{
+#ifdef OCL_USE_UTF8
+	using char_type = char8_t;
+#else
+	using char_type = char;
+#endif
+} // namespace ocl

@@ -8,7 +8,7 @@
 #define _OCL_CGI_WRITER_HPP
 
 #include <lib/io/print.hpp>
-#include <lib/utility/chunk_string.hpp>
+#include <lib/core/chunk_string.hpp>
 #include <sstream>
 #include <format>
 
@@ -21,7 +21,7 @@ namespace ocl
 		class basic_writer
 		{
 		private:
-			basic_writer& eval_(const ocl::basic_chunk_string<char_type>& mime, const ocl::basic_chunk_string<char_type>& ss) noexcept
+			basic_writer& eval_(const basic_chunk_string<char_type>& mime, const basic_chunk_string<char_type>& ss) noexcept
 			{
 				std::basic_stringstream<char_type> ss_out;
 
@@ -30,7 +30,7 @@ namespace ocl
 				ss_out << std::format("Content-Length: {}\r\n\r\n", ss.str().size());
 				ss_out << ss.str();
 
-				ocl::io::print(ss_out.str());
+				io::print(ss_out.str());
 
 				return *this;
 			}
@@ -43,32 +43,32 @@ namespace ocl
 			basic_writer(const basic_writer&)			 = default;
 
 		public:
-			friend void operator<<(basic_writer& self, const ocl::basic_chunk_string<char_type>& ss_in)
+			friend void operator<<(basic_writer& self, const basic_chunk_string<char_type>& ss_in)
 			{
 				self = self.eval_("text/plain", ss_in);
 			}
 
-			basic_writer& binary(const ocl::basic_chunk_string<char_type>& ss_in)
+			basic_writer& binary(const basic_chunk_string<char_type>& ss_in)
 			{
 				return this->eval_("application/octet-stream", ss_in);
 			}
 
-			basic_writer& html(const ocl::basic_chunk_string<char_type>& ss_in)
+			basic_writer& html(const basic_chunk_string<char_type>& ss_in)
 			{
 				return this->eval_("text/html", ss_in);
 			}
 
-			basic_writer& xml(const ocl::basic_chunk_string<char_type>& ss_in)
+			basic_writer& xml(const basic_chunk_string<char_type>& ss_in)
 			{
 				return this->eval_("application/xml", ss_in);
 			}
 
-			basic_writer& json(const ocl::basic_chunk_string<char_type>& ss_in)
+			basic_writer& json(const basic_chunk_string<char_type>& ss_in)
 			{
 				return this->eval_("application/json", ss_in);
 			}
 
-			basic_writer& js(const ocl::basic_chunk_string<char_type>& ss_in)
+			basic_writer& js(const basic_chunk_string<char_type>& ss_in)
 			{
 				return this->eval_("text/javascript", ss_in);
 			}

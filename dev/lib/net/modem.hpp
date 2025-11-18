@@ -8,6 +8,8 @@
 #ifndef _OCL_NET_NETWORK_HPP
 #define _OCL_NET_NETWORK_HPP
 
+#include <lib/tests/hpptest.hpp>
+
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
@@ -109,6 +111,10 @@ namespace ocl::net
 		{
 			static_assert(af != 0, "Address family is zero");
 			static_assert(kind != 0, "Kind is zero");
+
+			must_pass<af == AF_INET || af == AF_INET6>();
+			must_pass<kind == SOCK_STREAM || kind == SOCK_DGRAM>();
+			must_pass<(port > 0) && (port < 65536)>();
 
 			fd_		   = ::socket(af, kind, 0);
 			server_fd_ = is_server;
