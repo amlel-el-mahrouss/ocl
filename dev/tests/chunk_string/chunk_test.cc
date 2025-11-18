@@ -11,12 +11,13 @@
 
 TEST(ChunkTest, BasicChunkUsage)
 {
-	const std::string test_string = "HELLO, WORLD!";
-	const unsigned iterations = 1024000;
+	const char* test_string = "HELLO, WORLD!\r\n";
+	const auto iterations = 1024000;
+	const auto limit = 30;
 
 	auto start = std::chrono::high_resolution_clock::now();
 
-	ocl::basic_chunk_string<char, 1000000> optimized;
+	ocl::basic_chunk_string<char, iterations> optimized;
 
 	for (unsigned i = 0; i < iterations; ++i)
  	{
@@ -26,5 +27,5 @@ TEST(ChunkTest, BasicChunkUsage)
 	auto end = std::chrono::high_resolution_clock::now();
 	auto optimized_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
 
-	EXPECT_TRUE(optimized_time.count() < 30U);
+	EXPECT_TRUE(optimized_time.count() < limit);
 }
