@@ -33,6 +33,7 @@ namespace ocl::net
 	{
 		url_protocol					   m_protocol_{url_protocol::invalid};
 		std::basic_stringstream<char_type> m_ss_{};
+		std::basic_string<char_type>	   m_port_{""};
 
 	public:
 		explicit basic_url(const std::basic_string<char_type>& protocol)
@@ -65,6 +66,12 @@ namespace ocl::net
 			if (in.empty())
 				return *this;
 
+			if (in.starts_with(":"))
+			{
+				m_port_ = in.substr(1);
+				return *this;
+			}
+
 			m_ss_ += in;
 			return *this;
 		}
@@ -81,14 +88,21 @@ namespace ocl::net
 		}
 
 	public:
-		bool protocol_exists()
+		auto protocol() const noexcept
 		{
-			return this->m_protocol_ != url_protocol::bad || this->m_protocol_ != url_protocol::invalid;
+			return this->m_protocol_;
 		}
 
-		bool is_valid()
+		auto port() const noexcept
 		{
-			return m_ss_.size() > 0 && this->protocol_exists();
+			return this->m_port_;
+		}
+
+		auto is_valid() const noexcept
+		{
+			return m_ss_.size() > 0 && this->m_protocol_ != url_protocol::bad || this->m_protocol_ != url_protocol::invalid;
 		}
 	};
+
+	using url = basic_url<char>;
 } // namespace ocl::net

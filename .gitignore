@@ -7,11 +7,19 @@
 *.o
 *.obj
 
+dist/*
+
 docs/html
 docs/latex
 
 build*/
 build/
+
+*.aux
+*.fdb_latex*
+*.fls
+*.log
+*.gz
 
 .idea
 
