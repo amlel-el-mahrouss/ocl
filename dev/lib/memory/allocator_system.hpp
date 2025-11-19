@@ -40,8 +40,8 @@ namespace ocl
 	template <typename ret_type, typename allocator_new, typename allocator_delete>
 	class allocator_system
 	{
-		allocator_new	 alloc_;
-		allocator_delete del_;
+		allocator_new	 m_alloc_{};
+		allocator_delete m_free_{};
 
 	public:
 		allocator_system()	= default;
@@ -52,18 +52,18 @@ namespace ocl
 
 		ret_type* claim() noexcept
 		{
-			return alloc_();
+			return m_alloc_();
 		}
 
 		template <typename... var_type>
 		auto construct(var_type... args) -> std::shared_ptr<ret_type>
 		{
-			return std::shared_ptr<ret_type>(alloc_.template var_alloc<var_type...>(args...), allocator_delete{});
+			return std::shared_ptr<ret_type>(m_alloc_.template var_alloc<var_type...>(args...), allocator_delete{});
 		}
 
 		void unclaim(ret_type* ptr)
 		{
-			del_(ptr);
+			m_free_(ptr);
 		}
 	};
 

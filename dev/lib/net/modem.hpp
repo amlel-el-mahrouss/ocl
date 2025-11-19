@@ -16,16 +16,18 @@
 #include <string>
 #include <cstddef>
 
-#define OCL_MODEM_INTERFACE : public ocl::net::basic_modem
+#define OCL_MODEM_INTERFACE : public ocl::net::modem
 
 namespace ocl::net
 {
-	class basic_modem;
+	class modem;
 
-	typedef int64_t socket_type;
-
+	using socket_type = int64_t;
+	
+	/// =============================================================================
 	/// @brief Modem container concept, a container to read and write on a network stream.
-	class basic_modem
+	/// =============================================================================
+	class modem final
 	{
 	private:
 		socket_type fd_{};
@@ -35,19 +37,24 @@ namespace ocl::net
 	public:
 		const bool& bad{bad_};
 
-		explicit basic_modem() = default;
+		explicit modem() = default;
 
-		virtual ~basic_modem()
+		~modem()
 		{
 			this->destroy();
 		}
 
-		basic_modem& operator=(const basic_modem&) = delete;
-		basic_modem(const basic_modem&)			   = delete;
+		modem& operator=(const modem&) = delete;
+		modem(const modem&)			   = delete;
 
 		static constexpr auto		local_address_ip4 = "127.0.0.1";
 		static constexpr auto		local_address_ip6 = "::1";
 		static constexpr const auto backlog_count	  = 5U;
+
+		/// =============================================================================
+		/// @brief Check if the modem is valid.
+		/// @return true if valid, false otherwise.
+		/// =============================================================================
 
 		bool is_valid() const noexcept
 		{
@@ -107,7 +114,7 @@ namespace ocl::net
 		}
 
 		template <int32_t af, int32_t kind, int32_t port>
-		bool construct(const char* addr = basic_modem::local_address_ip4, const bool& is_server = false) noexcept
+		bool construct(const char* addr = modem::local_address_ip4, const bool& is_server = false) noexcept
 		{
 			static_assert(af != 0, "Address family is zero");
 			static_assert(kind != 0, "Kind is zero");
@@ -139,7 +146,7 @@ namespace ocl::net
 
 			bad_ = ret == -1;
 			
-			::listen(fd_, basic_modem::backlog_count);
+			::listen(fd_, modem::backlog_count);
 
 			return bad_ == false;
 		}

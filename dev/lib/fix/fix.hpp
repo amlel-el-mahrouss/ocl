@@ -205,11 +205,14 @@ namespace ocl::fix
 	{
 		if (!basic_range.is_valid())
 		{
-			handler.template error<true>("Invalid FIX packet");
+			handler.template error<true>("Invalid FIX packet.");
 		}
 	}
 
 	using fix_tag_type = std::uint32_t;
+
+	using range_data = basic_range_data<char>;
+	using visitor = basic_visitor<char>;
 } // namespace ocl::fix
 
 #endif // ifndef _OCL_FIX_PARSER_HPP

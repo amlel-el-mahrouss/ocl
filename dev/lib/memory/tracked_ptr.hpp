@@ -140,7 +140,7 @@ namespace ocl::memory
 			this->reset();
 		}
 
-		tracked_ptr(const tracked_ptr&) = delete;
+		tracked_ptr(const tracked_ptr&)			   = delete;
 		tracked_ptr& operator=(const tracked_ptr&) = delete;
 
 	public:
@@ -224,12 +224,12 @@ namespace ocl::memory
 	}
 
 	/// @brief a Must Pass function is a standard way to verify a container' validity, inspired from NeKernel/VMKernel.
-	template <typename T>
-	inline void must_pass(tracked_ptr<T>& ptr) noexcept
+	template <typename T, typename error_handler>
+	inline void must_pass(tracked_ptr<T>& ptr, error_handler handler)
 	{
 		if (ptr.manager().allocator().allocated_count_ < ptr.manager().allocator().deallocated_count_)
 		{
-			::kill(::getpid(), SIGTRAP);
+			handler.template error<true>("Invalid TrackedPtr detected: Deallocated count exceeds allocated count.");
 		}
 	}
 } // namespace ocl::memory
