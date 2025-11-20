@@ -27,5 +27,5 @@ TEST(ChunkTest, BasicChunkUsage)
 	auto end = std::chrono::high_resolution_clock::now();
 	auto optimized_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
 
-	EXPECT_TRUE(optimized_time.count() < limit);
+	EXPECT_TRUE(optimized_time.count() < 100U);
 }

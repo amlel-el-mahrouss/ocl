@@ -10,6 +10,7 @@
 
 #include <lib/core/includes.hpp>
 #include <lib/io/print.hpp>
+#include <cstring>
 
 namespace ocl
 {
