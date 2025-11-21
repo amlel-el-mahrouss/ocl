@@ -1,7 +1,7 @@
 /*
   tracked_ptr example
   written by Amlal El Mahrouss.
-  licensed under the MIT license
+  licensed under the Boost Software License
  */
 
 #include <lib/memory/tracked_ptr.hpp>

@@ -1,7 +1,7 @@
 /*
  * File: opt.hpp
  * Author: Amlal El Mahrouss,
- * Copyright 2023-2025, Amlal El Mahrouss
+ * Copyright 2023-2025, Amlal El Mahrouss, Licensed under the Boost Software License
  */
 
 #ifndef _OCL_OPT_HPP

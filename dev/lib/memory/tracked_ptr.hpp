@@ -2,7 +2,7 @@
  * File: memory/tracked_ptr.hpp
  * Purpose: Custom smart pointer implementation in C++
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
- * Copyright 2025, Amlal El Mahrouss, licensed under the MIT license.
+ * Copyright 2025, Amlal El Mahrouss, licensed under the Boost Software License.
  */
 
 #pragma once

@@ -1,7 +1,7 @@
 /* 
-  string checksum example
-  written by Amlal El Mahrouss.
-  licensed under the MIT license
+  String checksum example
+  Written by Amlal El Mahrouss.
+  Licensed under the Boost Software License
  */
 
 #include <lib/logic/opt.hpp>

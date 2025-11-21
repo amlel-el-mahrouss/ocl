@@ -2,7 +2,7 @@
  * File: crc32.hpp
  * Purpose: CRC32 module.
  * Author: Amlal El Mahrouss,
- * Copyright 2025, Amlal El Mahrouss.
+ * Copyright 2025, Amlal El Mahrouss, Licensed under the Boost Software License.
  */
 
 #ifndef _OCL_CRC32_HPP

@@ -2,7 +2,7 @@
  * File: core/allocator_system.hpp
  * Purpose: Allocator System container.
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
- * Copyright 2025, Amlal El Mahrouss. Licensed under the BSL 1.0 license
+ * Copyright 2025, Amlal El Mahrouss, Licensed under the Boost Software License. Licensed under the BSL 1.0 license
  */
 
 #ifndef _OCL_ALLOCATOR_SYSTEM_HPP
