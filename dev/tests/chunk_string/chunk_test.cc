@@ -2,7 +2,7 @@
  * File: tests/chunk_test.cc
  * Purpose: Chunk unit tests in C++
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
- * Copyright 2025, Amlal El Mahrouss, licensed under the MIT license.
+ * Copyright 2025, Amlal El Mahrouss, licensed under the Boost Software License.
  */
 
 #include <lib/io/print.hpp>
@@ -27,5 +27,5 @@ TEST(ChunkTest, BasicChunkUsage)
 	auto end = std::chrono::high_resolution_clock::now();
 	auto optimized_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
 
-	EXPECT_TRUE(optimized_time.count() < limit);
+	EXPECT_TRUE(optimized_time.count() < 100U);
 }

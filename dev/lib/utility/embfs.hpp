@@ -2,7 +2,7 @@
  * File: embfs.hpp
  * Purpose: Embedded File System.
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
- * Copyright 2025, Amlal El Mahrouss.
+ * Copyright 2025, Amlal El Mahrouss, Licensed under the Boost Software License.
  */
 
 #ifndef _OCL_EMBFS_HPP

@@ -2,7 +2,7 @@
 * File: core/basic_error_handler.hpp
 * Purpose: Error handler container.
 * Author: Amlal El Mahrouss (amlal@nekernel.org)
-* Copyright 2025, Amlal El Mahrouss.
+* Copyright 2025, Amlal El Mahrouss, Licensed under the Boost Software License.
 */
 
 #ifndef _OCL_ERROR_HANDLER_HPP

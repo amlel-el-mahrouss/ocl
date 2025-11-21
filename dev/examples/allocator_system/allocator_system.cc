@@ -2,7 +2,7 @@
  * File: allocator_system.cc
  * Purpose: Allocator System container.
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
- * Copyright 2025, Amlal El Mahrouss. Licensed under the BSL 1.0 license
+ * Copyright 2025, Amlal El Mahrouss, Licensed under the Boost Software License. Licensed under the BSL 1.0 license
  */
 
 #include <lib/memory/allocator_system.hpp>

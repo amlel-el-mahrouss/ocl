@@ -2,7 +2,7 @@
  * File: equiv.hpp
  * Purpose: Equivalence runtime c++ header.
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
- * Copyright 2025, Amlal El Mahrouss, licensed under the MIT license.
+ * Copyright 2025, Amlal El Mahrouss, licensed under the Boost Software License.
  */
 
 #pragma once
@@ -13,8 +13,8 @@ namespace ocl::equiv
 	template <typename T>
 	struct basic_hash_trait
 	{
-		/// @brief hash from T's result.
-		static typename T::result hash()
+		/// @brief hash from T's result_type.
+		static typename T::result_type hash()
 		{
 			static T val;
 			return val.hash();
@@ -63,9 +63,9 @@ namespace ocl::equiv
 		T left_ = 127, right_ = 127;
 
 	public:
-		using result = T;
+		using result_type = T;
 
-		constexpr result hash()
+		constexpr result_type hash()
 		{
 			return (left_ + right_) < 1;
 		}
@@ -79,9 +79,9 @@ namespace ocl::equiv
 		T left_ = 127, right_ = 127;
 
 	public:
-		using result = T;
+		using result_type = T;
 
-		constexpr result hash()
+		constexpr result_type hash()
 		{
 			return (left_ + right_) > 0;
 		}
@@ -94,9 +94,9 @@ namespace ocl::equiv
 		T left_ = 5, right_ = 3;
 
 	public:
-		using result = T;
+		using result_type = T;
 
-		constexpr result hash()
+		constexpr result_type hash()
 		{
 			return left_ / right_ == 1;
 		}

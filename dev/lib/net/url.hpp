@@ -2,7 +2,7 @@
  * File: net/url.hpp
  * Purpose: URL container in modern C++
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
- * Copyright 2025, Amlal El Mahrouss, licensed under the MIT license.
+ * Copyright 2025, Amlal El Mahrouss, licensed under the Boost Software License.
  */
 
 #pragma once
@@ -41,17 +41,17 @@ namespace ocl::net
 			if (protocol.starts_with("https://"))
 			{
 				m_protocol_ = url_protocol::https;
-				this->operator/=(protocol.substr(strlen("https://")));
+				this->operator/=(protocol.substr(std::size("https://")));
 			}
 			else if (protocol.starts_with("http://"))
 			{
 				m_protocol_ = url_protocol::http;
-				this->operator/=(protocol.substr(strlen("http://")));
+				this->operator/=(protocol.substr(std::size("http://")));
 			}
 			else if (protocol.starts_with("mailto:"))
 			{
 				m_protocol_ = url_protocol::mailto;
-				this->operator/=(protocol.substr(strlen("mailto:")));
+				this->operator/=(protocol.substr(std::size("mailto:")));
 			}
 		}
 

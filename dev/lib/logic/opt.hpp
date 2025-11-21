@@ -1,7 +1,7 @@
 /*
  * File: opt.hpp
  * Author: Amlal El Mahrouss,
- * Copyright 2023-2025, Amlal El Mahrouss
+ * Copyright 2023-2025, Amlal El Mahrouss, Licensed under the Boost Software License
  */
 
 #ifndef _OCL_OPT_HPP
@@ -120,12 +120,12 @@ namespace ocl
 		return greater_than(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
 	}
 
-	inline return_type eval_true()
+	inline return_type eval_true() noexcept
 	{
 		return return_type::okay;
 	}
 
-	inline return_type eval_false()
+	inline return_type eval_false() noexcept
 	{
 		return return_type::err;
 	}
