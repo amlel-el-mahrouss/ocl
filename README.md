@@ -1,6 +1,6 @@
 # Open C++ Library
 
-[![License: GPL-2.0](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License: BSL](https://img.shields.io/badge/license-BSL-blue.svg)](LICENSE)
 
 ## Brief:
 
