@@ -1,6 +1,6 @@
 /*
  * File: equiv.hpp
- * Purpose: Equivalence runtime c++ header.
+ * Purpose: Equivalence header.
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
  * Copyright 2025, Amlal El Mahrouss, licensed under the Boost Software License.
  */

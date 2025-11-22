@@ -35,22 +35,22 @@ namespace ocl::fix
 	namespace detail
 	{
 		template <typename char_type = char>
-		const char_type* begin_fix();
+		const char_type* begin_fix() noexcept;
 
 		template <>
-		inline const char* begin_fix<char>()
+		inline const char* begin_fix<char>() noexcept
 		{
 			return "FIX.4.2";
 		}
 
 		template <>
-		inline const char16_t* begin_fix<char16_t>()
+		inline const char16_t* begin_fix<char16_t>() noexcept
 		{
 			return u"FIX.4.2";
 		}
 
 		template <>
-		inline const char8_t* begin_fix<char8_t>()
+		inline const char8_t* begin_fix<char8_t>() noexcept
 		{
 			return u8"FIX.4.2";
 		}
