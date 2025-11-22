@@ -24,6 +24,8 @@ namespace ocl::net
 		http,
 		https,
 		mailto,
+		ftp,
+		tel,
 		bad = 0xff,
 	};
 
@@ -52,6 +54,16 @@ namespace ocl::net
 			{
 				m_protocol_ = url_protocol::mailto;
 				this->operator/=(protocol.substr(std::size("mailto:")));
+			}
+			else if (protocol.starts_with("tel:"))
+			{
+				m_protocol_ = url_protocol::tel;
+				this->operator/=(protocol.substr(std::size("tel:")));
+			}
+			else if (protocol.starts_with("ftp:"))
+			{
+				m_protocol_ = url_protocol::ftp;
+				this->operator/=(protocol.substr(std::size("ftp:")));
 			}
 		}
 

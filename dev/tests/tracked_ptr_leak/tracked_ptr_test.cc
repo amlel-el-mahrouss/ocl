@@ -6,7 +6,7 @@
  */
 
 #include <lib/memory/tracked_ptr.hpp>
-#include <gtest/gtest.h>
+#include <lib/tests/gtest.hpp>
 
 TEST(TrackedPtrTest, LeakTrackedPtrUsage)
 {
