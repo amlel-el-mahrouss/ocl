@@ -1,11 +1,11 @@
 /*
- * File: cgi_writer.hpp
+ * File: cgi.hpp
  * Author: Amlal El Mahrouss,
  * Copyright 2023-2025, Amlal El Mahrouss, Licensed under the Boost Software License.
  */
 
-#ifndef _OCL_CGI_WRITER_HPP
-#define _OCL_CGI_WRITER_HPP
+#ifndef _OCL_CGI_HPP
+#define _OCL_CGI_HPP
 
 #include <lib/io/print.hpp>
 #include <lib/core/chunk_string.hpp>
@@ -26,7 +26,7 @@ namespace ocl
 				std::basic_stringstream<char_type> ss_out;
 
 				ss_out << std::format("Content-Type: {}\r\n", mime.str());
-				ss_out << std::format("Server: {}\r\n", "OCL-CGI/1.0");
+				ss_out << std::format("Server: {}\r\n", "OCL/1.0");
 				ss_out << std::format("Content-Length: {}\r\n\r\n", ss.str().size());
 				ss_out << ss.str();
 
@@ -76,4 +76,4 @@ namespace ocl
 	} // namespace cgi
 } // namespace ocl
 
-#endif // ifndef _OCL_CGI_WRITER_HPP
+#endif // ifndef _OCL_CGI_HPP

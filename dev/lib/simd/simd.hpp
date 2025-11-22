@@ -18,7 +18,7 @@ namespace ocl::snu::simd
 	class basic_simd_processor
 	{
 	private:
-		backend_type processor_;
+		backend_type backend_;
 
 		enum opcode
 		{
@@ -41,21 +41,21 @@ namespace ocl::snu::simd
 			switch (op)
 			{
 			case add:
-				return processor_.add(lhs, rhs);
+				return backend_.add(lhs, rhs);
 			case mul:
-				return processor_.mul(lhs, rhs);
+				return backend_.mul(lhs, rhs);
 			case div:
-				return processor_.div(lhs, rhs);
+				return backend_.div(lhs, rhs);
 			default:
 				break;
 			}
 
-			return processor_.is_bad();
+			return backend_.is_bad();
 		}
 
 		std::basic_string<char> isa()
 		{
-			return processor_.isa();
+			return backend_.isa();
 		}
 	};
 } // namespace ocl::snu::simd

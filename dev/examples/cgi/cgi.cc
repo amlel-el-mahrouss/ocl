@@ -4,7 +4,7 @@
   licensed under the Boost Software License
  */
 
-#include <lib/utility/cgi_writer.hpp>
+#include <lib/utility/cgi.hpp>
 
 static ocl::basic_chunk_string<char> text_sample = R"(
 <!DOCTYPE html>
