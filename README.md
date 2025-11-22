@@ -14,8 +14,6 @@ A C++ library with additional modules for your C++ SDLC.
 
 ## Structure:
 
-
-
 - `core`: Core utilities and fundamental abstractions used across OCL.
 - `except`: Exception classes and error-handling helpers.
 - `fix`: FIX protocol utilities and helpers for Financial Information eXchange integration.

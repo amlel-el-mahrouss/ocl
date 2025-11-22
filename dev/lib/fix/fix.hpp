@@ -158,9 +158,7 @@ namespace ocl::fix
 			if (in.empty())
 				return ret;
 
-			static thread_local std::basic_string<char_type> in_tmp{};
-
-			in_tmp.reserve(in.size());
+			std::basic_string<char_type> in_tmp{"", in.size()};
 
 			try
 			{
@@ -205,7 +203,7 @@ namespace ocl::fix
 	{
 		if (!basic_range.is_valid())
 		{
-			handler.template error<true>("Invalid FIX packet.");
+			handler.template error<true>("Invalid FIX Message.");
 		}
 	}
 

@@ -9,7 +9,6 @@
 #define _OCL_PRINT_HPP
 
 #include <iostream>
-#include <ostream>
 
 namespace ocl::io
 {
