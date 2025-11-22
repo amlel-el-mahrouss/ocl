@@ -19,9 +19,9 @@ using simd_type = __m256;
 using simd_type = float32x4_t;
 #endif
 
-namespace ocl::snu::simd
+namespace ocl::simd
 {
-	struct basic_simd_backend final
+	struct basic_simd final
 	{
 		struct simd_traits final
 		{
@@ -29,7 +29,7 @@ namespace ocl::snu::simd
 
 		private:
 			static bool bad;
-			friend class basic_simd_backend;
+			friend class basic_simd;
 		};
 
 		using register_type = simd_traits;
@@ -41,7 +41,7 @@ namespace ocl::snu::simd
 
 		std::basic_string<char> isa()
 		{
-			return "basic_simd_backend";
+			return "basic_simd";
 		}
 	};
-} // namespace ocl::snu::simd
+} // namespace ocl::simd

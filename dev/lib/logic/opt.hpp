@@ -51,7 +51,7 @@ namespace ocl
 		}
 
 	private:
-		return_type m_ret;
+		return_type m_ret{return_type::invalid};
 	};
 
 	template <typename Teller, typename... Lst>

@@ -7,11 +7,9 @@
 
 #pragma once
 
-#include <cmath>
-
 namespace ocl
 {
-	template <std::size_t T>
+	template <__SIZE_TYPE__ T>
 	struct is_non_boolean_integer final
 	{
 		static constexpr const bool value = true;
@@ -29,7 +27,7 @@ namespace ocl
 		static constexpr const bool value = false;
 	};
 
-	constexpr inline auto not_a_number		= NAN;
-	constexpr inline auto positive_infinity = INFINITY;
+	constexpr inline auto not_a_number		= __builtin_nanf ("");
+	constexpr inline auto positive_infinity = __builtin_inff ();
 	constexpr inline auto negative_infinity = -positive_infinity;
 } // namespace ocl

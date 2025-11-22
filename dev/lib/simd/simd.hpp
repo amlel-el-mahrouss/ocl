@@ -12,10 +12,10 @@
 /// @author Amlal El Mahrouss
 /// @brief Basic SIMD processor.
 
-namespace ocl::snu::simd
+namespace ocl::simd
 {
 	template <typename backend_type>
-	class basic_simd_processor
+	class real_type
 	{
 	private:
 		backend_type backend_;
@@ -30,11 +30,11 @@ namespace ocl::snu::simd
 		};
 
 	public:
-		basic_simd_processor()			= default;
-		virtual ~basic_simd_processor() = default;
+		real_type()			= default;
+		virtual ~real_type() = default;
 
-		basic_simd_processor& operator=(const basic_simd_processor&) = delete;
-		basic_simd_processor(const basic_simd_processor&)			 = delete;
+		real_type& operator=(const real_type&) = delete;
+		real_type(const real_type&)			 = delete;
 
 		typename backend_type::register_type& call(const opcode& op, typename backend_type::register_type& lhs, typename backend_type::register_type& rhs)
 		{
@@ -58,4 +58,4 @@ namespace ocl::snu::simd
 			return backend_.isa();
 		}
 	};
-} // namespace ocl::snu::simd
+} // namespace ocl::simd

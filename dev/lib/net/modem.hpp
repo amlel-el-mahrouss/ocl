@@ -5,8 +5,7 @@
  * Copyright 2025, Amlal El Mahrouss, licensed under the Boost Software License.
  */
 
-#ifndef _OCL_NET_NETWORK_HPP
-#define _OCL_NET_NETWORK_HPP
+#pragma once
 
 #include <lib/tests/hpptest.hpp>
 
@@ -22,13 +21,14 @@ namespace ocl::net
 {
 	class modem;
 
-	using socket_type = int64_t;
-	
 	/// =============================================================================
 	/// @brief Modem container concept, a container to read and write on a network stream.
 	/// =============================================================================
 	class modem final
 	{
+	public:
+		using socket_type = int64_t;
+
 	private:
 		socket_type fd_{};
 		bool		server_fd_{false};
@@ -145,7 +145,7 @@ namespace ocl::net
 			int ret = ::bind(fd_, (struct sockaddr*)&addr_, sizeof(addr_));
 
 			bad_ = ret == -1;
-			
+
 			::listen(fd_, modem::backlog_count);
 
 			return bad_ == false;
@@ -166,4 +166,3 @@ namespace ocl::net
 	};
 } // namespace ocl::net
 
-#endif // ifndef _OCL_NET_NETWORK_HPP
