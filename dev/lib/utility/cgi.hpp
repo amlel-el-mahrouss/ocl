@@ -37,7 +37,7 @@ namespace ocl
 
 		public:
 			explicit basic_writer() = default;
-			virtual ~basic_writer()			= default;
+			virtual ~basic_writer() = default;
 
 			basic_writer& operator=(const basic_writer&) = default;
 			basic_writer(const basic_writer&)			 = default;

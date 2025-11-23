@@ -27,7 +27,7 @@ namespace ocl
 		static constexpr const bool value = false;
 	};
 
-	constexpr inline auto not_a_number		= __builtin_nanf ("");
-	constexpr inline auto positive_infinity = __builtin_inff ();
+	constexpr inline auto not_a_number		= __builtin_nanf("");
+	constexpr inline auto positive_infinity = __builtin_inff();
 	constexpr inline auto negative_infinity = -positive_infinity;
 } // namespace ocl

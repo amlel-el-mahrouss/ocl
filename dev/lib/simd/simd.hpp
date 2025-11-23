@@ -30,11 +30,11 @@ namespace ocl::simd
 		};
 
 	public:
-		real_type()			= default;
+		real_type()			 = default;
 		virtual ~real_type() = default;
 
 		real_type& operator=(const real_type&) = delete;
-		real_type(const real_type&)			 = delete;
+		real_type(const real_type&)			   = delete;
 
 		typename backend_type::register_type& call(const opcode& op, typename backend_type::register_type& lhs, typename backend_type::register_type& rhs)
 		{

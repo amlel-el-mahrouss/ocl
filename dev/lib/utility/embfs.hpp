@@ -37,7 +37,7 @@ namespace ocl::embfs
 #endif
 
 		typedef std::int16_t sword_t;
-		
+
 		typedef std::int32_t sdword_t;
 
 		typedef std::uint8_t utf8_char_t;

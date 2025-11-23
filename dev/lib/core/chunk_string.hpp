@@ -94,7 +94,7 @@ namespace ocl
 		std::basic_string<char_type> str() const noexcept
 		{
 			static std::basic_string<char_type> ret;
-			const auto& sz = ret.size();
+			const auto&							sz = ret.size();
 
 			if (chunk_total_ > sz)
 				ret.clear();

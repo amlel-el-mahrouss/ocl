@@ -151,6 +151,9 @@ namespace ocl::fix
 			return this->visit(in);
 		}
 
+		/// @brief Visit a FIX message and parse it into a basic_range_data object.
+		/// @param in The input FIX message as a string.
+		/// @warning This function may throw exceptions.
 		basic_range_data<char_type> visit(const std::basic_string<char_type>& in)
 		{
 			thread_local basic_range_data<char_type> ret{};
@@ -160,37 +163,29 @@ namespace ocl::fix
 
 			std::basic_string<char_type> in_tmp{"", in.size()};
 
-			try
+			for (auto& ch : in)
 			{
-				for (auto& ch : in)
+				if (ch != basic_visitor::soh)
 				{
-					if (ch != basic_visitor::soh)
-					{
-						in_tmp += ch;
-						continue;
-					}
-
-					std::basic_string<char_type> key = in_tmp.substr(0, in_tmp.find(basic_visitor::eq));
-					std::basic_string<char_type> val = in_tmp.substr(in_tmp.find(basic_visitor::eq) + 1);
-
-					if (ret.magic_.empty())
-					{
-						ret.magic_	   = val;
-						ret.magic_len_ = ret.magic_.size();
-					}
-					else
-					{
-						ret.body_.emplace_back(std::make_pair(key, val));
-						ret.body_len_ += in_tmp.size();
-					}
-
-					in_tmp.clear();
+					in_tmp += ch;
+					continue;
 				}
-			}
-			catch (...)
-			{
+
+				std::basic_string<char_type> key = in_tmp.substr(0, in_tmp.find(basic_visitor::eq));
+				std::basic_string<char_type> val = in_tmp.substr(in_tmp.find(basic_visitor::eq) + 1);
+
+				if (ret.magic_.empty())
+				{
+					ret.magic_	   = val;
+					ret.magic_len_ = ret.magic_.size();
+				}
+				else
+				{
+					ret.body_.emplace_back(std::make_pair(key, val));
+					ret.body_len_ += in_tmp.size();
+				}
+
 				in_tmp.clear();
-				return ret;
 			}
 
 			in_tmp.clear();
@@ -210,7 +205,7 @@ namespace ocl::fix
 	using fix_tag_type = std::uint32_t;
 
 	using range_data = basic_range_data<char>;
-	using visitor = basic_visitor<char>;
+	using visitor	 = basic_visitor<char>;
 } // namespace ocl::fix
 
 #endif // ifndef _OCL_FIX_PARSER_HPP
