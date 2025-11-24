@@ -7,15 +7,15 @@
 
 #pragma once
 
-#include <memory>
-#include <iostream>
-#include <string>
-
 #include <boost/config.hpp>
 #include <boost/core/nvp.hpp>
 #include <boost/core/demangle.hpp>
 #include <boost/core/null_deleter.hpp>
 #include <boost/container/allocator.hpp>
+
+#include <memory>
+#include <iostream>
+#include <string>
 
 namespace ocl
 {

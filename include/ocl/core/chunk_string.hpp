@@ -20,14 +20,17 @@ namespace ocl
 	template <typename char_type, std::size_t max_chunk_size>
 	class basic_chunk_string final
 	{
+	public:
+		using condition_type = bool;
+
 	private:
 		char_type	packed_chunks_[max_chunk_size] = {0};
 		std::size_t chunk_total_{};
 
-		bool bad_{false};
+		condition_type bad_{false};
 
 	public:
-		const bool& bad{bad_};
+		const condition_type& bad{bad_};
 
 		basic_chunk_string() = default;
 
@@ -53,9 +56,7 @@ namespace ocl
 			if (in == nullptr || bad_)
 				return *this;
 
-			const auto& sz = std::strlen(in);
-
-			this->operator+=(std::basic_string<char_type>(in, sz));
+			this->operator+=(std::basic_string<char_type>(in));
 
 			return *this;
 		}
