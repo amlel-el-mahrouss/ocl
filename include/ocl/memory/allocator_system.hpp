@@ -8,7 +8,7 @@
 #ifndef _OCL_ALLOCATOR_SYSTEM_HPP
 #define _OCL_ALLOCATOR_SYSTEM_HPP
 
-#include <core/includes.hpp>
+#include <core/config.hpp>
 #include <memory>
 
 namespace ocl

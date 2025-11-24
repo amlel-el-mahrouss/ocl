@@ -8,7 +8,7 @@
 #ifndef OCL_UTILITY_CHUNK_STRING_HPP
 #define OCL_UTILITY_CHUNK_STRING_HPP
 
-#include <core/includes.hpp>
+#include <core/config.hpp>
 #include <io/print.hpp>
 #include <cstring>
 

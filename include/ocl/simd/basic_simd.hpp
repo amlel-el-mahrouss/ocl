@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <core/includes.hpp>
+#include <core/config.hpp>
 
 #ifdef __x86_64__
 #include <immintrin.h>
