@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <core/includes.hpp>
+#include <core/config.hpp>
 
 /// @author Amlal El Mahrouss
 /// @brief Basic SIMD processor.

@@ -136,7 +136,8 @@ namespace ocl::fix
 	class basic_visitor final
 	{
 	public:
-		static constexpr const char_type soh  = '|';
+		/// AMLALE: Yeah...
+		static constexpr const char_type soh  = 0x01;
 		static constexpr const char_type eq	  = '=';
 		static constexpr uint32_t		 base = 10U;
 

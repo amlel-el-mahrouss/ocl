@@ -8,7 +8,7 @@
 #ifndef _OCL_ERROR_HANDLER_HPP
 #define _OCL_ERROR_HANDLER_HPP
 
-#include <core/includes.hpp>
+#include <core/config.hpp>
 #include <io/print.hpp>
 
 namespace ocl

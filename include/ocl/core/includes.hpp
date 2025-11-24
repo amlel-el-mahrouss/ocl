@@ -1,11 +1,15 @@
 /*
- * File: core/includes.hpp
- * Purpose: Core includes of the OCL.
+ * File: core/config.hpp
+ * Purpose: Config file of the OCL.
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
  * Copyright 2025, Amlal El Mahrouss, licensed under the Boost Software License.
  */
 
 #pragma once
+
+#include <memory>
+#include <iostream>
+#include <string>
 
 #include <boost/config.hpp>
 #include <boost/core/nvp.hpp>
