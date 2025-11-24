@@ -30,7 +30,7 @@ A C++ library with additional modules for your C++ SDLC.
 ### Logic Module (Option container)
 
 ```cpp
-#include <lib/logic/opt.hpp>
+#include <logic/opt.hpp>
 
 int main(int argc, char** argv)
 {

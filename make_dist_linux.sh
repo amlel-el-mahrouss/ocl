@@ -4,7 +4,7 @@ outputDir=dist/lib/
 
 mkdir -p $outputDir
 
-for f in dev/lib/*/*.hpp; do
+for f in include/ocl/*/*.hpp; do
 baseName=`echo $f | cut -d "." -f 1`
 echo "RUN:" cp --parents $f.hpp $outputDir$baseName
 cp --parents $f.hpp $outputDir$baseName
