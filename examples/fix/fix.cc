@@ -1,11 +1,10 @@
 /*
   fix example
-  written by Amlal El Mahrouss.
-  licensed under the Boost Software License
+  Written by Amlal El Mahrouss.
+  Licensed under the Boost Software License
  */
 
 #include <core/error_handler.hpp>
-#include <net/modem.hpp>
 #include <fix/parser.hpp>
 #include <iostream>
 #include <unistd.h>
@@ -38,8 +37,11 @@ int main(int argc, char** argv)
 	ocl::basic_error_handler handler;
 	ocl::fix::must_pass<char, ocl::basic_error_handler>(fix, handler);
 
-	ocl::io::print(":key=9\n");
+	ocl::io::print(":key=35\n");
 	ocl::io::print(":value=", fix["35"], "\n");
+
+	ocl::io::print(":key=49\n");
+	ocl::io::print(":value=", fix["49"], "\n");
 
 	return 0;
 }

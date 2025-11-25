@@ -37,8 +37,8 @@ int main(int argc, char** argv)
 
 	ocl::io::println("Testing data...");
 
-	auto opt = do_some("Ohio", "Ohio");
-	opt.expect("Checksum failed, Ohio isn't Ohio!");
+	auto opt = do_some("Foo", "Foo");
+	opt.expect("Checksum failed, Foo isn't Foo!");
 
 
 	return 0;

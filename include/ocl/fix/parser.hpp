@@ -77,7 +77,7 @@ namespace ocl::fix
 		if (basic_range.length_ < 0)
 			return std::basic_string<char_type>{};
 
-		return std::basic_string<char_type>(basic_range.ascii_bytes_, basic_range.length_);
+		return std::basic_string<char_type>(basic_range.bytes_, basic_range.length_);
 	}
 
 	/// @brief a basic_range object containing the FIX packet values.
@@ -148,7 +148,7 @@ namespace ocl::fix
 		/// @brief Visit a FIX message and parse it into a basic_range_data object.
 		/// @param in The input FIX message as a string.
 		/// @warning This function may throw exceptions.
-		basic_range_data<char_type> visit(std::basic_string<char_type> in)
+		basic_range_data<char_type> visit(const std::basic_string<char_type>& in)
 		{
 			basic_range_data<char_type> ret{};
 
