@@ -20,8 +20,8 @@ namespace ocl
 		explicit basic_error_handler() = default;
 		virtual ~basic_error_handler() = default;
 
-		basic_error_handler& operator=(const basic_error_handler&) = delete;
-		basic_error_handler(const basic_error_handler&)			   = delete;
+		basic_error_handler& operator=(const basic_error_handler&) = default;
+		basic_error_handler(const basic_error_handler&)			   = default;
 
 		template <bool throw_too = false>
 		void error(const std::basic_string<char>& msg)

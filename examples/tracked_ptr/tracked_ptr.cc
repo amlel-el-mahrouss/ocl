@@ -46,7 +46,8 @@ int main(int argc, char** argv)
 	std::cout << "total=" << ptr.manager().allocator().deallocated_count_ << std::endl;
 	std::cout << "leak-detected=" << std::boolalpha << (ptr.manager().allocator().allocated_count_ > ptr.manager().allocator().deallocated_count_) << std::endl;
 
-	ocl::memory::must_pass(ptr);
+	ocl::standard_error_handler err;
+	ocl::memory::must_pass(ptr, err);
 
 	return EXIT_SUCCESS;
 }
