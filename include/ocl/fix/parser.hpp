@@ -148,7 +148,7 @@ namespace ocl::fix
 		/// @brief Visit a FIX message and parse it into a basic_range_data object.
 		/// @param in The input FIX message as a string.
 		/// @warning This function may throw exceptions.
-		basic_range_data<char_type> visit(std::basic_string<char_type> in)
+		basic_range_data<char_type> visit(const std::basic_string<char_type>& in)
 		{
 			basic_range_data<char_type> ret{};
 
