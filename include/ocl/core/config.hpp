@@ -14,6 +14,15 @@
 #include <boost/container/allocator.hpp>
 #include <boost/assert.hpp>
 
+#include <cstddef>
+#include <cassert>
+#include <utility>
+#include <string>
+#include <vector>
+#include <cstdint>
+#include <sys/types.h>
+#include <unistd.h>
+
 #ifdef __cplusplus
 /// DLL/Dylib/So specific macro.
 #  define OCL_EXPORT_DECL extern "C" BOOST_SYMBOL_EXPORT
