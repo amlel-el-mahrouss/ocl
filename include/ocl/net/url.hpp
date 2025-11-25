@@ -36,7 +36,7 @@ namespace ocl::net
 			bad = 0xff,
 		};
 
-		uint32_t					   m_protocol_{basic_url::invalid};
+		uint32_t						   m_protocol_{basic_url::invalid};
 		std::basic_stringstream<char_type> m_ss_{};
 		std::basic_string<char_type>	   m_port_{""};
 

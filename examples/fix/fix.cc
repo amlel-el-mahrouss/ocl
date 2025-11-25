@@ -38,12 +38,8 @@ int main(int argc, char** argv)
 	ocl::basic_error_handler handler;
 	ocl::fix::must_pass<char, ocl::basic_error_handler>(fix, handler);
 
-	for (auto fields : fix.body_)
-	{
-		ocl::io::print("key=", fields.first);
-		ocl::io::print(":value=", fields.second);
-		ocl::io::print("\n");
-	}
+	ocl::io::print(":key=9\n");
+	ocl::io::print(":value=", fix["35"], "\n");
 
 	return 0;
 }

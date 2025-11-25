@@ -8,7 +8,10 @@
 #ifndef _OCL_FIX_PARSER_HPP
 #define _OCL_FIX_PARSER_HPP
 
+#include <algorithm>
 #include <core/config.hpp>
+#include <string>
+#include <io/print.hpp>
 
 namespace ocl::fix
 {
@@ -98,17 +101,14 @@ namespace ocl::fix
 		std::basic_string<char_type> operator[](const std::basic_string<char_type>& key)
 		{
 			if (key.empty())
-			{
 				return std::basic_string<char_type>{};
-			}
 
-			for (const auto& pair : this->body_)
-			{
-				if (pair.first == key)
-				{
-					return pair.second;
-				}
-			}
+			auto it = std::find_if(this->body_.begin(), this->body_.end(), [&key](const std::pair<std::basic_string<char_type>, std::basic_string<char_type>>& in) {
+				return in.first == key;
+			});
+
+			if (it != this->body_.cend())
+				return it->second;
 
 			return std::basic_string<char_type>{};
 		}
@@ -130,7 +130,7 @@ namespace ocl::fix
 	{
 	public:
 		/// AMLALE: Yeah...
-		static constexpr const char_type soh  = 0x01;
+		static constexpr const int		 soh  = '\x01';
 		static constexpr const char_type eq	  = '=';
 		static constexpr uint32_t		 base = 10U;
 
@@ -148,41 +148,60 @@ namespace ocl::fix
 		/// @brief Visit a FIX message and parse it into a basic_range_data object.
 		/// @param in The input FIX message as a string.
 		/// @warning This function may throw exceptions.
-		basic_range_data<char_type> visit(const std::basic_string<char_type>& in)
+		basic_range_data<char_type> visit(std::basic_string<char_type> in)
 		{
-			thread_local basic_range_data<char_type> ret{};
+			basic_range_data<char_type> ret{};
 
 			if (in.empty())
 				return ret;
 
-			std::basic_string<char_type> in_tmp{"", in.size()};
+			std::basic_string<char_type> key;
 
-			for (auto& ch : in)
+			std::size_t off = 0UL;
+
+			while (true)
 			{
-				if (ch != basic_visitor::soh)
+				if (in.size() < off)
+					break;
+
+				if (in[off] != basic_visitor::eq)
 				{
-					in_tmp += ch;
+					if (in[off] == basic_visitor::soh)
+					{
+						++off;
+						continue;
+					}
+
+					key += in[off];
+					++off;
 					continue;
 				}
 
-				std::basic_string<char_type> key = in_tmp.substr(0, in_tmp.find(basic_visitor::eq));
-				std::basic_string<char_type> val = in_tmp.substr(in_tmp.find(basic_visitor::eq) + 1);
+				if (in.size() < (off + 1))
+					break;
+
+				std::basic_string<char_type> val = in.substr(off + 1);
+
+				if (val.find(basic_visitor::soh) != std::basic_string<char_type>::npos)
+				{
+					val.erase(val.find(basic_visitor::soh));
+				}
 
 				if (ret.magic_.empty())
 				{
 					ret.magic_	   = val;
 					ret.magic_len_ = ret.magic_.size();
 				}
-				else
-				{
-					ret.body_.emplace_back(std::make_pair(key, val));
-					ret.body_len_ += in_tmp.size();
-				}
 
-				in_tmp.clear();
+				ret.body_.emplace_back(std::make_pair(key, val));
+
+				off += val.size() + 1;
+
+				key.clear();
 			}
 
-			in_tmp.clear();
+			ret.body_len_ = ret.body_.size();
+
 			return ret;
 		}
 	};
