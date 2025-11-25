@@ -13,7 +13,7 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_executable(NetworkTestBasic net_test.cc)
+add_executable(NetworkTestBasic network_basic_test.cc)
 target_link_libraries(NetworkTestBasic gtest_main)
 
 set_property(TARGET NetworkTestBasic PROPERTY CXX_STANDARD 20)

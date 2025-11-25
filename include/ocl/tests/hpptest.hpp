@@ -7,8 +7,11 @@
 
 #pragma once
 
+#include <boost/config.hpp>
+#include <core/config.hpp>
 #include <io/print.hpp>
-#include <cstdlib>
+#include <string.h>
+#include <unistd.h>
 
 namespace ocl::hpptest
 {
@@ -25,6 +28,10 @@ namespace ocl::hpptest
 		}
 	};
 
+#ifdef __linux__
+	using errno_t = error_t;
+#endif
+
 	struct posix_terminate final
 	{
 		template <bool stop_execution = true, errno_t args>
@@ -40,7 +47,7 @@ namespace ocl::hpptest
 	typedef bool condition_type;
 
 	template <condition_type expr = true>
-	consteval inline void must_be()
+	consteval inline void must_pass()
 	{
 #ifdef OCL_HPPTEST
 		OCL_HPPTEST_ASSERT(expr);
@@ -48,7 +55,7 @@ namespace ocl::hpptest
 	}
 
 	template <condition_type expect, typename on_fail>
-	inline void must_be(condition_type cond) noexcept
+	inline void must_pass(condition_type cond) noexcept
 	{
 		if (cond != expect)
 		{
@@ -57,7 +64,7 @@ namespace ocl::hpptest
 	}
 
 	template <errno_t expect = 0>
-	inline void must_be(errno_t ern) noexcept
+	inline void must_pass(errno_t ern) noexcept
 	{
 		if (ern != expect)
 		{
@@ -79,7 +86,7 @@ namespace ocl::hpptest
 	};
 
 	template <HRESULT expect = S_OK>
-	inline void must_be(HRESULT hr) noexcept
+	inline void must_pass(HRESULT hr) noexcept
 	{
 		if (hr != expect)
 		{

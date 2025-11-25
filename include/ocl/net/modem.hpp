@@ -14,6 +14,7 @@
 #include <sys/socket.h>
 #include <string>
 #include <cstddef>
+#include <cstring>
 
 #define OCL_MODEM_INTERFACE : public ocl::net::modem
 
@@ -23,6 +24,8 @@
 
 namespace ocl::net
 {
+	using namespace hpptest;
+
 	class modem;
 
 	/// =============================================================================
