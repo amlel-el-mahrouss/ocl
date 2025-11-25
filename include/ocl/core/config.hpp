@@ -12,10 +12,14 @@
 #include <boost/core/demangle.hpp>
 #include <boost/core/null_deleter.hpp>
 #include <boost/container/allocator.hpp>
+#include <boost/assert.hpp>
 
-#include <memory>
-#include <iostream>
-#include <string>
+#ifdef __cplusplus
+/// DLL/Dylib/So specific macro.
+#  define OCL_EXPORT_DECL extern "C" BOOST_SYMBOL_EXPORT
+#else
+#  define OCL_EXPORT_DECL 
+#endif
 
 namespace ocl
 {

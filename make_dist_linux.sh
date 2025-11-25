@@ -20,12 +20,12 @@ outputDirTools=dist/
 
 for f in include/ocl/*/*.hpp; do
 baseName=`echo $f | cut -d "." -f 1`
-echo "RUN:" cp $f $outputDir$baseName
-cp $f $outputDirCmd$baseName
+echo "RUN:" cp $f $outputDir$baseName'.hpp'
+cp $f $outputDirCmd$baseName'.hpp'
 done
 
 for f in tools/*.py; do
 baseName=`echo $f | cut -d "." -f 1`
-echo "RUN:" cp $baseName'.py' $outputDirTools$baseName
+echo "RUN:" cp $baseName'.py' $outputDirTools$baseName'.py'
 cp $baseName'.py' $outputDirTools$baseName'.py'
 done

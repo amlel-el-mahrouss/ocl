@@ -3,3 +3,4 @@
 -DEMBFS_28BIT_LBA
 -xc++
 -I/opt/homebrew/Cellar/boost/1.89.0/include
+-I/usr/include
