@@ -77,7 +77,7 @@ namespace ocl::fix
 		if (basic_range.length_ < 0)
 			return std::basic_string<char_type>{};
 
-		return std::basic_string<char_type>(basic_range.ascii_bytes_, basic_range.length_);
+		return std::basic_string<char_type>(basic_range.bytes_, basic_range.length_);
 	}
 
 	/// @brief a basic_range object containing the FIX packet values.
