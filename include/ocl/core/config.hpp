@@ -25,9 +25,9 @@
 
 #ifdef __cplusplus
 /// DLL/Dylib/So specific macro.
-#  define OCL_EXPORT_DECL extern "C" BOOST_SYMBOL_EXPORT
+#define OCL_EXPORT_DECL extern "C" BOOST_SYMBOL_EXPORT
 #else
-#  define OCL_EXPORT_DECL 
+#define OCL_EXPORT_DECL
 #endif
 
 namespace ocl
