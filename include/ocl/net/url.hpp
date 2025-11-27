@@ -11,7 +11,7 @@
 #include <sstream>
 
 /// @author Amlal El Mahrouss (amlal@nekernel.org)
-/// @brief Parse URLs (in a non-standard way).
+/// @brief Parse URIs/URLs/URNs (Non rfc3986 compliant.)
 
 namespace ocl::net
 {
