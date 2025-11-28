@@ -23,7 +23,7 @@ namespace ocl::net
 	class basic_url final
 	{
 	public:
-		using reference = basic_url&;
+		using ref_type = basic_url&;
 
 		enum
 		{
@@ -76,7 +76,7 @@ namespace ocl::net
 		basic_url(const basic_url&)			   = default;
 
 	private:
-		reference operator/=(const std::basic_string<char_type>& in)
+		ref_type operator/=(const std::basic_string<char_type>& in)
 		{
 			if (in.empty())
 				return *this;
@@ -91,7 +91,7 @@ namespace ocl::net
 			return *this;
 		}
 
-		reference operator/=(const char_type& in)
+		ref_type operator/=(const char_type& in)
 		{
 			m_ss_ += in;
 			return *this;

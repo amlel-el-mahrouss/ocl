@@ -15,7 +15,7 @@
 namespace ocl::simd
 {
 	template <typename backend_type>
-	class real_type
+	class OCL_DEPRECATED_MSG("Unmaintained since v1.0.51") real_type
 	{
 	private:
 		backend_type backend_;
