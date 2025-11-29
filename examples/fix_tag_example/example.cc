@@ -1,12 +1,6 @@
-/*
- * File: tests/fix_test.cc
- * Purpose: Custom FIX protocol tests.
- * Author: Amlal El Mahrouss (amlal@nekernel.org)
- * Copyright 2025, Amlal El Mahrouss, licensed under the Boost Software License.
- */
-
+#include <core/error_handler.hpp>
 #include <fix/parser.hpp>
-#include <gtest/gtest.h>
+#include <io/print.hpp>
 
 constexpr const char default_fix[] = {
 	'8', '=', 'F', 'I', 'X', '.', '4', '.', '2', 0x01,
@@ -21,11 +15,16 @@ constexpr const char default_fix[] = {
 	'1', '0', '=', '1', '4', '3', 0x01, 0x00 // CheckSum = 143
 };
 
-TEST(FIXTest, BasicFIXUsage)
+int main(int argc, char** argv)
 {
-	ocl::fix::basic_visitor<char>	 basic_visitor;
-	ocl::fix::basic_range_data<char> fix = basic_visitor.visit(default_fix);
+	ocl::fix::visitor basic_visitor;
+	ocl::fix::range_data fix = basic_visitor.visit(default_fix);
 
-	EXPECT_EQ(fix.magic_, ocl::fix::detail::begin_fix());
-	EXPECT_TRUE(fix.is_valid());
+	ocl::io::print(":key=35\n");
+	ocl::io::print(":value=", fix["35"], "\n");
+
+	ocl::io::print(":key=49\n");
+	ocl::io::print(":value=", fix["49"], "\n");
+
+	return 0;
 }

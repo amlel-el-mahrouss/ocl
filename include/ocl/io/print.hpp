@@ -8,6 +8,7 @@
 #ifndef _OCL_PRINT_HPP
 #define _OCL_PRINT_HPP
 
+#include <core/config.hpp>
 #include <iostream>
 
 namespace ocl::io
@@ -18,9 +19,7 @@ namespace ocl::io
 		std::cout << fmt;
 	}
 
-	inline void print() noexcept
-	{
-	}
+	inline void print() noexcept {}
 
 	template <typename... Args>
 	inline void print(Args... fmt) noexcept

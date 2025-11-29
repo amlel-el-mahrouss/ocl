@@ -1,6 +1,6 @@
 /*
  * File: core/chunk_string.hpp
- * Purpose: String implementation for the OCL C++ library.
+ * Purpose: Chunked String implementation for the OCL C++ library.
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
  * Copyright 2025, Amlal El Mahrouss
  */

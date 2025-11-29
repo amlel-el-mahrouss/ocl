@@ -40,7 +40,6 @@ namespace ocl
 		}
 	};
 
-	using standard_error_handler = basic_error_handler;
 	using error_handler_type	 = basic_error_handler;
 } // namespace ocl
 

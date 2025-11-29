@@ -7,8 +7,7 @@
 
 #include <net/modem.hpp>
 #include <io/print.hpp>
-#include <tests/gtest.hpp>
-#include <cstring>
+#include <gtest/gtest.h>
 
 /// @brief Basic Send Test 
 TEST(NetworkTest, BasicNetworkTransmit)
