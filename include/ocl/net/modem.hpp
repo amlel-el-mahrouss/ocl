@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <tests/hpptest.hpp>
+#include <core/config.hpp>
 
 #include <unistd.h>
 #include <arpa/inet.h>
@@ -24,8 +24,6 @@
 
 namespace ocl::net
 {
-	using namespace hpptest;
-
 	class modem;
 
 	/// =============================================================================

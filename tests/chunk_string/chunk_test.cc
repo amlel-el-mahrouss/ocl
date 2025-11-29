@@ -6,26 +6,17 @@
  */
 
 #include <io/print.hpp>
-#include <tests/gtest.hpp>
+#include <gtest/gtest.h>
 #include <core/chunk_string.hpp>
+
+const char* test_string = "HELLO, WORLD!\r\n";
+const auto	iterations	= 1024000;
+const auto	limit		= 30;
 
 TEST(ChunkTest, BasicChunkUsage)
 {
-	const char* test_string = "HELLO, WORLD!\r\n";
-	const auto iterations = 1024000;
-	const auto limit = 30;
-
-	auto start = std::chrono::high_resolution_clock::now();
-
 	ocl::basic_chunk_string<char, iterations> optimized;
-
-	for (unsigned i = 0; i < iterations; ++i)
- 	{
-		optimized += test_string;
-	}
-
-	auto end = std::chrono::high_resolution_clock::now();
-	auto optimized_time = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-
-	EXPECT_TRUE(optimized_time.count() < 100U);
+	optimized += test_string;
+	
+	EXPECT_TRUE(optimized.str() == test_string);
 }

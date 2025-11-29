@@ -8,10 +8,11 @@
 #ifndef _OCL_FIX_PARSER_HPP
 #define _OCL_FIX_PARSER_HPP
 
-#include <algorithm>
 #include <core/config.hpp>
-#include <string>
 #include <io/print.hpp>
+
+#include <algorithm>
+#include <string>
 
 namespace ocl::fix
 {

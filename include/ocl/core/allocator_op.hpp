@@ -1,5 +1,5 @@
 /*
- * File: core/allocator_system.hpp
+ * File: core/allocator_op.hpp
  * Purpose: Allocator System container.
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
  * Copyright 2025, Amlal El Mahrouss, Licensed under the Boost Software License. Licensed under the BSL 1.0 license
@@ -38,19 +38,19 @@ namespace ocl
 	};
 
 	template <typename ret_type, typename allocator_new, typename allocator_delete>
-	class allocator_system
+	class allocator_op
 	{
 		allocator_new	 m_alloc_{};
 		allocator_delete m_free_{};
 
 	public:
-		allocator_system()	= default;
-		~allocator_system() = default;
+		allocator_op()	= default;
+		~allocator_op() = default;
 
-		allocator_system& operator=(const allocator_system&) = delete;
-		allocator_system(const allocator_system&)			 = delete;
+		allocator_op& operator=(const allocator_op&) = delete;
+		allocator_op(const allocator_op&)			 = delete;
 
-		ret_type* claim() noexcept
+		ret_type* claim()
 		{
 			return m_alloc_();
 		}
@@ -68,7 +68,7 @@ namespace ocl
 	};
 
 	template <typename type>
-	using standard_allocator_type = allocator_system<type, new_op<type>, delete_op<type>>;
+	using allocator_type = allocator_op<type, new_op<type>, delete_op<type>>;
 } // namespace ocl
 
 #endif // ifndef _OCL_ALLOCATOR_SYSTEM_HPP

@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <core/config.hpp>
+
 /// @brief OCL equivalence namespace.
 namespace ocl::equiv
 {

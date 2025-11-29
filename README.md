@@ -4,26 +4,14 @@
 
 ## Brief:
 
-A C++ library with additional modules for your C++ SDLC.
+A set of containers in C++ for developers.
 
 ## Requirements:
 
-- Boost C++ libraries (https://www.boost.org/)
-- Clang (https://clang.llvm.org/)
-- Git (https://git-scm.com/)
-
-## Structure:
-
-- `core`: Core utilities and fundamental abstractions used across OCL.
-- `except`: Exception classes and error-handling helpers.
-- `fix`: FIX protocol utilities and helpers for Financial Information eXchange integration.
-- `io`: Input/output utilities, stream helpers, and file handling.
-- `logic`: Logic facilities, macros, and helpers for programs.
-- `memory`: Memory management utilities, allocators, and smart-pointer helpers.
-- `net`: Networking utilities and lightweight socket helpers.
-- `simd`: SIMD-optimized algorithms and low-level performance helpers.
-- `tests`: Unit and integration tests that validate OCL components.
-- `utility`: General-purpose helper functions and small algorithms.
+- [Boost](https://www.boost.org/)
+- [Clang](https://clang.llvm.org/)
+- [CMake](https://cmake.org/)
+- [Git](https://git-scm.com/)
 
 ## Examples:
 
