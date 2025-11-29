@@ -11,18 +11,24 @@
 
 #ifdef __x86_64__
 #include <immintrin.h>
-using simd_type = __m256;
 #endif
 
 #ifdef __aarch64__
 #include <arm_neon.h>
-using simd_type = float32x4_t;
 #endif
 
 namespace ocl::simd
 {
-	struct basic_simd final
+	struct OCL_DEPRECATED_MSG("Unmaintained since v1.0.51") basic_simd final
 	{
+#ifdef __x86_64__
+		using simd_type = __m256;
+#endif
+
+#ifdef __aarch64__
+		using simd_type = float32x4_t;
+#endif
+
 		struct simd_traits final
 		{
 			simd_type __val;

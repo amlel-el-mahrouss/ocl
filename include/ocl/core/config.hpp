@@ -23,10 +23,15 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#define OCL_DEPRECATED() [[deprecated]]
+#define OCL_DEPRECATED_MSG(MSG) [[deprecated( MSG )]]
+
 #ifdef __cplusplus
+#define OCL_DECL extern "C"
 /// DLL/Dylib/So specific macro.
 #define OCL_EXPORT_DECL extern "C" BOOST_SYMBOL_EXPORT
 #else
+#define OCL_DECL 
 #define OCL_EXPORT_DECL
 #endif
 
