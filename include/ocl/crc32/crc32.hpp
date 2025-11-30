@@ -8,12 +8,13 @@
 #ifndef _OCL_CRC32_HPP
 #define _OCL_CRC32_HPP
 
+#include <core/config.hpp>
 #include <cstdint>
 #include <string>
 #include <cstddef>
 
 /// @brief Crc32 implementation in C++
-/// @author Amlal EL Mahrouss (amlal@nekernel.org)
+/// @author Amlal El Mahrouss (amlal@nekernel.org)
 
 namespace ocl::crc32
 {
@@ -55,9 +56,9 @@ namespace ocl::crc32
 			0xbdbdf21c, 0xcabac28a, 0x53b39330, 0x24b4a3a6, 0xbad03605, 0xcdd70693, 0x54de5729, 0x23d967bf,
 			0xb3667a2e, 0xc4614ab8, 0x5d681b02, 0x2a6f2b94, 0xb40bbe37, 0xc30c8ea1, 0x5a05df1b, 0x2d02ef8d};
 
-		template <typename char_type>
+		template <typename buffer_type>
 		inline std::uint32_t
-		crc32(const char_type* in, size_t len) noexcept
+		crc32(buffer_type in, size_t len) noexcept
 		{
 			if (!in || *in == 0)
 				return 0;
@@ -74,7 +75,7 @@ namespace ocl::crc32
 	template <typename char_type = char>
 	inline std::uint32_t hash(const std::basic_string<char_type>& in)
 	{
-		return detail::crc32(in.c_str(), in.size());
+		return detail::crc32<const char_type*>(in.c_str(), in.size());
 	}
 } // namespace ocl::crc32
 

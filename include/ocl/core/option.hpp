@@ -1,5 +1,5 @@
 /*
- * File: opt.hpp
+ * File: option.hpp
  * Author: Amlal El Mahrouss,
  * Copyright 2023-2025, Amlal El Mahrouss, Licensed under the Boost Software License
  */
@@ -21,37 +21,42 @@ namespace ocl
 	};
 
 	template <typename char_type = char>
-	struct opt final
+	struct option final
 	{
-		explicit opt(const return_type& return_type)
-			: m_ret(return_type)
+		explicit option(const return_type& return_type)
+			: ret_(return_type)
 		{
 		}
 
-		opt& expect(const char_type* input)
+		~option() = default;
+
+		option& operator=(const option&) = default;
+		option(const option&)			   = default;
+
+		option& expect(const char_type* input)
 		{
-			if (m_ret == return_type::err)
+			if (ret_ == return_type::err)
 			{
-				throw std::runtime_error(input ? input : "opt::error");
+				throw std::runtime_error(input ? input : "option::error");
 			}
 
 			return *this;
 		}
 
 		template <typename ErrorHandler>
-		opt& expect_or_handle(const char_type* input)
+		option& expect_or_handle(const char_type* input)
 		{
-			if (m_ret == return_type::err)
+			if (ret_ == return_type::err)
 			{
 				ErrorHandler err_handler;
-				err_handler(input ? input : "opt::error");
+				err_handler(input ? input : "option::error");
 			}
 
 			return *this;
 		}
 
 	private:
-		return_type m_ret{return_type::invalid};
+		return_type ret_{return_type::invalid};
 	};
 
 	template <typename Teller, typename... Lst>
@@ -64,10 +69,6 @@ namespace ocl
 	{
 		struct int_eq_teller
 		{
-			explicit int_eq_teller()
-			{
-			}
-
 			bool operator()(int a, int b)
 			{
 				return (a == b);
@@ -76,10 +77,6 @@ namespace ocl
 
 		struct int_greater_than_teller
 		{
-			explicit int_greater_than_teller()
-			{
-			}
-
 			bool operator()(int a, int b)
 			{
 				return (a > b);
@@ -88,10 +85,6 @@ namespace ocl
 
 		struct int_less_than_teller
 		{
-			explicit int_less_than_teller()
-			{
-			}
-
 			bool operator()(int a, int b)
 			{
 				return (a < b);

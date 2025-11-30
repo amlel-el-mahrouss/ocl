@@ -10,9 +10,9 @@
 
 #include <core/config.hpp>
 #include <io/print.hpp>
-
 #include <algorithm>
 #include <string>
+#include <vector>
 
 namespace ocl::fix
 {
@@ -216,7 +216,7 @@ namespace ocl::fix
 		}
 	}
 
-	using fix_tag_type = std::uint32_t;
+	using fix_tag_type = std::basic_string<char>;
 
 	using range_data = basic_range_data<char>;
 	using visitor	 = basic_visitor<char>;

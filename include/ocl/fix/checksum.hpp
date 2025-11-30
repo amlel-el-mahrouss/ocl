@@ -8,3 +8,7 @@
 #pragma once
 
 #include <core/config.hpp>
+
+namespace ocl::fix
+{
+}

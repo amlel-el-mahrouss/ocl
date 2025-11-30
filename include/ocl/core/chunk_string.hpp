@@ -24,7 +24,7 @@ namespace ocl
 		using condition_type = bool;
 
 	private:
-		char_type	packed_chunks_[max_chunk_size] = {0};
+		char_type	chunk_[max_chunk_size] = {0};
 		std::size_t chunk_total_{};
 
 		condition_type bad_{false};
@@ -84,7 +84,7 @@ namespace ocl
 
 			if (chunk_total_ < size_max_chunk)
 			{
-				std::memcpy(packed_chunks_ + chunk_total_, ptr, sz);
+				std::memcpy(chunk_ + chunk_total_, ptr, sz);
 				chunk_total_ += sz;
 			}
 
@@ -102,14 +102,14 @@ namespace ocl
 			else
 				return ret;
 
-			ret = packed_chunks_;
+			ret = chunk_;
 
 			return ret;
 		}
 
 		void print() noexcept
 		{
-			ocl::io::print(packed_chunks_);
+			ocl::io::print(chunk_);
 		}
 	};
 
