@@ -31,7 +31,7 @@ namespace ocl
 		~option() = default;
 
 		option& operator=(const option&) = default;
-		option(const option&)			   = default;
+		option(const option&)			 = default;
 
 		option& expect(const char_type* input)
 		{

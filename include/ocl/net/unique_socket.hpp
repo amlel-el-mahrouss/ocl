@@ -69,8 +69,8 @@ namespace ocl::net
 			auto ret = ::recv(cl_, static_cast<void*>(const_cast<char*>(out)), len, 0);
 
 			unique_socket sock;
-			
-			sock.fd_ = cl_;
+
+			sock.fd_  = cl_;
 			sock.bad_ = ret > 0L;
 
 			return std::move(sock);
