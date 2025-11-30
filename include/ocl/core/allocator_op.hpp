@@ -13,8 +13,9 @@
 
 namespace ocl
 {
+	/// @note these are guidelines on allocating a resource
 	template <typename type>
-	struct new_op final
+	struct global_new_op final
 	{
 		inline auto operator()() -> type*
 		{
@@ -22,14 +23,15 @@ namespace ocl
 		}
 
 		template <typename... var_type>
-		inline auto var_alloc(var_type... args) -> type*
+		inline auto var_alloc(var_type&&... args) -> type*
 		{
-			return new type{args...};
+			return new type{std::forward<var_type>(args)...};
 		}
 	};
 
+	/// @note these are guidelines on deleting a resource
 	template <typename type>
-	struct delete_op final
+	struct global_delete_op final
 	{
 		inline auto operator()(type* t) -> void
 		{
@@ -50,25 +52,15 @@ namespace ocl
 		allocator_op& operator=(const allocator_op&) = delete;
 		allocator_op(const allocator_op&)			 = delete;
 
-		ret_type* claim()
-		{
-			return alloc_op_();
-		}
-
 		template <typename... var_type>
-		auto construct(var_type... args) -> std::shared_ptr<ret_type>
+		auto construct(var_type&&... args) -> std::shared_ptr<ret_type>
 		{
-			return std::shared_ptr<ret_type>(alloc_op_.template var_alloc<var_type...>(args...), allocator_delete{});
-		}
-
-		void unclaim(ret_type* ptr)
-		{
-			free_op_(ptr);
+			return std::shared_ptr<ret_type>(alloc_op_.template var_alloc<var_type...>(args...), free_op_);
 		}
 	};
 
 	template <typename type>
-	using allocator_type = allocator_op<type, new_op<type>, delete_op<type>>;
+	using allocator_type = allocator_op<type, global_new_op<type>, global_delete_op<type>>;
 } // namespace ocl
 
 #endif // ifndef _OCL_ALLOCATOR_SYSTEM_HPP
