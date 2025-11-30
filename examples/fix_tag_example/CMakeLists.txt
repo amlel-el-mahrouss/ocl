@@ -8,7 +8,7 @@ project(
 
 find_package(Boost REQUIRED COMPONENTS container)
 
-add_executable(FixExample fix.cc)
+add_executable(FixExample example.cc)
 
 set_property(TARGET FixExample PROPERTY CXX_STANDARD 20)
 target_include_directories(FixExample PUBLIC ../../include/ocl)

@@ -1,6 +1,6 @@
 /*
- * File: crc32.hpp
- * Purpose: CRC32 module.
+ * File: hash.hpp
+ * Purpose: Hashing module.
  * Author: Amlal El Mahrouss,
  * Copyright 2025, Amlal El Mahrouss, Licensed under the Boost Software License.
  */
@@ -9,6 +9,7 @@
 #define _OCL_CRC32_HPP
 
 #include <core/config.hpp>
+#include <unordered_map>
 #include <cstdint>
 #include <string>
 #include <cstddef>
@@ -16,13 +17,13 @@
 /// @brief Crc32 implementation in C++
 /// @author Amlal El Mahrouss (amlal@nekernel.org)
 
-namespace ocl::crc32
+namespace ocl
 {
-	namespace detail
+	struct hash_trait
 	{
-		inline constexpr const std::uint16_t crc_sz_ = 256U;
+		static constexpr const std::uint16_t crc_sz_ = 256U;
 
-		inline std::uint32_t crc_array_[crc_sz_] = {
+		static constexpr std::uint32_t crc_array_[crc_sz_] = {
 			0x00000000, 0x77073096, 0xee0e612c, 0x990951ba, 0x076dc419, 0x706af48f, 0xe963a535, 0x9e6495a3,
 			0x0edb8832, 0x79dcb8a4, 0xe0d5e91e, 0x97d2d988, 0x09b64c2b, 0x7eb17cbd, 0xe7b82d07, 0x90bf1d91,
 			0x1db71064, 0x6ab020f2, 0xf3b97148, 0x84be41de, 0x1adad47d, 0x6ddde4eb, 0xf4d4b551, 0x83d385c7,
@@ -57,7 +58,7 @@ namespace ocl::crc32
 			0xb3667a2e, 0xc4614ab8, 0x5d681b02, 0x2a6f2b94, 0xb40bbe37, 0xc30c8ea1, 0x5a05df1b, 0x2d02ef8d};
 
 		template <typename buffer_type>
-		inline std::uint32_t
+		static std::uint32_t
 		crc32(buffer_type in, size_t len) noexcept
 		{
 			if (!in || *in == 0)
@@ -70,13 +71,31 @@ namespace ocl::crc32
 
 			return ~crc;
 		}
-	} // namespace detail
+	};
 
-	template <typename char_type = char>
-	inline std::uint32_t hash(const std::basic_string<char_type>& in)
+	template <typename K, typename V>
+	using hash_map = std::unordered_map<K, V, std::hash<ocl::hash_trait>>;
+} // namespace ocl
+
+namespace std
+{
+	template <>
+	struct hash<ocl::hash_trait> final
 	{
-		return detail::crc32<const char_type*>(in.c_str(), in.size());
-	}
-} // namespace ocl::crc32
+		hash() = default;
+		~hash() = default;
+
+		template <typename T>
+		inline std::size_t operator()(T* in_)
+		{
+			return ocl::hash_trait::crc32<char*>((char*)in_, sizeof(T));
+		}
+
+		inline std::size_t operator()(const std::string& in_)
+		{
+			return ocl::hash_trait::crc32<const char*>(in_.c_str(), in_.size());
+		}
+	};
+} // namespace std
 
 #endif // !_OCL_CRC32_HPP
