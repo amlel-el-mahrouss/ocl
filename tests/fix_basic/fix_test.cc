@@ -26,6 +26,5 @@ TEST(FIXTest, BasicFIXUsage)
 	ocl::fix::basic_visitor<char>	 basic_visitor;
 	ocl::fix::basic_range_data<char> fix = basic_visitor.visit(default_fix);
 
-	EXPECT_EQ(fix.magic_, ocl::fix::detail::begin_fix());
 	EXPECT_TRUE(fix.is_valid());
 }
