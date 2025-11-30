@@ -1,5 +1,5 @@
 /*
- * File: equiv.hpp
+ * File: is_same.hpp
  * Purpose: Equivalence header.
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
  * Copyright 2025, Amlal El Mahrouss, licensed under the Boost Software License.
@@ -10,10 +10,10 @@
 #include <core/config.hpp>
 
 /// @brief OCL equivalence namespace.
-namespace ocl::equiv
+namespace ocl::is_same
 {
 	template <typename T>
-	struct basic_hash_trait
+	struct basic_hash
 	{
 		/// @brief hash from T's result_type.
 		static typename T::result_type hash()
@@ -103,4 +103,4 @@ namespace ocl::equiv
 			return left_ / right_ == 1;
 		}
 	};
-} // namespace ocl::equiv
+} // namespace ocl::is_same

@@ -1,6 +1,6 @@
 /*
- * File: net/modem.hpp
- * Purpose: Modem concept in modern C++
+ * File: net/unique_socket.hpp
+ * Purpose: RAII socket concept in modern C++
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
  * Copyright 2025, Amlal El Mahrouss, licensed under the Boost Software License.
  */
@@ -16,20 +16,18 @@
 #include <cstddef>
 #include <cstring>
 
-#define OCL_MODEM_INTERFACE : public ocl::net::modem
-
 #ifdef _WIN32
-#error !!! "Windows is not supported yet for <modem>" !!!
+#error !!! "Windows is not supported yet for <socket>" !!!
 #endif // _WIN32
 
 namespace ocl::net
 {
-	class modem;
+	class unique_socket;
 
 	/// =============================================================================
 	/// @brief Modem container concept, a container to read and write on a network stream.
 	/// =============================================================================
-	class modem final
+	class unique_socket final
 	{
 	public:
 		using socket_type	 = int64_t;
@@ -44,22 +42,22 @@ namespace ocl::net
 	public:
 		const error_type& bad{bad_};
 
-		explicit modem() = default;
+		unique_socket() = default;
 
-		~modem()
+		~unique_socket()
 		{
 			this->destroy();
 		}
 
-		modem& operator=(const modem&) = delete;
-		modem(const modem&)			   = delete;
+		unique_socket& operator=(const unique_socket&) = delete;
+		unique_socket(const unique_socket&)			   = default;
 
 		static constexpr auto		local_address_ip4 = "127.0.0.1";
 		static constexpr auto		local_address_ip6 = "::1";
 		static constexpr const auto backlog_count	  = 5U;
 
 		/// =============================================================================
-		/// @brief Check if the modem is valid.
+		/// @brief Check if the unique_socket is valid.
 		/// @return true if valid, false otherwise.
 		/// =============================================================================
 
@@ -120,15 +118,11 @@ namespace ocl::net
 			return ret >= 0L;
 		}
 
-		template <int32_t af, int32_t kind, int32_t port>
-		bool construct(const char* addr = modem::local_address_ip4, const bool& is_server = false) noexcept
+		template <uint16_t af, uint16_t kind, uint16_t port>
+		bool construct(const char* addr = unique_socket::local_address_ip4, const bool& is_server = false) noexcept
 		{
 			static_assert(af != 0, "Address family is zero");
 			static_assert(kind != 0, "Kind is zero");
-
-			must_pass<af == AF_INET || af == AF_INET6>();
-			must_pass<kind == SOCK_STREAM || kind == SOCK_DGRAM>();
-			must_pass<(port > 0) && (port < 65536)>();
 
 			fd_		   = ::socket(af, kind, 0);
 			is_server_ = is_server;
@@ -153,7 +147,7 @@ namespace ocl::net
 
 			bad_ = ret == -1;
 
-			::listen(fd_, modem::backlog_count);
+			::listen(fd_, unique_socket::backlog_count);
 
 			return bad_ == false;
 		}
@@ -171,4 +165,13 @@ namespace ocl::net
 			return true;
 		}
 	};
+
+	template<typename char_type, uint16_t port>
+	inline unique_socket make_socket(const std::basic_string<char_type>& address, const bool is_server)
+	{
+		unique_socket sock;
+		sock.construct<AF_INET, SOCK_STREAM, port>(address.c_str(), is_server);
+
+		return sock;
+	}
 } // namespace ocl::net

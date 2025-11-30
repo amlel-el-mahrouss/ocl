@@ -9,14 +9,17 @@
 #define _OCL_PRINT_HPP
 
 #include <core/config.hpp>
+
 #include <iostream>
+
+#define console_io_out std::cout
 
 namespace ocl::io
 {
 	template <typename T>
 	inline void print(T fmt) noexcept
 	{
-		std::cout << fmt;
+		console_io_out << fmt;
 	}
 
 	inline void print() noexcept {}
@@ -31,7 +34,7 @@ namespace ocl::io
 	template <typename T, typename... Args>
 	inline void print(T fmt, Args... other) noexcept
 	{
-		std::cout << fmt;
+		console_io_out << fmt;
 		print(other...);
 	}
 
@@ -39,8 +42,15 @@ namespace ocl::io
 	inline void println(T... fmt) noexcept
 	{
 		print(fmt...);
+
+#ifdef _WIN32
+		print("\r\n");
+#else
 		print("\n");
+#endif
 	}
 } // namespace ocl::io
+
+#undef console_io_out
 
 #endif // ifndef _OCL_PRINT_HPP
