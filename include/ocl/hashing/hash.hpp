@@ -13,6 +13,7 @@
 #include <cstdint>
 #include <string>
 #include <cstddef>
+#include <concepts>
 
 /// @brief Crc32 implementation in C++
 /// @author Amlal El Mahrouss (amlal@nekernel.org)
@@ -57,9 +58,8 @@ namespace ocl
 			0xbdbdf21c, 0xcabac28a, 0x53b39330, 0x24b4a3a6, 0xbad03605, 0xcdd70693, 0x54de5729, 0x23d967bf,
 			0xb3667a2e, 0xc4614ab8, 0x5d681b02, 0x2a6f2b94, 0xb40bbe37, 0xc30c8ea1, 0x5a05df1b, 0x2d02ef8d};
 
-		template <typename buffer_type>
-		static std::uint32_t
-		crc32(buffer_type in, size_t len) noexcept
+		static std::size_t
+		crc32(const char* in, size_t len) noexcept
 		{
 			if (!in || *in == 0)
 				return 0;
@@ -73,6 +73,9 @@ namespace ocl
 		}
 	};
 
+	template <typename V>
+	using string_hash_map = std::unordered_map<std::string, V, std::hash<ocl::hash_trait>>;
+
 	template <typename K, typename V>
 	using hash_map = std::unordered_map<K, V, std::hash<ocl::hash_trait>>;
 } // namespace ocl
@@ -82,20 +85,32 @@ namespace std
 	template <>
 	struct hash<ocl::hash_trait> final
 	{
-		hash() = default;
+		hash()	= default;
 		~hash() = default;
 
 		template <typename T>
-		inline std::size_t operator()(T* in_)
+		inline std::size_t operator()(T* in_) const
 		{
-			return ocl::hash_trait::crc32<char*>((char*)in_, sizeof(T));
+			return ocl::hash_trait::crc32(reinterpret_cast<const char*>(in_), sizeof(T));
 		}
 
-		inline std::size_t operator()(const std::string& in_)
+		inline std::size_t operator()(const std::string& in_) const
 		{
-			return ocl::hash_trait::crc32<const char*>(in_.c_str(), in_.size());
+			return ocl::hash_trait::crc32(in_.c_str(), in_.size());
 		}
 	};
+
+	// Source - https://stackoverflow.com/a/68521441
+	// Posted by StoryTeller - Unslander Monica, modified by community. See post 'Timeline' for change history
+	// Retrieved 2025-11-30, License - CC BY-SA 4.0
+
+	template <class Fn, class... ArgTypes>
+		struct is_invocable_hash : std::bool_constant <
+								   requires(Fn fn, ArgTypes... arg_types)
+	{
+		{std::forward<Fn>(fn)(std::forward<ArgTypes>(arg_types)...)}->std::same_as<hash<ocl::hash_trait>>;
+	}>{};
+
 } // namespace std
 
 #endif // !_OCL_CRC32_HPP
