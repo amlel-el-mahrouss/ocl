@@ -12,22 +12,17 @@
 /// @brief Basic Send Test 
 TEST(NetworkTest, BasicNetworkTransmit)
 {
-	ocl::net::unique_socket sock;
-	sock.construct<AF_INET, SOCK_STREAM, 8000>(ocl::net::unique_socket::local_address_ip4, true);
-
-	EXPECT_TRUE(sock.is_valid());
-
+	ocl::net::unique_socket sock = ocl::net::unique_socket::make_socket<8000>(ocl::net::unique_socket::local_address_ip4, false);
 	std::basic_string<char> buf_dst = "HELLO, WORLD!";
-	EXPECT_TRUE(sock.transmit(buf_dst));
+	EXPECT_TRUE(sock.read(buf_dst.c_str(), buf_dst.size()).bad == false);
 }
 
 /// @brief Basic Receive test
 TEST(NetworkTest, BasicNetworkReceive)
 {
-	ocl::net::unique_socket sock;
-	sock.construct<AF_INET, SOCK_STREAM, 8000>(ocl::net::unique_socket::local_address_ip4, true);
+	ocl::net::unique_socket sock = ocl::net::unique_socket::make_socket<8000>(ocl::net::unique_socket::local_address_ip4, true);
 
-	EXPECT_TRUE(sock.is_valid());
+	EXPECT_TRUE(!sock.bad);
 
 	std::basic_string<char> buf_dst;
 	buf_dst.reserve(512);
@@ -35,12 +30,11 @@ TEST(NetworkTest, BasicNetworkReceive)
 	auto buf = buf_dst.data();
 	auto sz = buf_dst.size();
 
-	EXPECT_FALSE(sock.receive(buf, sz));
+	EXPECT_FALSE(!sock.read(buf, sz).bad);
 }
 
 TEST(NetworkTest, BasicNetworkConstruct)
 {
-	auto socket = ocl::net::make_socket<char, 8000>(ocl::net::unique_socket::local_address_ip4, true);
-
-	EXPECT_TRUE(socket.is_valid());
+	auto socket = ocl::net::unique_socket::make_socket<8000>(ocl::net::unique_socket::local_address_ip4, true);
+	EXPECT_TRUE(!socket.bad);
 }

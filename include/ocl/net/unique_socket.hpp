@@ -56,68 +56,63 @@ namespace ocl::net
 		static constexpr auto		local_address_ip6 = "::1";
 		static constexpr const auto backlog_count	  = 5U;
 
-		/// =============================================================================
-		/// @brief Check if the unique_socket is valid.
-		/// @return true if valid, false otherwise.
-		/// =============================================================================
-
-		bool is_valid() const noexcept
+		unique_socket read(const char* out, std::size_t len) noexcept
 		{
-			return this->fd_ != -1 && !this->bad_;
-		}
-
-		template <typename ptr_type>
-		bool receive(ptr_type& out, std::size_t len) noexcept
-		{
-			static_assert(std::is_pointer<ptr_type>::value, "ptr_type is not a pointer!");
-
-			if (!out)
-				return false;
-
-			if (!len)
-				return false;
+			if (!out || !len)
+				return {};
 
 			socket_type cl_{fd_};
 
 			if (this->is_server_)
 				cl_ = ::accept(fd_, nullptr, nullptr);
 
-			auto ret = ::recv(cl_, out, len, 0);
+			auto ret = ::recv(cl_, static_cast<void*>(const_cast<char*>(out)), len, 0);
 
-			return ret > 0L;
+			unique_socket sock;
+			
+			sock.fd_ = cl_;
+			sock.bad_ = ret > 0L;
+
+			return std::move(sock);
 		}
 
-		template <typename ptr_type>
-		bool transmit(ptr_type& out, std::size_t len) noexcept
+		unique_socket& write(const char* out, std::size_t len) noexcept
 		{
-			static_assert(std::is_pointer<ptr_type>::value, "ptr_type is not a pointer!");
-
 			if (!out)
-				return false;
+				return *this;
 
 			if (!len)
-				return false;
+				return *this;
 
 			auto ret = ::send(fd_, out, len, 0);
 
 			bad_ = !(ret >= 0L);
 
-			return ret >= 0L;
+			return *this;
 		}
 
-		template <typename char_type>
-		bool transmit(const std::basic_string<char_type>& out) noexcept
+		unique_socket& write(const std::string& out) noexcept
 		{
 			if (out.empty())
-				return false;
+				return *this;
 
 			auto ret = ::send(fd_, out.data(), out.size(), 0);
 
 			bad_ = !(ret >= 0L);
 
-			return ret >= 0L;
+			return *this;
 		}
 
+		template <uint16_t port>
+		static unique_socket make_socket(const std::string& address, const bool is_server)
+		{
+			unique_socket sock;
+			sock.construct<AF_INET, SOCK_STREAM, port>(address.c_str(), is_server);
+
+			return sock;
+		}
+
+	private:
 		template <uint16_t af, uint16_t kind, uint16_t port>
 		bool construct(const char* addr = unique_socket::local_address_ip4, const bool& is_server = false) noexcept
 		{
@@ -165,13 +160,4 @@ namespace ocl::net
 			return true;
 		}
 	};
-
-	template<typename char_type, uint16_t port>
-	inline unique_socket make_socket(const std::basic_string<char_type>& address, const bool is_server)
-	{
-		unique_socket sock;
-		sock.construct<AF_INET, SOCK_STREAM, port>(address.c_str(), is_server);
-
-		return sock;
-	}
 } // namespace ocl::net
