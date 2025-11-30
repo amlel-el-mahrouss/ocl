@@ -22,7 +22,9 @@ namespace ocl::io
 		console_io_out << fmt;
 	}
 
-	inline void print() noexcept {}
+	inline void print() noexcept
+	{
+	}
 
 	template <typename... Args>
 	inline void print(Args... fmt) noexcept

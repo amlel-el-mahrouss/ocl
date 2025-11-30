@@ -18,12 +18,12 @@ A set of containers in C++ for developers.
 ### Logic Module (Option container)
 
 ```cpp
-#include <logic/opt.hpp>
+#include <logic/option.hpp>
 
 int main(int argc, char** argv)
 {
-  auto opt = ocl::opt(ocl::eval_eq(50, 50)).expect("ocl::eval_eq, does not match!");
-  opt = ocl::opt(ocl::eval_eq(50, 40));
+  auto opt = ocl::option(ocl::eval_eq(50, 50)).expect("ocl::eval_eq, does not match!");
+  opt = ocl::option(ocl::eval_eq(50, 40));
   opt.expect("this time it doesn't.");
 
   return EXIT_SUCCESS;
