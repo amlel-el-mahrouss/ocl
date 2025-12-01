@@ -10,7 +10,7 @@
 #include <core/config.hpp>
 
 /// @brief OCL equivalence namespace.
-namespace ocl::is_same
+namespace ocl
 {
 	template <typename T>
 	struct basic_hash
@@ -103,4 +103,4 @@ namespace ocl::is_same
 			return left_ / right_ == 1;
 		}
 	};
-} // namespace ocl::is_same
+} // namespace ocl

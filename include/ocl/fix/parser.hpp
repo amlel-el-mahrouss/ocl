@@ -9,7 +9,7 @@
 #define _OCL_FIX_PARSER_HPP
 
 #include <core/config.hpp>
-#include <hashing/hash.hpp>
+#include <hashing/crc_hash.hpp>
 #include <io/print.hpp>
 #include <algorithm>
 #include <string>

@@ -31,8 +31,3 @@
 #define OCL_DECL
 #define OCL_EXPORT_DECL
 #endif
-
-namespace ocl
-{
-	using char_type = char;
-} // namespace ocl
