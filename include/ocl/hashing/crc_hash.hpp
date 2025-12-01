@@ -1,5 +1,5 @@
 /*
- * File: hash.hpp
+ * File: crc_hash.hpp
  * Purpose: Hashing module.
  * Author: Amlal El Mahrouss,
  * Copyright 2025, Amlal El Mahrouss, Licensed under the Boost Software License.
@@ -14,13 +14,15 @@
 #include <string>
 #include <cstddef>
 #include <concepts>
+#include <cstring>
 
 /// @brief Crc32 implementation in C++
 /// @author Amlal El Mahrouss (amlal@nekernel.org)
 
 namespace ocl
 {
-	struct hash_trait
+	/// @brief implements a trait object for crc hashing.
+	struct crc_hash_trait
 	{
 		static constexpr const std::uint16_t crc_sz_ = 256U;
 
@@ -59,31 +61,34 @@ namespace ocl
 			0xb3667a2e, 0xc4614ab8, 0x5d681b02, 0x2a6f2b94, 0xb40bbe37, 0xc30c8ea1, 0x5a05df1b, 0x2d02ef8d};
 
 		static std::size_t
-		crc32(const char* in, size_t len) noexcept
+		crc32(const char* in, std::size_t len) noexcept
 		{
-			if (!in || *in == 0)
+			if (!len)
 				return 0;
 
 			std::uint32_t crc = 0xffffffff;
+			std::size_t cnt = 0;
 
-			while ((len--) > 0)
-				crc = (crc >> 8) ^ crc_array_[(crc ^ *(in++)) & 0xFF];
+			while ((len--) > 0) {
+				crc = (crc >> 8) ^ crc_array_[(crc ^ in[cnt]) & 0xFF];
+				++cnt;
+			}
 
 			return ~crc;
 		}
 	};
 
 	template <typename V>
-	using string_hash_map = std::unordered_map<std::string, V, std::hash<ocl::hash_trait>>;
+	using string_hash_map = std::unordered_map<std::string, V, std::hash<ocl::crc_hash_trait>>;
 
 	template <typename K, typename V>
-	using hash_map = std::unordered_map<K, V, std::hash<ocl::hash_trait>>;
+	using hash_map = std::unordered_map<K, V, std::hash<ocl::crc_hash_trait>>;
 } // namespace ocl
 
 namespace std
 {
 	template <>
-	struct hash<ocl::hash_trait> final
+	struct hash<ocl::crc_hash_trait> final
 	{
 		hash()	= default;
 		~hash() = default;
@@ -91,12 +96,17 @@ namespace std
 		template <typename T>
 		inline std::size_t operator()(T* in_) const
 		{
-			return ocl::hash_trait::crc32(reinterpret_cast<const char*>(in_), sizeof(T));
+			return ocl::crc_hash_trait::crc32(reinterpret_cast<const char*>(in_), sizeof(T));
+		}
+
+		inline std::size_t operator()(const char* in_) const
+		{
+			return ocl::crc_hash_trait::crc32(in_, strlen(in_));
 		}
 
 		inline std::size_t operator()(const std::string& in_) const
 		{
-			return ocl::hash_trait::crc32(in_.c_str(), in_.size());
+			return ocl::crc_hash_trait::crc32(in_.c_str(), in_.size());
 		}
 	};
 
@@ -108,7 +118,7 @@ namespace std
 		struct is_invocable_hash : std::bool_constant <
 								   requires(Fn fn, ArgTypes... arg_types)
 	{
-		{std::forward<Fn>(fn)(std::forward<ArgTypes>(arg_types)...)}->std::same_as<hash<ocl::hash_trait>>;
+		{std::forward<Fn>(fn)(std::forward<ArgTypes>(arg_types)...)}->std::same_as<hash<ocl::crc_hash_trait>>;
 	}>{};
 
 } // namespace std

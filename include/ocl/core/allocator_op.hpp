@@ -60,7 +60,7 @@ namespace ocl
 	};
 
 	template <typename type>
-	using allocator_type = allocator_op<type, global_new_op<type>, global_delete_op<type>>;
+	using allocator = allocator_op<type, global_new_op<type>, global_delete_op<type>>;
 } // namespace ocl
 
 #endif // ifndef _OCL_ALLOCATOR_SYSTEM_HPP
