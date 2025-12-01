@@ -21,10 +21,18 @@ constexpr const char default_fix[] = {
 	'1', '0', '=', '1', '4', '3', 0x01, 0x00 // CheckSum = 143
 };
 
-TEST(FIXTest, BasicFIXUsage)
-{
-	ocl::fix::basic_visitor<char>	 basic_visitor;
-	ocl::fix::basic_range_data<char> fix = basic_visitor.visit(default_fix);
+ocl::fix::basic_visitor	   basic_visitor;
+ocl::fix::basic_range_data fix = basic_visitor.visit(default_fix);
 
+TEST(FIXTest, FIX1)
+{
 	EXPECT_TRUE(fix.is_valid());
+	EXPECT_TRUE(fix["35"].empty() == false && fix["35"] == "A");
+	EXPECT_TRUE(fix["49"].empty() == false && fix["49"] == "SERVER");
+}
+
+TEST(FIXTest, FIX2)
+{
+	EXPECT_TRUE(fix["133"].empty() == true && fix["133"] != "");
+	EXPECT_TRUE(fix["49"].empty() == false && fix["49"] != "A");
 }
