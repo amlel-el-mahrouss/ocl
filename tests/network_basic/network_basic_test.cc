@@ -14,7 +14,7 @@ TEST(NetworkTest, BasicNetworkReceive1)
 {
 	ocl::net::unique_socket sock = ocl::net::unique_socket::make_socket<8000>(ocl::net::unique_socket::local_address_ip4, false);
 	std::basic_string<char> buf_dst = "HELLO, WORLD!";
-	EXPECT_TRUE(sock.read_server_buffer(buf_dst.data(), buf_dst.size()).bad() == false);
+	EXPECT_TRUE(sock.read_client_buffer(buf_dst.data(), buf_dst.size()).bad() == false);
 }
 
 /// @brief Basic Receive test
