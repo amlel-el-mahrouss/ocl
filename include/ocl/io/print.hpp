@@ -48,8 +48,8 @@ namespace ocl::io
 
 	inline void enable_stdio_sync(const bool& enable) noexcept
 	{
-		console_io_out.sync_with_stdio(enable);
-		detail::is_stdio_sync = false;
+		detail::is_stdio_sync = enable;
+		console_io_out.sync_with_stdio(detail::is_stdio_sync);
 	}
 
 	inline const bool& is_stdio_sync()
