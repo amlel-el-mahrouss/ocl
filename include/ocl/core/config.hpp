@@ -31,3 +31,8 @@
 #define OCL_DECL
 #define OCL_EXPORT_DECL
 #endif
+
+#ifdef _WIN32
+#define OCL_USE_CRLF_ENDINGS 1
+#define OCL_WINDOWS			 1
+#endif

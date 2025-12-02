@@ -19,6 +19,8 @@ int main(int argc, char** argv)
 	ocl::fix::visitor basic_visitor;
 	ocl::fix::range_data fix = basic_visitor.visit(default_fix);
 
+	ocl::io::enable_stdio_sync(false);
+
 	ocl::io::print(":key=35\n");
 	ocl::io::print(":value=", fix["35"], "\n");
 

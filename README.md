@@ -2,20 +2,21 @@
 
 [![License: BSL](https://img.shields.io/badge/license-BSL-blue.svg)](LICENSE)
 
-## Brief:
-
-A set of containers in C++ for developers.
+A set of containers in C++ for developers.<br/>
+You use them to speed up your development cycle for C++ applications.
 
 ## Requirements:
+
+The OCL requires the following:
 
 - [Boost](https://www.boost.org/)
 - [Clang](https://clang.llvm.org/)
 - [CMake](https://cmake.org/)
 - [Git](https://git-scm.com/)
 
-## Examples:
+### Example: The Option container
 
-### Logic Module (Option container)
+Evaluates whether an expression is passing the options.
 
 ```cpp
 #include <logic/option.hpp>

@@ -13,6 +13,7 @@
 #include <iostream>
 
 #define console_io_out std::cout
+#define console_io_in  std::cin
 
 namespace ocl::io
 {
@@ -40,19 +41,37 @@ namespace ocl::io
 		print(other...);
 	}
 
-	template <typename... T>
-	inline void println(T... fmt) noexcept
+	namespace detail
 	{
-		print(fmt...);
+		inline bool is_stdio_sync = true;
+	}
 
-#ifdef _WIN32
+	inline void enable_stdio_sync(const bool& enable) noexcept
+	{
+		console_io_out.sync_with_stdio(enable);
+		detail::is_stdio_sync = false;
+	}
+
+	inline const bool& is_stdio_sync()
+	{
+		return detail::is_stdio_sync;
+	}
+
+	inline void lf() noexcept
+	{
+#ifdef OCL_USE_CRLF_ENDINGS
 		print("\r\n");
 #else
 		print("\n");
 #endif
 	}
-} // namespace ocl::io
 
-#undef console_io_out
+	template <typename... T>
+	inline void println(T... fmt) noexcept
+	{
+		print(fmt...);
+		lf();
+	}
+} // namespace ocl::io
 
 #endif // ifndef _OCL_PRINT_HPP

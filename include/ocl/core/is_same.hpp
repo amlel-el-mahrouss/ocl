@@ -15,11 +15,13 @@ namespace ocl
 	template <typename T>
 	struct basic_hash
 	{
+		using result_type = typename T::result_type;
+		using type		  = T;
+
 		/// @brief hash from T's result_type.
-		static typename T::result_type hash()
+		static result_type hash()
 		{
-			static T val;
-			return val.hash();
+			return T{}.hash();
 		}
 	};
 
