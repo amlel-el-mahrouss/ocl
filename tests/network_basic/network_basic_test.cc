@@ -10,7 +10,7 @@
 #include <gtest/gtest.h>
 
 /// @brief Basic Send Test 
-TEST(NetworkTest, BasicNetworkTransmit)
+TEST(NetworkTest, BasicNetworkReceive1)
 {
 	ocl::net::unique_socket sock = ocl::net::unique_socket::make_socket<8000>(ocl::net::unique_socket::local_address_ip4, false);
 	std::basic_string<char> buf_dst = "HELLO, WORLD!";
@@ -18,7 +18,7 @@ TEST(NetworkTest, BasicNetworkTransmit)
 }
 
 /// @brief Basic Receive test
-TEST(NetworkTest, BasicNetworkReceive)
+TEST(NetworkTest, BasicNetworkReceive2)
 {
 	ocl::net::unique_socket sock = ocl::net::unique_socket::make_socket<8000>(ocl::net::unique_socket::local_address_ip4, true);
 
