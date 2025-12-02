@@ -9,6 +9,7 @@
 
 #include <core/config.hpp>
 
+#include <stdexcept>
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
@@ -22,26 +23,20 @@
 
 namespace ocl::net
 {
-	class unique_socket;
-
-	/// =============================================================================
-	/// @brief Modem container concept, a container to read and write on a network stream.
-	/// =============================================================================
 	class unique_socket final
 	{
 	public:
-		using socket_type	 = int64_t;
+		using socket_type	 = int;
 		using error_type	 = bool;
 		using condition_type = bool;
+		using socket_state	 = int;
 
 	private:
-		socket_type	   fd_{};
+		socket_type	   socket_{};
 		condition_type is_server_{false};
-		error_type	   bad_{true};
+		error_type	   bad_{false};
 
 	public:
-		const error_type& bad{bad_};
-
 		unique_socket() = default;
 
 		~unique_socket()
@@ -50,64 +45,113 @@ namespace ocl::net
 		}
 
 		unique_socket& operator=(const unique_socket&) = delete;
-		unique_socket(const unique_socket&)			   = default;
+		unique_socket(const unique_socket&)			   = delete;
 
-		static constexpr auto		local_address_ip4 = "127.0.0.1";
-		static constexpr auto		local_address_ip6 = "::1";
-		static constexpr const auto backlog_count	  = 5U;
+		unique_socket& operator=(unique_socket&& other) noexcept
+		{
+			if (this != &other)
+			{
+				destroy();
+				socket_		  = other.socket_;
+				is_server_	  = other.is_server_;
+				bad_		  = other.bad_;
+				other.socket_ = 0;
+				other.bad_	  = true;
+			}
 
-		unique_socket read(const char* out, std::size_t len) noexcept
+			return *this;
+		}
+
+		unique_socket(unique_socket&& other) noexcept
+			: socket_(other.socket_), is_server_(other.is_server_), bad_(other.bad_)
+		{
+			other.socket_ = 0;
+			other.bad_	  = true;
+		}
+
+		static constexpr auto local_address_ip4 = "127.0.0.1";
+		static constexpr auto backlog_count		= 5U;
+
+		const error_type& bad()
+		{
+			return bad_;
+		}
+
+		unique_socket::socket_state state() noexcept
+		{
+			socket_state error = 0;
+			socklen_t	 len   = sizeof(error);
+			getsockopt(socket_, SOL_SOCKET, SO_ERROR, &error, &len);
+
+			return error;
+		}
+
+		unique_socket accept() noexcept
+		{
+			socket_type cl_{-1};
+
+			if (this->is_server_)
+				cl_ = ::accept(socket_, nullptr, nullptr);
+
+			unique_socket ret_sock;
+			ret_sock.socket_ = cl_;
+
+			return std::move(ret_sock);
+		}
+
+		unique_socket read_server_buffer(char* out, std::size_t len)
 		{
 			if (!out || !len)
 				return {};
 
-			socket_type cl_{fd_};
+			if (!is_server_)
+			{
+				return {};
+			}
 
-			if (this->is_server_)
-				cl_ = ::accept(fd_, nullptr, nullptr);
+			auto ret_sock = accept();
 
-			auto ret = ::recv(cl_, static_cast<void*>(const_cast<char*>(out)), len, 0);
+			if (ret_sock.socket_ == -1)
+				throw std::invalid_argument("no connection to accept.");
 
-			unique_socket sock;
+			auto ret	  = ::recv(ret_sock.socket_, static_cast<void*>(out), len, 0);
+			ret_sock.bad_ = ret < 0L;
 
-			sock.fd_  = cl_;
-			sock.bad_ = ret > 0L;
-
-			return std::move(sock);
+			return ret_sock;
 		}
 
-		unique_socket& write(const char* out, std::size_t len) noexcept
+		void read_client_buffer(char* out, std::size_t len)
+		{
+			if (!out || !len)
+				return;
+
+			if (is_server_)
+				return;
+
+			auto ret	  = ::recv(this->socket_, static_cast<void*>(out), len, 0);
+			this->bad_ = ret < 0L;
+		}
+
+		void write_from_buffer(const char* out, std::size_t len)
 		{
 			if (!out)
-				return *this;
+				return;
 
 			if (!len)
-				return *this;
+				return;
 
-			auto ret = ::send(fd_, out, len, 0);
+			auto ret = ::send(socket_, out, len, 0);
 
-			bad_ = !(ret >= 0L);
-
-			return *this;
-		}
-
-		unique_socket& write(const std::string& out) noexcept
-		{
-			if (out.empty())
-				return *this;
-
-			auto ret = ::send(fd_, out.data(), out.size(), 0);
-
-			bad_ = !(ret >= 0L);
-
-			return *this;
+			bad_ = ret < 0L;
 		}
 
 		template <uint16_t port>
 		static unique_socket make_socket(const std::string& address, const bool is_server)
 		{
 			unique_socket sock;
-			sock.construct<AF_INET, SOCK_STREAM, port>(address.c_str(), is_server);
+
+			if (!sock.construct<AF_INET, SOCK_STREAM, port>(address.c_str(), is_server))
+				throw std::invalid_argument("invalid socket argument");
 
 			return sock;
 		}
@@ -119,10 +163,10 @@ namespace ocl::net
 			static_assert(af != 0, "Address family is zero");
 			static_assert(kind != 0, "Kind is zero");
 
-			fd_		   = ::socket(af, kind, 0);
+			socket_	   = ::socket(af, kind, 0);
 			is_server_ = is_server;
 
-			if (fd_ == -1)
+			if (socket_ == -1)
 				return false;
 
 			struct sockaddr_in addr_;
@@ -134,28 +178,28 @@ namespace ocl::net
 
 			if (!is_server)
 			{
-				const auto ret = ::connect(fd_, reinterpret_cast<struct sockaddr*>(&addr_), sizeof(addr_));
+				const auto ret = ::connect(socket_, reinterpret_cast<struct sockaddr*>(&addr_), sizeof(addr_));
 				return ret == 0L;
 			}
 
-			int ret = ::bind(fd_, (struct sockaddr*)&addr_, sizeof(addr_));
+			int ret = ::bind(socket_, (struct sockaddr*)&addr_, sizeof(addr_));
 
 			bad_ = ret == -1;
 
-			::listen(fd_, unique_socket::backlog_count);
+			::listen(socket_, unique_socket::backlog_count);
 
 			return bad_ == false;
 		}
 
 		bool destroy() noexcept
 		{
-			if (!fd_)
+			if (!socket_)
 				return false;
 
-			::shutdown(fd_, SHUT_RDWR);
-			::close(fd_);
+			::shutdown(socket_, SHUT_RDWR);
+			::close(socket_);
 
-			fd_ = 0L;
+			socket_ = 0L;
 
 			return true;
 		}
