@@ -67,9 +67,10 @@ namespace ocl
 				return 0;
 
 			std::uint32_t crc = 0xffffffff;
-			std::size_t cnt = 0;
+			std::size_t	  cnt = 0;
 
-			while ((len--) > 0) {
+			while ((len--) > 0)
+			{
 				crc = (crc >> 8) ^ crc_array_[(crc ^ in[cnt]) & 0xFF];
 				++cnt;
 			}

@@ -14,7 +14,12 @@ TEST(NetworkTest, BasicNetworkReceive1)
 {
 	ocl::net::unique_socket sock = ocl::net::unique_socket::make_socket<8000>(ocl::net::unique_socket::local_address_ip4, false);
 	std::vector<char> buf_dst(512);
-	sock.read_client_buffer(buf_dst.data(), buf_dst.size());
+
+	auto buf = buf_dst.data();
+	auto sz = buf_dst.size();
+
+	sock.read_client_buffer(buf, sz);
+
 	EXPECT_TRUE(sock.bad());
 }
 

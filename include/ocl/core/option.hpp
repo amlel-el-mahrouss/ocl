@@ -23,15 +23,17 @@ namespace ocl
 	template <typename char_type = char>
 	struct option final
 	{
-		explicit option(const return_type& return_type)
+		option() = delete;
+
+		option(const return_type& return_type)
 			: ret_(return_type)
 		{
 		}
 
 		~option() = default;
 
-		option& operator=(const option&) = default;
-		option(const option&)			 = default;
+		option& operator=(const option&) = delete;
+		option(const option&)			 = delete;
 
 		option& expect(const char_type* input)
 		{
@@ -65,7 +67,7 @@ namespace ocl
 		return tell(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
 	}
 
-	namespace traits
+	namespace detail
 	{
 		struct int_eq_teller
 		{
@@ -90,26 +92,26 @@ namespace ocl
 				return (a < b);
 			}
 		};
-	} // namespace traits
+	} // namespace detail
 
 	template <typename... Lst>
 	inline return_type eval_less_than(Lst&&... arg)
 	{
-		static traits::int_less_than_teller eq;
+		static detail::int_less_than_teller eq;
 		return eq(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
 	}
 
 	template <typename... Lst>
 	inline return_type eval_eq(Lst&&... arg)
 	{
-		static traits::int_eq_teller less_than;
+		static detail::int_eq_teller less_than;
 		return less_than(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
 	}
 
 	template <typename... Lst>
 	inline return_type eval_greater_than(Lst&&... arg)
 	{
-		static traits::int_greater_than_teller greater_than;
+		static detail::int_greater_than_teller greater_than;
 		return greater_than(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
 	}
 
@@ -121,6 +123,11 @@ namespace ocl
 	inline return_type eval_false() noexcept
 	{
 		return return_type::err;
+	}
+
+	inline return_type eval_invalid() noexcept
+	{
+		return return_type::invalid;
 	}
 } // namespace ocl
 

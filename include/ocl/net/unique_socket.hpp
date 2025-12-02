@@ -17,8 +17,8 @@
 #include <cstddef>
 #include <cstring>
 
-#ifdef _WIN32
-#error !!! "Windows is not supported yet for <socket>" !!!
+#ifdef OCL_WINDOWS
+#error !!! "Windows is not supported yet for <unique_socket>" !!!
 #endif // _WIN32
 
 namespace ocl::net
@@ -128,7 +128,7 @@ namespace ocl::net
 			if (is_server_)
 				return;
 
-			auto ret	  = ::recv(this->socket_, static_cast<void*>(out), len, 0);
+			auto ret   = ::recv(this->socket_, static_cast<void*>(out), len, 0);
 			this->bad_ = ret < 0L;
 		}
 
