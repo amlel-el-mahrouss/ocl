@@ -9,37 +9,43 @@
 #include <io/print.hpp>
 #include <gtest/gtest.h>
 
-/// @brief Basic Send Test 
-TEST(NetworkTest, BasicNetworkReceive1)
+/// @brief Basic Send test
+TEST(NetworkTest, BasicNetworkIO)
 {
-	ocl::net::unique_socket sock = ocl::net::unique_socket::make_socket<8000>(ocl::net::unique_socket::local_address_ip4, false);
+	ocl::unique_socket sock = ocl::unique_socket::make_socket<8000>(ocl::unique_socket::any_address, true);
+
 	std::vector<char> buf_dst(512);
+
+	buf_dst.push_back('H');
+	buf_dst.push_back('e');
+	buf_dst.push_back('l');
+	buf_dst.push_back('l');
+	buf_dst.push_back('o');
+	buf_dst.push_back('\0');
 
 	auto buf = buf_dst.data();
 	auto sz = buf_dst.size();
 
-	sock.read_client_buffer(buf, sz);
+	sock.write_from_buffer(buf, sz);
 
-	EXPECT_TRUE(sock.bad());
-}
+	ocl::unique_socket sock2 = ocl::unique_socket::make_socket<8000>(ocl::unique_socket::any_address, false);
 
-/// @brief Basic Receive test
-TEST(NetworkTest, BasicNetworkReceive2)
-{
-	ocl::net::unique_socket sock = ocl::net::unique_socket::make_socket<8000>(ocl::net::unique_socket::local_address_ip4, true);
+	auto accepeted = sock.accept();
+	accepeted.write_from_buffer(buf, sz);
+
+	std::vector<char> buf_dst2(512);
+
+	buf = buf_dst2.data();
+	sz = buf_dst2.size();
+
+	sock2.read_client_buffer(buf, sz);
 
 	EXPECT_TRUE(!sock.bad());
-
-	std::vector<char> buf_dst(512);
-
-	auto buf = buf_dst.data();
-	auto sz = buf_dst.size();
-
-	EXPECT_FALSE(!sock.read_server_buffer(buf, sz).bad());
+	EXPECT_TRUE(!sock2.bad());
 }
 
 TEST(NetworkTest, BasicNetworkConstruct)
 {
-	auto socket = ocl::net::unique_socket::make_socket<8000>(ocl::net::unique_socket::local_address_ip4, true);
+	auto socket = ocl::unique_socket::make_socket<8000>(ocl::unique_socket::any_address, true);
 	EXPECT_TRUE(!socket.bad());
 }
