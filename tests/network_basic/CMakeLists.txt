@@ -17,7 +17,7 @@ add_executable(NetworkTestBasic network_basic_test.cc)
 target_link_libraries(NetworkTestBasic gtest_main)
 
 set_property(TARGET NetworkTestBasic PROPERTY CXX_STANDARD 20)
-target_include_directories(NetworkTestBasic PUBLIC ../../include/ocl)
+target_include_directories(NetworkTestBasic PUBLIC ../../include/)
 
 include(GoogleTest)
 gtest_discover_tests(NetworkTestBasic)
