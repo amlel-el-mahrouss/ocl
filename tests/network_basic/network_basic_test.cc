@@ -5,8 +5,8 @@
  * Copyright 2025, Amlal El Mahrouss, licensed under the Boost Software License.
  */
 
-#include <net/unique_socket.hpp>
-#include <io/print.hpp>
+#include <ocl/unique_socket.hpp>
+#include <ocl/print.hpp>
 #include <gtest/gtest.h>
 
 /// @brief Basic Send test

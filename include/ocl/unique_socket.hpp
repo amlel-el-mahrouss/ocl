@@ -1,5 +1,5 @@
 /*
- * File: net/unique_socket.hpp
+ * File: unique_socket.hpp
  * Purpose: RAII socket concept in modern C++
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
  * Copyright 2025, Amlal El Mahrouss, licensed under the Boost Software License.
@@ -7,19 +7,8 @@
 
 #pragma once
 
-#include <core/config.hpp>
-
-#include <stdexcept>
-#include <unistd.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
-#include <string>
-#include <cstddef>
-#include <cstring>
-
-#ifdef OCL_WINDOWS
-#error !!! "Windows is not supported yet for <unique_socket>" !!!
-#endif // _WIN32
+#include <ocl/detail/config.hpp>
+#include <ocl/detail/net_config.hpp>
 
 namespace ocl
 {

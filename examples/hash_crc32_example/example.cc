@@ -1,5 +1,5 @@
-#include <hashing/crc_hash.hpp>
-#include <io/print.hpp>
+#include <ocl/crc_hash.hpp>
+#include <ocl/print.hpp>
 
 int main(int argc, char** argv)
 {

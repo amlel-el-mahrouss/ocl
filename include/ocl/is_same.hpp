@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <core/config.hpp>
+#include <ocl/detail/config.hpp>
 
 /// @brief OCL equivalence namespace.
 namespace ocl
