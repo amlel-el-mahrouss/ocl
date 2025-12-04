@@ -1,5 +1,5 @@
 /*
- * File: core/allocator_op.hpp
+ * File: allocator_op.hpp
  * Purpose: Allocator System container.
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
  * Copyright 2025, Amlal El Mahrouss, Licensed under the Boost Software License. Licensed under the BSL 1.0 license
@@ -8,7 +8,7 @@
 #ifndef _OCL_ALLOCATOR_SYSTEM_HPP
 #define _OCL_ALLOCATOR_SYSTEM_HPP
 
-#include <core/config.hpp>
+#include <ocl/detail/config.hpp>
 #include <memory>
 
 namespace ocl

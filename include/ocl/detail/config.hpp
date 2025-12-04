@@ -1,6 +1,6 @@
 /*
- * File: core/config.hpp
- * Purpose: Config file of the OCL.
+ * File: detail/config.hpp
+ * Purpose: Config file of the OCL.CORE library.
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
  * Copyright 2025, Amlal El Mahrouss, licensed under the Boost Software License.
  */

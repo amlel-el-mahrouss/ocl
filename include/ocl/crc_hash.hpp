@@ -8,7 +8,7 @@
 #ifndef _OCL_CRC32_HPP
 #define _OCL_CRC32_HPP
 
-#include <core/config.hpp>
+#include <ocl/detail/config.hpp>
 #include <unordered_map>
 #include <cstdint>
 #include <string>

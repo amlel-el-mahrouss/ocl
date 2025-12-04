@@ -2,13 +2,13 @@
  * File: print.hpp
  * Purpose: OCL Print library
  * Author: Amlal El Mahrouss. (amlal@nekernel.org)
- * Copyright 2025
+ * Copyright 2025, Amlal El Mahrouss, Licensed under the Boost Software License. Licensed under the BSL 1.0 license
  */
 
 #ifndef _OCL_PRINT_HPP
 #define _OCL_PRINT_HPP
 
-#include <core/config.hpp>
+#include <ocl/detail/config.hpp>
 
 #include <iostream>
 

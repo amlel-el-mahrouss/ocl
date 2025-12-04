@@ -7,7 +7,7 @@
 #ifndef _OCL_OPT_HPP
 #define _OCL_OPT_HPP
 
-#include <core/config.hpp>
+#include <ocl/detail/config.hpp>
 #include <utility>
 
 namespace ocl

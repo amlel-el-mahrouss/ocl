@@ -1,5 +1,5 @@
-#include <net/unique_socket.hpp>
-#include <io/print.hpp>
+#include <ocl/unique_socket.hpp>
+#include <ocl/print.hpp>
 
 /// @brief Basic Send test
 int main()
