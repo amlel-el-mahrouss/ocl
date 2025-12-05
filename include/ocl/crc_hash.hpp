@@ -5,8 +5,8 @@
  * Copyright 2025, Amlal El Mahrouss, Licensed under the Boost Software License.
  */
 
-#ifndef _OCL_CRC32_HPP
-#define _OCL_CRC32_HPP
+#ifndef __OCL_CORE_CRC_HASH
+#define __OCL_CORE_CRC_HASH
 
 #include <ocl/detail/config.hpp>
 #include <unordered_map>
@@ -111,10 +111,6 @@ namespace std
 		}
 	};
 
-	// Source - https://stackoverflow.com/a/68521441
-	// Posted by StoryTeller - Unslander Monica, modified by community. See post 'Timeline' for change history
-	// Retrieved 2025-11-30, License - CC BY-SA 4.0
-
 	template <class Fn, class... ArgTypes>
 		struct is_invocable_hash : std::bool_constant <
 								   requires(Fn fn, ArgTypes... arg_types)
@@ -124,4 +120,4 @@ namespace std
 
 } // namespace std
 
-#endif // !_OCL_CRC32_HPP
+#endif // !__OCL_CORE_CRC_HASH

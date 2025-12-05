@@ -5,7 +5,8 @@
  * Copyright 2025, Amlal El Mahrouss, licensed under the Boost Software License.
  */
 
-#pragma once
+#ifndef __OCL_CORE_SOCKET
+#define __OCL_CORE_SOCKET
 
 #include <ocl/detail/config.hpp>
 #include <ocl/detail/net_config.hpp>
@@ -209,3 +210,5 @@ namespace ocl
 		{ sock.bad() };
 	};
 } // namespace ocl
+
+#endif

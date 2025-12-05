@@ -5,8 +5,8 @@
  * Copyright 2025, Amlal El Mahrouss, Licensed under the Boost Software License. Licensed under the BSL 1.0 license
  */
 
-#ifndef _OCL_PRINT_HPP
-#define _OCL_PRINT_HPP
+#ifndef __OCL_CORE_PRINT
+#define __OCL_CORE_PRINT
 
 #include <ocl/detail/config.hpp>
 
@@ -74,4 +74,4 @@ namespace ocl::io
 	}
 } // namespace ocl::io
 
-#endif // ifndef _OCL_PRINT_HPP
+#endif // ifndef __OCL_CORE_PRINT
