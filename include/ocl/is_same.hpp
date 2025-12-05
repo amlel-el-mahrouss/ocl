@@ -5,7 +5,8 @@
  * Copyright 2025, Amlal El Mahrouss, licensed under the Boost Software License.
  */
 
-#pragma once
+#ifndef __OCL_CORE_IS_SAME
+#define __OCL_CORE_IS_SAME
 
 #include <ocl/detail/config.hpp>
 
@@ -106,3 +107,5 @@ namespace ocl
 		}
 	};
 } // namespace ocl
+
+#endif

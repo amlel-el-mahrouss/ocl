@@ -1,12 +1,12 @@
 /*
  * File: allocator_op.hpp
- * Purpose: Allocator System container.
+ * Purpose: Allocator Operations container.
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
  * Copyright 2025, Amlal El Mahrouss, Licensed under the Boost Software License. Licensed under the BSL 1.0 license
  */
 
-#ifndef _OCL_ALLOCATOR_SYSTEM_HPP
-#define _OCL_ALLOCATOR_SYSTEM_HPP
+#ifndef __OCL_CORE_ALLOC
+#define __OCL_CORE_ALLOC
 
 #include <ocl/detail/config.hpp>
 #include <memory>
@@ -63,4 +63,4 @@ namespace ocl
 	using allocator = allocator_op<type, global_new_op<type>, global_delete_op<type>>;
 } // namespace ocl
 
-#endif // ifndef _OCL_ALLOCATOR_SYSTEM_HPP
+#endif // ifndef __OCL_CORE_ALLOC

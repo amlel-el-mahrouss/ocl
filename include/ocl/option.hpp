@@ -4,8 +4,8 @@
  * Copyright 2023-2025, Amlal El Mahrouss, Licensed under the Boost Software License
  */
 
-#ifndef _OCL_OPT_HPP
-#define _OCL_OPT_HPP
+#ifndef __OCL_CORE_OPTION
+#define __OCL_CORE_OPTION
 
 #include <ocl/detail/config.hpp>
 #include <utility>
@@ -131,4 +131,4 @@ namespace ocl
 	}
 } // namespace ocl
 
-#endif /* ifndef _OCL_OPT_HPP */
+#endif /* ifndef __OCL_CORE_OPTION */
