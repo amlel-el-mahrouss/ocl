@@ -68,7 +68,7 @@ namespace ocl
 		T left_ = 127, right_ = 127;
 
 	public:
-		using result_type = T;
+		using result_type = bool;
 
 		constexpr result_type hash()
 		{
@@ -84,7 +84,7 @@ namespace ocl
 		T left_ = 127, right_ = 127;
 
 	public:
-		using result_type = T;
+		using result_type = bool;
 
 		constexpr result_type hash()
 		{
@@ -99,11 +99,26 @@ namespace ocl
 		T left_ = 5, right_ = 3;
 
 	public:
-		using result_type = T;
+		using result_type = bool;
 
 		constexpr result_type hash()
 		{
-			return left_ / right_ == 1;
+			return (left_ / right_) == 1;
+		}
+	};
+
+	template <typename T>
+	struct equiv_is
+	{
+	private:
+		T left_{}, right_{};
+
+	public:
+		using result_type = bool;
+
+		constexpr result_type hash()
+		{
+			return (left_ / right_);
 		}
 	};
 } // namespace ocl

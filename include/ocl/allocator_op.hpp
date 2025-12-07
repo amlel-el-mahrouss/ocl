@@ -1,6 +1,6 @@
 /*
  * File: allocator_op.hpp
- * Purpose: Allocator Operations container.
+ * Purpose: Allocate from a pool.
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
  * Copyright 2025, Amlal El Mahrouss, Licensed under the Boost Software License. Licensed under the BSL 1.0 license
  */
