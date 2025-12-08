@@ -12,7 +12,7 @@
 
 namespace ocl
 {
-	enum class return_type
+	enum struct return_type
 	{
 		invalid = 0,
 		okay	= 100,
@@ -50,8 +50,7 @@ namespace ocl
 		{
 			if (ret_ == return_type::err)
 			{
-				ErrorHandler err_handler;
-				err_handler(input ? input : "option::error");
+				ErrorHandler{}(input ? input : "option::error");
 			}
 
 			return *this;

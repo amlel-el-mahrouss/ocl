@@ -5,7 +5,8 @@
  * Copyright 2025, Amlal El Mahrouss, licensed under the Boost Software License.
  */
 
-#pragma once
+#ifndef __OCL_TRACKED_PTR
+#define __OCL_TRACKED_PTR
 
 #include <exception>
 #include <ocl/detail/config.hpp>
@@ -233,3 +234,5 @@ namespace ocl
 		}
 	}
 } // namespace ocl
+
+#endif // ifndef __OCL_TRACKED_PTR
