@@ -44,7 +44,7 @@ TEST(NetworkTest, BasicNetworkIO)
 	EXPECT_TRUE(!sock2.bad());
 }
 
-TEST(NetworkTest, BasicNetworkConstruct)
+TEST(NetworkTest, BasicNetworkMakeSocket)
 {
 	auto socket = ocl::unique_socket::make_socket<8000>(ocl::unique_socket::any_address, true);
 	EXPECT_TRUE(!socket.bad());

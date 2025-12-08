@@ -9,12 +9,13 @@
 #define __OCL_UNIQUE_PTR
 
 #include <ocl/detail/config.hpp>
+#include <ocl/tracked_ptr.hpp>
 #include <memory>
 
 namespace ocl
 {
-    template<class T, class Del>
-    using unique_ptr = std::unique_ptr<T, Del>;
+	template <class T, class Del>
+	using unique_ptr = std::unique_ptr<T, Del>;
 }
 
 #endif // ifndef __OCL_UNIQUE_PTR
