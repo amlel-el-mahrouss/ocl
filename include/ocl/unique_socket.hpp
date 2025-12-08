@@ -207,7 +207,7 @@ namespace ocl
 
 	template <typename TS>
 	concept IsValidSocket = requires(TS& sock) {
-		{ sock.bad() };
+		{ !sock.bad() };
 	};
 } // namespace ocl
 
