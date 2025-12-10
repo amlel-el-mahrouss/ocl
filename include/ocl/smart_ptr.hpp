@@ -15,15 +15,15 @@
 
 namespace ocl
 {
-	template <class T, class Del>
+	template <class T, class Del = std::default_delete<T>>
 	using unique_ptr = std::unique_ptr<T, Del>;
 
-    template<class T, class _Deleter>
-    inline auto delete_ptr(T& obj) -> auto { return std::shared_ptr<T>{obj, _Deleter()}; }
+	template <class T>
+	using shared_ptr = std::shared_ptr<T>;
 
-    /// @brief Constructs a `null_ptr`, that is, a pointer that isn't deleted from the heap.
+    /// @brief Constructs a `delete_ptr`, that is, a pointer that isn't deleted from the heap.
     template<class T>
-    inline auto null_deleter(T& obj) -> auto { return delete_ptr<T, boost::null_deleter>(obj); }
+    inline auto delete_ptr(T* object) -> auto { return shared_ptr<T>{ object, boost::null_deleter{}}; }
 
 }
 
