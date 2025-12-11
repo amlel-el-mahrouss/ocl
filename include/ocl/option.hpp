@@ -20,7 +20,6 @@ namespace ocl
 		count = err - okay + 1,
 	};
 
-	template <typename char_type = char>
 	class option final
 	{
     public:
@@ -35,7 +34,7 @@ namespace ocl
 		option& operator=(const option&) = delete;
 		option(const option&)			 = delete;
 
-		option& expect(const char_type* input)
+		option& expect(const char* input)
 		{
 			if (ret_ == return_type::err)
 			{
@@ -46,7 +45,7 @@ namespace ocl
 		}
 
 		template <typename ErrorHandler>
-		option& expect_or_handle(const char_type* input)
+		option& expect_or_handle(const char* input)
 		{
 			if (ret_ == return_type::err)
 			{
