@@ -5,7 +5,7 @@
  * Copyright 2025, Amlal El Mahrouss, licensed under the Boost Software License.
  */
 
-#include <ocl/unique_socket.hpp>
+#include <ocl/posix/unique_socket.hpp>
 #include <ocl/print.hpp>
 #include <gtest/gtest.h>
 

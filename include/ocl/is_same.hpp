@@ -14,7 +14,7 @@
 namespace ocl
 {
 	template <typename T>
-	struct basic_hash
+	struct basic_hash final
 	{
 		using result_type = typename T::result_type;
 		using type		  = T;
@@ -29,13 +29,10 @@ namespace ocl
 	template <typename T, typename U>
 	struct is_same
 	{
-		static constexpr bool value = false;
+        using left_type = T;
+        using right_type = T;
 
-		/// @brief check if hash matches what we expect.
-		constexpr bool operator()() noexcept
-		{
-			return T::hash() == U::hash();
-		}
+		static constexpr bool value = false;
 	};
 
 	template <typename T>
@@ -47,12 +44,10 @@ namespace ocl
 	template <typename T, typename U>
 	struct is_not_same
 	{
-		static constexpr bool value = true;
+        using left_type = T;
+        using right_type = T;
 
-		constexpr bool operator()() noexcept
-		{
-			return T::hash() != U::hash();
-		}
+		static constexpr bool value = true;
 	};
 
 	template <typename T>
@@ -62,7 +57,7 @@ namespace ocl
 	};
 
 	template <typename T>
-	struct equiv_is_int8
+	struct equiv_is_int8 final
 	{
 	private:
 		T left_ = 127, right_ = 127;
@@ -77,7 +72,7 @@ namespace ocl
 	};
 
 	template <typename T>
-	struct equiv_not_int8
+	struct equiv_not_int8 final
 	{
 	private:
 		// these shall overflow if not int8.
@@ -93,7 +88,7 @@ namespace ocl
 	};
 
 	template <typename T>
-	struct equiv_is_real
+	struct equiv_is_real final
 	{
 	private:
 		T left_ = 5, right_ = 3;
@@ -108,17 +103,18 @@ namespace ocl
 	};
 
 	template <typename T>
-	struct equiv_is
+	struct equiv_is final
 	{
 	private:
 		T left_{}, right_{};
 
 	public:
 		using result_type = bool;
+        using type = T;
 
 		constexpr result_type hash()
 		{
-			return (left_ / right_);
+			return (left_ == right_);
 		}
 	};
 } // namespace ocl

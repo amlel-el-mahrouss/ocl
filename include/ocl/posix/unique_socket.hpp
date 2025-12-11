@@ -9,7 +9,7 @@
 #define __OCL_CORE_SOCKET
 
 #include <ocl/detail/config.hpp>
-#include <ocl/detail/net_config.hpp>
+#include <ocl/detail/posix/net_config.hpp>
 
 namespace ocl
 {

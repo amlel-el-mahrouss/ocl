@@ -21,11 +21,11 @@ namespace ocl
 	};
 
 	template <typename char_type = char>
-	struct option final
+	class option final
 	{
+    public:
 		option() = delete;
-
-		option(const return_type& return_type)
+		explicit option(const return_type& return_type)
 			: ret_(return_type)
 		{
 		}
@@ -68,7 +68,7 @@ namespace ocl
 
 	namespace detail
 	{
-		struct int_eq_teller
+		struct int_eq_teller final
 		{
 			bool operator()(int a, int b)
 			{
@@ -76,7 +76,7 @@ namespace ocl
 			}
 		};
 
-		struct int_greater_than_teller
+		struct int_greater_than_teller final
 		{
 			bool operator()(int a, int b)
 			{
@@ -84,7 +84,7 @@ namespace ocl
 			}
 		};
 
-		struct int_less_than_teller
+		struct int_less_than_teller final
 		{
 			bool operator()(int a, int b)
 			{
