@@ -13,4 +13,10 @@ The OCL requires the following:
 - [CMake](https://cmake.org/)
 - [Git](https://git-scm.com/)
 
+## Freestanding Status
+
+The Freestanding Status is a concept where a module is evaluated on whether it has or is fully freestanding or not.
+
+- Half-Verified ({option, is_same}.hpp)
+
 ##### (c) 2025 Amlal El Mahrouss and OCL Authors, licensed under the Boost Software License.

@@ -218,9 +218,11 @@ namespace ocl
 
 	namespace detail
 	{
+        using tracked_error = std::runtime_error;
+
 		inline void throw_tracked_error()
 		{
-			throw std::runtime_error("tracked_error: memory leak detected.");
+			throw tracked_error("tracked_error: memory leak detected.");
 		}
 	} // namespace detail
 

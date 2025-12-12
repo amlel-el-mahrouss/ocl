@@ -9,10 +9,7 @@
 #define __OCL_CORE_PRINT
 
 #include <ocl/detail/config.hpp>
-#include <iostream>
-
-#define console_io_out std::cout
-#define console_io_in  std::cin
+#include <ocl/io.hpp>
 
 namespace ocl::io
 {
@@ -24,8 +21,8 @@ namespace ocl::io
 
 	inline void print() noexcept
 	{
-        extern void lf() noexcept;
-        lf();
+		extern void lf() noexcept;
+		lf();
 	}
 
 	template <typename... Args>

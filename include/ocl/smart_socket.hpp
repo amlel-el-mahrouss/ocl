@@ -9,10 +9,13 @@
 #define __OCL_SMART_SOCKET
 
 #include <ocl/detail/config.hpp>
+
+#ifndef __OCL_FREESTANDING
 #include <boost/asio.hpp>
 
 #ifdef OCL_POSIX
 # include <ocl/posix/unique_socket.hpp>
 #endif
+#endif // !__OCL_FREESTANDING
 
 #endif // __OCL_SMART_SOCKET

@@ -9,12 +9,15 @@
 #define __OCL_CORE_CONFIG
 
 #include <boost/config.hpp>
+
+#ifndef __OCL_FREESTANDING
 #include <boost/core/addressof.hpp>
 #include <boost/core/nvp.hpp>
 #include <boost/core/demangle.hpp>
 #include <boost/core/null_deleter.hpp>
 #include <boost/container/allocator.hpp>
 #include <boost/assert.hpp>
+#endif
 
 #define OCL_DEPRECATED()		[[deprecated]]
 #define OCL_DEPRECATED_MSG(MSG) [[deprecated(MSG)]]
@@ -38,7 +41,9 @@
 #endif
 
 #ifndef OCL_WINDOWS
+#ifndef __OCL_FREESTANDING
 #include <unistd.h>
+#endif
 #endif
 
 #if OCL_WANTS_PRAGMA_ONCE
