@@ -59,62 +59,59 @@ namespace ocl
 	template <typename T>
 	struct equiv_is_int8 final
 	{
-	private:
-		T left_ = 127, right_ = 127;
-
-	public:
 		using result_type = bool;
 
 		constexpr result_type hash()
 		{
-			return (left_ + right_) < 1;
+			return sizeof(T) == 1;
 		}
 	};
 
 	template <typename T>
 	struct equiv_not_int8 final
 	{
-	private:
-		// these shall overflow if not int8.
-		T left_ = 127, right_ = 127;
-
-	public:
 		using result_type = bool;
 
 		constexpr result_type hash()
 		{
-			return (left_ + right_) > 0;
+			return sizeof(T) > 1;
 		}
 	};
 
 	template <typename T>
 	struct equiv_is_real final
 	{
-	private:
-		T left_ = 5, right_ = 3;
-
-	public:
 		using result_type = bool;
 
 		constexpr result_type hash()
 		{
-			return (left_ / right_) == 1;
+			return sizeof(T) >= 4;
 		}
 	};
 
-	template <typename T>
+	template <typename L, typename R>
 	struct equiv_is final
 	{
-	private:
-		T left_{}, right_{};
-
-	public:
 		using result_type = bool;
-        using type = T;
+        using left_type = L;
+        using right_type = R;
 
 		constexpr result_type hash()
 		{
-			return (left_ == right_);
+			return false;
+		}
+	};
+
+	template <typename L>
+	struct equiv_is<L, L> final
+	{
+		using result_type = bool;
+        using left_type = L;
+        using right_type = L;
+
+		constexpr result_type hash()
+		{
+			return true;
 		}
 	};
 } // namespace ocl

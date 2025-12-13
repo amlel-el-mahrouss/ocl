@@ -16,24 +16,24 @@
 
 #include <iostream>
 #else
-#define console_io_out ::ocl::io::null_cout
-#define console_io_in  ::ocl::io::null_cin
+#define console_io_out ::ocl::io::void_cout
+#define console_io_in  ::ocl::io::void_cin
 
 #warning The OCL doesn't define IO streams in a freestanding host.
 
 namespace ocl::io
 {
-	class nullable_stream final
+	class void_stream final
 	{
-		nullable_stream()		   = default;
-		~nullable_stream() = default;
+		void_stream()		   = default;
+		~void_stream() = default;
 
-        nullable_stream& operator<<(...) = delete;
-        nullable_stream& operator>>(...) = delete;
+        void_stream& operator<<(...) = delete;
+        void_stream& operator>>(...) = delete;
 	}
 
-	inline nullable_stream null_cout;
-	inline nullable_stream null_cin;
+	inline void_stream void_cout;
+	inline void_stream void_cin;
 } // namespace ocl::io
 
 #endif

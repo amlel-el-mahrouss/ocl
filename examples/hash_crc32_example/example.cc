@@ -9,7 +9,7 @@ int main(int argc, char** argv)
     std::hash<ocl::crc_hash_trait> hash{};
 
     ocl::io::enable_stdio_sync(false);
-	ocl::io::print(hash(argv[1]));
+	ocl::io::print(hash.operator()<true, false>(argv[1]));
 
 	return 0;
 }

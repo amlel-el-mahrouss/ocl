@@ -8,9 +8,8 @@
 #ifndef __OCL_CORE_CONFIG
 #define __OCL_CORE_CONFIG
 
-#include <boost/config.hpp>
-
 #ifndef __OCL_FREESTANDING
+#include <boost/config.hpp>
 #include <boost/core/addressof.hpp>
 #include <boost/core/nvp.hpp>
 #include <boost/core/demangle.hpp>
@@ -29,21 +28,23 @@
 #ifdef __cplusplus
 #define OCL_DECL extern "C"
 /// DLL/Dylib/So specific macro.
-#define OCL_EXPORT_DECL extern "C" __attribute__((visibility("default")))
+#ifdef __GNUC__
+#define OCL_EXPORT_DECL OCL_DECL __attribute__((visibility("default")))
+#else
+#define OCL_EXPORT_DECL OCL_DECL declspec(dllexport)
+#endif
 #else
 #define OCL_DECL
+#ifdef __GNUC__
 #define OCL_EXPORT_DECL
+#else
+#define OCL_EXPORT_DECL OCL_DECL declspec(dllimport)
+#endif
 #endif
 
 #ifdef _WIN32
 #define OCL_USE_CRLF_ENDINGS 1
 #define OCL_WINDOWS			 1
-#endif
-
-#ifndef OCL_WINDOWS
-#ifndef __OCL_FREESTANDING
-#include <unistd.h>
-#endif
 #endif
 
 #if OCL_WANTS_PRAGMA_ONCE
