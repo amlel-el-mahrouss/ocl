@@ -23,10 +23,10 @@
 
 namespace ocl::io
 {
-	class nullable_stream
+	class nullable_stream final
 	{
 		nullable_stream()		   = default;
-		virtual ~nullable_stream() = default;
+		~nullable_stream() = default;
 
         nullable_stream& operator<<(...) = delete;
         nullable_stream& operator>>(...) = delete;
