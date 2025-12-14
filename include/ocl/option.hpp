@@ -69,7 +69,8 @@ namespace ocl
 	{
 		struct int_eq_teller final
 		{
-			bool operator()(int a, int b)
+            template <class ObjFirst, class ObjLast>
+			bool operator()(ObjFirst a, ObjLast b)
 			{
 				return (a == b);
 			}
@@ -77,7 +78,8 @@ namespace ocl
 
 		struct int_greater_than_teller final
 		{
-			bool operator()(int a, int b)
+            template <class ObjFirst, class ObjLast>
+			bool operator()(ObjFirst a, ObjLast b)
 			{
 				return (a > b);
 			}
@@ -85,7 +87,8 @@ namespace ocl
 
 		struct int_less_than_teller final
 		{
-			bool operator()(int a, int b)
+            template <class ObjFirst, class ObjLast>
+			bool operator()(ObjFirst a, ObjLast b)
 			{
 				return (a < b);
 			}
@@ -95,22 +98,19 @@ namespace ocl
 	template <typename... Lst>
 	inline return_type eval_less_than(Lst&&... arg)
 	{
-		static detail::int_less_than_teller eq;
-		return eq(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
+		return detail::int_less_than_teller{}(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
 	}
 
 	template <typename... Lst>
 	inline return_type eval_eq(Lst&&... arg)
 	{
-		static detail::int_eq_teller less_than;
-		return less_than(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
+		return detail::int_eq_teller{}(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
 	}
 
 	template <typename... Lst>
 	inline return_type eval_greater_than(Lst&&... arg)
 	{
-		static detail::int_greater_than_teller greater_than;
-		return greater_than(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
+		return detail::int_greater_than_teller{}(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
 	}
 
 	inline return_type eval_true() noexcept

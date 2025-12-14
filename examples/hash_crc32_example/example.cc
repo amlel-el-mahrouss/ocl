@@ -1,6 +1,6 @@
 #include <ocl/crc_hash.hpp>
 #include <ocl/print.hpp>
-#include <ocl/smart_ptr.hpp>
+#include <ocl/option.hpp>
 
 int main(int argc, char** argv)
 {
