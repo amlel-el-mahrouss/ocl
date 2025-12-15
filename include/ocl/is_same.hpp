@@ -19,8 +19,8 @@ namespace ocl
 		using result_type = typename T::result_type;
 		using type		  = T;
 
-		/// @brief hash from T's result_type.
-		static result_type hash()
+        // AMLALE: If it throws, we can't compute the hash correctly.
+		static constexpr result_type hash() noexcept
 		{
 			return T{}.hash();
 		}
@@ -61,10 +61,7 @@ namespace ocl
 	{
 		using result_type = bool;
 
-		constexpr result_type hash()
-		{
-			return sizeof(T) == 1;
-		}
+        static constexpr auto value = sizeof(T) == 1;
 	};
 
 	template <typename T>
@@ -72,10 +69,7 @@ namespace ocl
 	{
 		using result_type = bool;
 
-		constexpr result_type hash()
-		{
-			return sizeof(T) > 1;
-		}
+        static constexpr auto value = sizeof(T) > 1;
 	};
 
 	template <typename T>
@@ -83,10 +77,7 @@ namespace ocl
 	{
 		using result_type = bool;
 
-		constexpr result_type hash()
-		{
-			return sizeof(T) >= 4;
-		}
+        static constexpr auto value = sizeof(T) >= 4;
 	};
 
 	template <typename L, typename R>
@@ -96,10 +87,7 @@ namespace ocl
         using left_type = L;
         using right_type = R;
 
-		constexpr result_type hash()
-		{
-			return false;
-		}
+        static constexpr auto value = false;
 	};
 
 	template <typename L>
@@ -109,10 +97,7 @@ namespace ocl
         using left_type = L;
         using right_type = L;
 
-		constexpr result_type hash()
-		{
-			return true;
-		}
+        static constexpr auto value = true;
 	};
 } // namespace ocl
 

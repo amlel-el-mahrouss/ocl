@@ -27,6 +27,7 @@ namespace ocl
 		explicit option(const return_type& return_type)
 			: ret_(return_type)
 		{
+            assert(ret_ != return_type::invalid);
 		}
 
 		~option() = default;
@@ -36,6 +37,8 @@ namespace ocl
 
 		option& expect(const char* input)
 		{
+            assert(ret_ != return_type::invalid);
+
 			if (ret_ == return_type::err)
 			{
 				throw std::runtime_error(input ? input : "option::error");
@@ -47,8 +50,11 @@ namespace ocl
 		template <typename ErrorHandler>
 		option& expect_or_handle(const char* input)
 		{
+            assert(ret_ != return_type::invalid);
+
 			if (ret_ == return_type::err)
 			{
+                // AMLALE: Shall it be a functor or container here?
 				ErrorHandler{}(input ? input : "option::error");
 			}
 
@@ -59,56 +65,72 @@ namespace ocl
 		return_type ret_{return_type::invalid};
 	};
 
-	template <typename Teller, typename... Lst>
-	inline return_type eval(Teller tell, Lst&&... arg)
-	{
-		return tell(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
-	}
-
 	namespace detail
 	{
-		struct int_eq_teller final
+        // AMLALE: They (operator()) were marked `noexcept` as failing conditions within an evaluation (say a overloads operator==) proves that the
+        // predictate is wrong.
+
+        struct teller
+        {
+            explicit teller() = default;
+            virtual ~teller() = default;
+
+            template <class ObjFirst, class ObjLast>
+			bool operator()(ObjFirst a, ObjLast b) noexcept
+            {
+                return false;
+            }
+        };
+ 
+        struct int_eq_teller final : teller
 		{
             template <class ObjFirst, class ObjLast>
-			bool operator()(ObjFirst a, ObjLast b)
+			bool operator()(ObjFirst a, ObjLast b) noexcept
 			{
 				return (a == b);
 			}
 		};
 
-		struct int_greater_than_teller final
+		struct int_greater_than_teller final : teller
 		{
             template <class ObjFirst, class ObjLast>
-			bool operator()(ObjFirst a, ObjLast b)
+			bool operator()(ObjFirst a, ObjLast b) noexcept
 			{
 				return (a > b);
 			}
 		};
 
-		struct int_less_than_teller final
+		struct int_less_than_teller final : teller
 		{
             template <class ObjFirst, class ObjLast>
-			bool operator()(ObjFirst a, ObjLast b)
+			bool operator()(ObjFirst a, ObjLast b) noexcept 
 			{
 				return (a < b);
 			}
 		};
 	} // namespace detail
 
+	template <typename Teller, typename... Lst>
+	inline return_type eval(const Teller& tell, Lst&&... arg)
+	{
+        static_assert(std::is_base_of_v<detail::teller, Teller>, "Teller is not evalueable.");
+		return tell(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
+	}
+
 	template <typename... Lst>
-	inline return_type eval_less_than(Lst&&... arg)
+	inline return_type eval_less_than(Lst&&... arg) noexcept
 	{
 		return detail::int_less_than_teller{}(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
 	}
 
 	template <typename... Lst>
-	inline return_type eval_eq(Lst&&... arg)
+	inline return_type eval_eq(Lst&&... arg) noexcept
 	{
 		return detail::int_eq_teller{}(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
 	}
 
 	template <typename... Lst>
-	inline return_type eval_greater_than(Lst&&... arg)
+	inline return_type eval_greater_than(Lst&&... arg) noexcept
 	{
 		return detail::int_greater_than_teller{}(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
 	}

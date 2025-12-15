@@ -7,5 +7,8 @@ int main(int argc, char** argv)
     ocl::option opt{ocl::eval_eq(nullptr, nullptr)};
     opt.expect("is incorrect");
 
+    ocl::option opt2{ocl::eval_eq(argv, nullptr)};
+    opt2.expect("is incorrect");
+
 	return 0;
 }
