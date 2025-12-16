@@ -14,7 +14,7 @@
 #include <boost/asio.hpp>
 
 #ifdef OCL_POSIX
-# include <ocl/posix/unique_socket.hpp>
+#include <ocl/posix/unique_socket.hpp>
 #endif
 #endif // !__OCL_FREESTANDING
 

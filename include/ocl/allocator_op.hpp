@@ -64,12 +64,11 @@ namespace ocl
 			return std::shared_ptr<ret_type>(allocator_new{}.template var_alloc<var_type...>(std::forward<var_type...>(args)...), allocator_delete{});
 		}
 
-        template<size_t N>
+		template <size_t N>
 		auto construct_array()
 		{
 			return std::shared_ptr<ret_type>(allocator_new{}.template array_alloc<N>(), allocator_delete{});
 		}
-
 	};
 
 	template <typename type>

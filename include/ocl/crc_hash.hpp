@@ -60,14 +60,14 @@ namespace ocl
 			0xbdbdf21c, 0xcabac28a, 0x53b39330, 0x24b4a3a6, 0xbad03605, 0xcdd70693, 0x54de5729, 0x23d967bf,
 			0xb3667a2e, 0xc4614ab8, 0x5d681b02, 0x2a6f2b94, 0xb40bbe37, 0xc30c8ea1, 0x5a05df1b, 0x2d02ef8d};
 
-        template <typename algorithm>
+		template <typename algorithm>
 		static constexpr algorithm crc(const char* in, std::size_t len)
 		{
 			if (!len)
 				return 0UL;
 
-			algorithm crc = 0xffffffff;
-			std::size_t	  cnt = 0;
+			algorithm	crc = 0xffffffff;
+			std::size_t cnt = 0;
 
 			while ((len--) > 0)
 			{
@@ -78,10 +78,10 @@ namespace ocl
 			return ~crc;
 		}
 
-        template <std::uint8_t algorithm>
+		template <std::uint8_t algorithm>
 		constexpr std::uint8_t crc(const char* in, std::size_t len) = delete;
 
-        template <std::uint64_t algorithm>
+		template <std::uint64_t algorithm>
 		constexpr std::uint64_t crc(const char* in, std::size_t len) = delete;
 	};
 
@@ -95,7 +95,7 @@ namespace ocl
 inline void
 operator""_crc(const char* in, std::size_t len) noexcept
 {
-    ocl::crc_hash_trait::crc<std::uint32_t>(reinterpret_cast<const char*>(in), strlen(in));
+	ocl::crc_hash_trait::crc<std::uint32_t>(reinterpret_cast<const char*>(in), strlen(in));
 }
 
 namespace std

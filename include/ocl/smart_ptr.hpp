@@ -21,9 +21,12 @@ namespace ocl
 	template <class T>
 	using shared_ptr = std::shared_ptr<T>;
 
-    /// @brief Constructs a `delete_ptr`, that is, a pointer that isn't deleted from the heap.
-    template<class T>
-    inline auto delete_ptr(T* object) -> auto { return shared_ptr<T>{ object, boost::null_deleter{}}; }
-}
+	/// @brief Constructs a `delete_ptr`, that is, a pointer that isn't deleted from the heap.
+	template <class T>
+	inline auto delete_ptr(T* object) -> auto
+	{
+		return shared_ptr<T>{object, boost::null_deleter{}};
+	}
+} // namespace ocl
 
 #endif // ifndef __OCL_SMART_PTR

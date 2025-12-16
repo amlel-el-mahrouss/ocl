@@ -19,7 +19,7 @@ namespace ocl
 		using result_type = typename T::result_type;
 		using type		  = T;
 
-        // AMLALE: If it throws, we can't compute the hash correctly.
+		// AMLALE: If it throws, we can't compute the hash correctly.
 		static constexpr result_type hash() noexcept
 		{
 			return T{}.hash();
@@ -29,8 +29,8 @@ namespace ocl
 	template <typename T, typename U>
 	struct is_same
 	{
-        using left_type = T;
-        using right_type = T;
+		using left_type	 = T;
+		using right_type = T;
 
 		static constexpr bool value = false;
 	};
@@ -44,8 +44,8 @@ namespace ocl
 	template <typename T, typename U>
 	struct is_not_same
 	{
-        using left_type = T;
-        using right_type = T;
+		using left_type	 = T;
+		using right_type = T;
 
 		static constexpr bool value = true;
 	};
@@ -61,7 +61,7 @@ namespace ocl
 	{
 		using result_type = bool;
 
-        static constexpr auto value = sizeof(T) == 1;
+		static constexpr auto value = sizeof(T) == 1;
 	};
 
 	template <typename T>
@@ -69,7 +69,7 @@ namespace ocl
 	{
 		using result_type = bool;
 
-        static constexpr auto value = sizeof(T) > 1;
+		static constexpr auto value = sizeof(T) > 1;
 	};
 
 	template <typename T>
@@ -77,27 +77,27 @@ namespace ocl
 	{
 		using result_type = bool;
 
-        static constexpr auto value = sizeof(T) >= 4;
+		static constexpr auto value = sizeof(T) >= 4;
 	};
 
 	template <typename L, typename R>
 	struct equiv_is final
 	{
 		using result_type = bool;
-        using left_type = L;
-        using right_type = R;
+		using left_type	  = L;
+		using right_type  = R;
 
-        static constexpr auto value = false;
+		static constexpr auto value = false;
 	};
 
 	template <typename L>
 	struct equiv_is<L, L> final
 	{
 		using result_type = bool;
-        using left_type = L;
-        using right_type = L;
+		using left_type	  = L;
+		using right_type  = L;
 
-        static constexpr auto value = true;
+		static constexpr auto value = true;
 	};
 } // namespace ocl
 
