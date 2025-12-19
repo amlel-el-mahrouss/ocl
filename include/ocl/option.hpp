@@ -12,7 +12,7 @@
 
 namespace ocl
 {
-	enum struct return_type
+	enum struct return_type : int
 	{
 		invalid = 0,
 		okay	= 100,
@@ -67,12 +67,12 @@ namespace ocl
 
 	namespace detail
 	{
-		// AMLALE: They (operator()) were marked `noexcept` as failing conditions within an evaluation (say a overloads operator==) proves that the
-		// predictate is wrong.
+		// AMLALE: The operator() are marked as `noexcept` as failing conditions within an evaluation (say a overloads operator==) proves that the
+		// predictate is wrong. Thus program state is undefined.
 
 		struct teller
 		{
-			explicit teller() = default;
+			teller()		  = default;
 			virtual ~teller() = default;
 
 			template <class ObjFirst, class ObjLast>
