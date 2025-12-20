@@ -115,19 +115,14 @@ namespace ocl
 	template <typename Type, typename Mgr = tracked_mgr<Type>>
 	class tracked_ptr
 	{
-	public:
-		static Mgr& manager() noexcept
-		{
-			static Mgr mgr;
-			return mgr;
-		}
+		Mgr m_mgr_;
 
 	public:
 		template <typename... U>
 		tracked_ptr(U&&... args)
 			: ptr_(nullptr)
 		{
-			ptr_ = tracked_ptr::manager().retain(std::forward<U>(args)...);
+			ptr_ = m_mgr_.retain(std::forward<U>(args)...);
 		}
 
 		virtual ~tracked_ptr() noexcept
@@ -146,7 +141,7 @@ namespace ocl
 		{
 			if (ptr_)
 			{
-				tracked_ptr::manager().dispose(ptr_);
+				m_mgr_.dispose(ptr_);
 			}
 		}
 

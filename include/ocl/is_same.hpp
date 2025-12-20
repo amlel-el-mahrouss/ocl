@@ -4,6 +4,6 @@
 #error "This header has been deprecated, it now redirects to equiv.hpp"
 #else
 #warning "This header has been deprecated, it now redirects to equiv.hpp"
-#endif 
+#endif
 
 #include <ocl/equiv.hpp>

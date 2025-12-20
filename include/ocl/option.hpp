@@ -20,6 +20,16 @@ namespace ocl
 		count = err - okay + 1,
 	};
 
+	namespace detail
+	{
+		using option_error = std::runtime_error;
+
+		void throw_option_invalid_type_error()
+		{
+			throw option_error("option has invalid type.");
+		}
+	} // namespace detail
+
 	class option final
 	{
 	public:
@@ -27,7 +37,8 @@ namespace ocl
 		explicit option(const return_type& return_type)
 			: ret_(return_type)
 		{
-			assert(ret_ != return_type::invalid);
+			if (ret_ == return_type::invalid)
+				detail::throw_option_invalid_type_error();
 		}
 
 		~option() = default;
@@ -41,13 +52,13 @@ namespace ocl
 
 			if (ret_ == return_type::err)
 			{
-				throw std::runtime_error(input ? input : "option::error");
+				throw detail::option_error(input ? input : "option::error");
 			}
 
 			return *this;
 		}
 
-		template <typename ErrorHandler>
+		template <typename Handleable>
 		option& expect_or_handle(const char* input)
 		{
 			assert(ret_ != return_type::invalid);
@@ -55,7 +66,7 @@ namespace ocl
 			if (ret_ == return_type::err)
 			{
 				// AMLALE: Shall it be a functor or container here?
-				ErrorHandler{}(input ? input : "option::error");
+				Handleable(input ? input : "option::error");
 			}
 
 			return *this;
@@ -82,7 +93,7 @@ namespace ocl
 			}
 		};
 
-		struct int_eq_teller final : teller
+		struct eq_teller final : teller
 		{
 			template <class ObjFirst, class ObjLast>
 			bool operator()(ObjFirst a, ObjLast b) noexcept
@@ -91,7 +102,7 @@ namespace ocl
 			}
 		};
 
-		struct int_greater_than_teller final : teller
+		struct greater_than_teller final : teller
 		{
 			template <class ObjFirst, class ObjLast>
 			bool operator()(ObjFirst a, ObjLast b) noexcept
@@ -100,7 +111,7 @@ namespace ocl
 			}
 		};
 
-		struct int_less_than_teller final : teller
+		struct less_than_teller final : teller
 		{
 			template <class ObjFirst, class ObjLast>
 			bool operator()(ObjFirst a, ObjLast b) noexcept
@@ -118,21 +129,21 @@ namespace ocl
 	}
 
 	template <typename... Lst>
-	inline return_type eval_less_than(Lst&&... arg) noexcept
+	inline return_type eval_less_than(Lst&&... arg)
 	{
-		return detail::int_less_than_teller{}(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
+		return detail::less_than_teller{}(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
 	}
 
 	template <typename... Lst>
-	inline return_type eval_eq(Lst&&... arg) noexcept
+	inline return_type eval_eq(Lst&&... arg)
 	{
-		return detail::int_eq_teller{}(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
+		return detail::eq_teller{}(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
 	}
 
 	template <typename... Lst>
-	inline return_type eval_greater_than(Lst&&... arg) noexcept
+	inline return_type eval_greater_than(Lst&&... arg)
 	{
-		return detail::int_greater_than_teller{}(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
+		return detail::greater_than_teller{}(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
 	}
 
 	inline return_type eval_true() noexcept
