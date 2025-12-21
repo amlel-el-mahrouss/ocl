@@ -42,6 +42,13 @@ namespace ocl::io
 	namespace detail
 	{
 		inline bool is_stdio_sync = true;
+
+        using io_error = std::runtime_error;
+
+		inline void throw_option_invalid_type_error(const boost::string_view& loc = BOOST_CURRENT_LOCATION.to_string())
+		{
+			throw io_error(loc.to_string());
+		}
 	}
 
 	inline void enable_stdio_sync(const bool& enable) noexcept

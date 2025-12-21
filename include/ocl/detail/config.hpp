@@ -15,7 +15,9 @@
 #include <boost/core/demangle.hpp>
 #include <boost/core/null_deleter.hpp>
 #include <boost/container/allocator.hpp>
+#include <boost/assert/source_location.hpp>
 #include <boost/assert.hpp>
+#include <boost/utility/string_view.hpp>
 #endif
 
 #define OCL_DEPRECATED()		[[deprecated]]
@@ -50,5 +52,16 @@
 #if OCL_WANTS_PRAGMA_ONCE
 #define OCL_HAS_PRAGMA_ONCE 1
 #endif
+
+namespace ocl
+{
+    namespace detail
+    {
+        inline void throw_runtime_error(const boost::string_view& loc = BOOST_CURRENT_LOCATION.to_string())
+        {
+            throw std::runtime_error(loc.to_string());
+        }
+    }
+}
 
 #endif

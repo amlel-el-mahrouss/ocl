@@ -215,9 +215,9 @@ namespace ocl
 	{
 		using tracked_error = std::runtime_error;
 
-		inline void throw_tracked_error()
+		inline void throw_tracked_error(const boost::string_view& loc = BOOST_CURRENT_LOCATION.to_string())
 		{
-			throw tracked_error("tracked_error: memory leak detected.");
+			throw tracked_error(loc.to_string());
 		}
 	} // namespace detail
 

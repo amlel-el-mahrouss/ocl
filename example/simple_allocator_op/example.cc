@@ -1,7 +1,7 @@
 #include <ocl/print.hpp>
 #include <ocl/allocator_op.hpp>
 
-/// @brief Basic Send test
+/// \brief Allocation of ints example.
 int main()
 {
 	ocl::allocator<int> int_alloc;

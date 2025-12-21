@@ -8,7 +8,7 @@
 #define __OCL_CORE_OPTION
 
 #include <ocl/detail/config.hpp>
-#include <utility>
+#include <ocl/print.hpp>
 
 namespace ocl
 {
@@ -24,9 +24,9 @@ namespace ocl
 	{
 		using option_error = std::runtime_error;
 
-		void throw_option_invalid_type_error()
+		inline void throw_option_invalid_type_error(const boost::string_view& loc = BOOST_CURRENT_LOCATION.to_string())
 		{
-			throw option_error("option has invalid type.");
+			throw option_error(loc.to_string());
 		}
 	} // namespace detail
 
@@ -52,21 +52,22 @@ namespace ocl
 
 			if (ret_ == return_type::err)
 			{
-				throw detail::option_error(input ? input : "option::error");
+				io::println(input ? input : "option::error");
+                detail::throw_option_invalid_type_error();
 			}
 
 			return *this;
 		}
 
 		template <typename Handleable>
-		option& expect_or_handle(const char* input)
+		option& expect(const char* input)
 		{
 			assert(ret_ != return_type::invalid);
 
 			if (ret_ == return_type::err)
 			{
 				// AMLALE: Shall it be a functor or container here?
-				Handleable(input ? input : "option::error");
+				Handleable{}(input ? input : "option::error");
 			}
 
 			return *this;
@@ -81,19 +82,7 @@ namespace ocl
 		// AMLALE: The operator() are marked as `noexcept` as failing conditions within an evaluation (say a overloads operator==) proves that the
 		// predictate is wrong. Thus program state is undefined.
 
-		struct teller
-		{
-			teller()		  = default;
-			virtual ~teller() = default;
-
-			template <class ObjFirst, class ObjLast>
-			bool operator()(ObjFirst a, ObjLast b) noexcept
-			{
-				return false;
-			}
-		};
-
-		struct eq_teller final : teller
+		struct eq_teller final
 		{
 			template <class ObjFirst, class ObjLast>
 			bool operator()(ObjFirst a, ObjLast b) noexcept
@@ -102,7 +91,7 @@ namespace ocl
 			}
 		};
 
-		struct greater_than_teller final : teller
+		struct greater_than_teller final
 		{
 			template <class ObjFirst, class ObjLast>
 			bool operator()(ObjFirst a, ObjLast b) noexcept
@@ -111,7 +100,7 @@ namespace ocl
 			}
 		};
 
-		struct less_than_teller final : teller
+		struct less_than_teller final
 		{
 			template <class ObjFirst, class ObjLast>
 			bool operator()(ObjFirst a, ObjLast b) noexcept
@@ -124,7 +113,6 @@ namespace ocl
 	template <typename Teller, typename... Lst>
 	inline return_type eval(const Teller& tell, Lst&&... arg)
 	{
-		static_assert(std::is_base_of_v<detail::teller, Teller>, "Teller is not evalueable.");
 		return tell(std::forward<Lst>(arg)...) ? return_type::okay : return_type::err;
 	}
 
