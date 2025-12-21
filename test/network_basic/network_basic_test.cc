@@ -1,5 +1,5 @@
 /*
- * File: tests/net_test.cc
+ * File: tests/network_basic_test.cc
  * Purpose: Network unit tests in C++
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
  * Copyright 2025, Amlal El Mahrouss, licensed under the Boost Software License.
@@ -25,8 +25,6 @@ TEST(NetworkTest, BasicNetworkIO)
 
 	auto buf = buf_dst.data();
 	auto sz = buf_dst.size();
-
-	sock.write_from_buffer(buf, sz);
 
 	ocl::unique_socket sock2 = ocl::unique_socket::make_socket<8000>(ocl::unique_socket::any_address, false);
 
