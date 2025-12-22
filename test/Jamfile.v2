@@ -10,8 +10,8 @@ project tests
 
 exe option.test.o 
     : option.test.cpp 
-    : <cxxflags>-std=c++20 ;
+    : <cxxstd>20 ;
 
 exe allocator_op.test.o 
     : allocator_op.test.cpp 
-    : <cxxflags>-std=c++20 ;
+    : <cxxstd>20 ;
