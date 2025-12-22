@@ -48,6 +48,7 @@ namespace ocl
 		}
 	};
 
+    /// \brief Allocator operations structure. Takes care of memory mgmt within a pool.
 	template <typename ret_type, typename allocator_new, typename allocator_delete>
 	class allocator_op
 	{

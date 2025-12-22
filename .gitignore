@@ -8,6 +8,7 @@
 *.obj
 
 dist/*
+bin/
 
 docs/html
 docs/latex

@@ -1,3 +1,9 @@
+/*
+ * File: basic_hash.hpp
+ * Author: Amlal El Mahrouss,
+ * Copyright 2023-2025, Amlal El Mahrouss, Licensed under the Boost Software License
+ */
+
 #ifndef __OCL_CORE_BASIC_HASH
 #define __OCL_CORE_BASIC_HASH
 
@@ -6,8 +12,9 @@
 /// @brief OCL equivalence namespace.
 namespace ocl
 {
+    /// \brief Hash helper.
 	template <class T>
-	struct basic_hash final
+	struct basic_hash
 	{
 		using result_type = typename T::result_type;
 		using type		  = T;
@@ -18,6 +25,20 @@ namespace ocl
 			return type{}.hash();
 		}
 	};
-}
+
+    /// \brief For all boolean types, return false as they are not hashable
+	template <>
+	struct basic_hash<bool>
+	{
+		using result_type = bool;
+		using type		  = bool;
+
+		// AMLALE: If it throws, we can't compute the hash correctly.
+		constexpr result_type hash()
+		{
+			return false;
+		}
+	};
+} // namespace ocl
 
 #endif

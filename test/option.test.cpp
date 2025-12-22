@@ -1,6 +1,6 @@
 // File: option.test.cpp
 // Purpose; Option test for OCL.
-/// @brief This unit test checks if the unit test fails with the expected value.
+/// @brief This unit test checks if the test fails with the expected value.
 /// @author Amlal El Mahrouss
 
 #include <ocl/option.hpp>
