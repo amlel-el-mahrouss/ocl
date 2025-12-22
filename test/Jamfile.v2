@@ -1,0 +1,17 @@
+# 
+#  File: Jamfile.v2
+#  Author: Amlal El Mahrouss,
+#  Copyright 2025, Amlal El Mahrouss, Licensed under the Boost Software License
+# 
+
+project tests 
+: default-build debug
+;
+
+exe option.test.o 
+    : option.test.cpp 
+    : <cxxflags>-std=c++20 ;
+
+exe allocator_op.test.o 
+    : allocator_op.test.cpp 
+    : <cxxflags>-std=c++20 ;
