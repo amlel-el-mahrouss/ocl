@@ -17,7 +17,8 @@ namespace ocl
 	template <typename type>
 	struct global_new_op final
 	{
-		using pointer_type = type*;
+		using pointer_type		 = type*;
+		using const_pointer_type = const type*;
 
 		auto alloc() -> pointer_type
 		{
@@ -41,6 +42,7 @@ namespace ocl
 	struct global_array_delete_op final
 	{
 		using pointer_type = type*;
+		using const_pointer_type = const type*;
 
 		auto operator()(pointer_type t) -> void
 		{
@@ -48,7 +50,7 @@ namespace ocl
 		}
 	};
 
-    /// \brief Allocator operations structure. Takes care of memory mgmt within a pool.
+	/// \brief Allocator operations structure. Takes care of memory mgmt within a pool.
 	template <typename ret_type, typename allocator_new, typename allocator_delete>
 	class allocator_op
 	{

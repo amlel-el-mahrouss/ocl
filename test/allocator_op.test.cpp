@@ -8,9 +8,9 @@
 #define BOOST_TEST_MODULE allocator_op
 #include <boost/test/included/unit_test.hpp>
 
-BOOST_AUTO_TEST_CASE( allocator_should_succeed )
+BOOST_AUTO_TEST_CASE(allocator_should_succeed)
 {
-    auto ptr = ocl::allocator<int>{}.construct_array<10>();
-    int* arr = ptr.get();
-    BOOST_TEST( arr != nullptr );
+	auto ptr = ocl::allocator<int>{}.construct_array<10>();
+	int* arr = ptr.get();
+	BOOST_TEST(arr != nullptr);
 }

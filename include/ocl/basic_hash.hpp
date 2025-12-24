@@ -12,7 +12,7 @@
 /// @brief OCL equivalence namespace.
 namespace ocl
 {
-    /// \brief Hash helper.
+	/// \brief Hash helper.
 	template <class T>
 	struct basic_hash
 	{
@@ -26,7 +26,7 @@ namespace ocl
 		}
 	};
 
-    /// \brief For all boolean types, return false as they are not hashable
+	/// \brief For all boolean types, return false as they are not hashable
 	template <>
 	struct basic_hash<bool>
 	{

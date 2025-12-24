@@ -53,7 +53,7 @@ namespace ocl
 			if (ret_ == return_type::err)
 			{
 				io::println(input ? input : "option::error");
-                detail::throw_option_invalid_type_error();
+				detail::throw_option_invalid_type_error();
 			}
 
 			return *this;
