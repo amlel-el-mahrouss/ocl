@@ -134,8 +134,11 @@ namespace ocl
 		tracked_ptr& operator=(const tracked_ptr&) = delete;
 
 	public:
-		using pointer_type = Type*;
-		using type		   = Type;
+		using pointer_type		   = Type*;
+		using type				   = Type;
+		using reference_type	   = Type&;
+		using const_reference_type = const Type&;
+		using manager_type		   = tracked_mgr<Type>;
 
 		void reset()
 		{
@@ -181,7 +184,6 @@ namespace ocl
 		{
 			if (this != &other)
 			{
-				this->reset();
 				ptr_	   = other.ptr_;
 				other.ptr_ = nullptr;
 			}
@@ -199,10 +201,10 @@ namespace ocl
 		return tracked_ptr<Type>();
 	}
 
-	template <typename U, typename... Type>
-	inline auto make_tracked(Type&&... arg) -> tracked_ptr<U>
+	template <typename RetType, typename... Type>
+	inline auto make_tracked(Type&&... arg) -> tracked_ptr<RetType>
 	{
-		return tracked_ptr<U>(std::forward<Type>(arg)...);
+		return tracked_ptr<RetType>(std::forward<Type>(arg)...);
 	}
 
 	template <typename Type>
@@ -221,9 +223,9 @@ namespace ocl
 		}
 	} // namespace detail
 
-	/// @brief a Must Pass function is a standard way to verify a container' validity, inspired from NeKernel/VMKernel.
+	/// @brief This function is a standard way to verify a container' validity, inspired from NeKernel/VMKernel.
 	template <typename Type>
-	inline void must_pass(tracked_ptr<Type>& ptr)
+	inline void try_throw(tracked_ptr<Type>& ptr)
 	{
 		if (ptr.manager().allocator().allocated_count_ < ptr.manager().allocator().deallocated_count_)
 		{

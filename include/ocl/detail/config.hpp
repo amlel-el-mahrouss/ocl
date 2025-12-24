@@ -55,6 +55,7 @@
 
 namespace ocl
 {
+
 	namespace detail
 	{
 		inline void throw_runtime_error(const boost::string_view& loc = BOOST_CURRENT_LOCATION.to_string())
@@ -62,6 +63,7 @@ namespace ocl
 			throw std::runtime_error(loc.to_string());
 		}
 	} // namespace detail
+
 } // namespace ocl
 
 #endif

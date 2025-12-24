@@ -41,7 +41,7 @@ namespace ocl
 	template <typename type>
 	struct global_array_delete_op final
 	{
-		using pointer_type = type*;
+		using pointer_type		 = type*;
 		using const_pointer_type = const type*;
 
 		auto operator()(pointer_type t) -> void
