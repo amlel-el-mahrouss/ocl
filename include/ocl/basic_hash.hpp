@@ -1,8 +1,7 @@
-/*
- * File: basic_hash.hpp
- * Author: Amlal El Mahrouss,
- * Copyright 2023-2025, Amlal El Mahrouss, Licensed under the Boost Software License
- */
+// Copyright 2023-2025, Amlal El Mahrouss (amlal@nekernel.org)
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+// Official repository: https://github.com/ocl-org/core
 
 #ifndef __OCL_CORE_BASIC_HASH
 #define __OCL_CORE_BASIC_HASH

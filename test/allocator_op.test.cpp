@@ -1,6 +1,8 @@
-// File: allocator.test.cpp
-// Purpose; Allocator test for OCL.
-/// @brief This unit test checks if the test succeeds.
+// Copyright 2025, Amlal El Mahrouss (amlal@nekernel.org)
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+// Official repository: https://github.com/ocl-org/core
+
 /// @author Amlal El Mahrouss
 
 #include <ocl/allocator_op.hpp>

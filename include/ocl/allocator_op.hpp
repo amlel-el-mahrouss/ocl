@@ -1,9 +1,7 @@
-/*
- * File: allocator_op.hpp
- * Purpose: Allocate from a pool.
- * Author: Amlal El Mahrouss (amlal@nekernel.org)
- * Copyright 2025, Amlal El Mahrouss, Licensed under the Boost Software License. Licensed under the BSL 1.0 license
- */
+// Copyright 2025, Amlal El Mahrouss (amlal@nekernel.org)
+// Distributed under the Boost Software License, Version 1.0. (See accompanying
+// file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
+// Official repository: https://github.com/ocl-org/core
 
 #ifndef __OCL_CORE_ALLOC
 #define __OCL_CORE_ALLOC
