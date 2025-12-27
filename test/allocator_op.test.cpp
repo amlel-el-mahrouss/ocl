@@ -15,6 +15,9 @@ BOOST_AUTO_TEST_CASE(allocator_should_succeed)
 	auto ptr = ocl::allocator<int>{}.construct_array<10>();
 	int* arr = ptr.get();
 	BOOST_TEST(arr != nullptr);
-	*arr = 10;
-	BOOST_TEST(*arr == 10);
+	for (auto i{0ul}; i < 10; ++i)
+	{
+		*(arr + i) = 10;
+		BOOST_TEST(*(arr + i) == 10);
+	}
 }

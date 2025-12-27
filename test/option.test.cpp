@@ -13,30 +13,12 @@
 
 BOOST_AUTO_TEST_CASE(option_should_fail)
 {
-	bool ret = false;
-	try
-	{
-		ocl::option opt(ocl::eval_false());
-		opt.expect("");
-	}
-	catch (...)
-	{
-		ret = true;
-	}
-	BOOST_TEST(ret == true);
+        ocl::option opt(ocl::eval_false());
+	BOOST_CHECK_THROW(opt.expect(""), std::exception);
 }
 
 BOOST_AUTO_TEST_CASE(option_should_succeed)
 {
-	bool ret = true;
-	try
-	{
-		ocl::option opt(ocl::eval_true());
-		opt.expect("");
-	}
-	catch (...)
-	{
-		ret = false;
-	}
-	BOOST_TEST(ret == true);
+        ocl::option opt(ocl::eval_true());
+	BOOST_CHECK_NO_THROW(opt.expect(""));
 }
